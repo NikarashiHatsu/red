@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['prefix' => 'toko', 'as' => 'toko.', 'middleware' => 'verified:auth'], function() {
+    Route::view('/', 'toko.index')->name('index');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
