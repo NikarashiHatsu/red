@@ -18,11 +18,12 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'verified:auth'], function() {
-    Route::group(['prefix' => 'toko', 'as' => 'toko.'], function() {
-        Route::view('/', 'toko.index')->name('index');
+    Route::group(['prefix' => 'store', 'as' => 'store.'], function() {
+        Route::view('/', 'store.index')->name('index');
+        Route::view('/pricing_plan', 'store.pricing_plan.index')->name('pricing_plan');
     });
 
-    Route::redirect('/dashboard', '/toko')->name('dashboard');
+    Route::redirect('/dashboard', '/store')->name('dashboard');
 });
 
 
