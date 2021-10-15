@@ -61,17 +61,9 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('store.index')" :active="request()->routeIs('store.index')">
-                {{ __('navigation.dashboard') }}
-            </x-responsive-nav-link>
+            @include('layouts.navigation_user_responsive')
 
-            <x-responsive-nav-link :href="route('store.pricing_plan.index')" :active="request()->routeIs('store.pricing_plan.index')">
-                {{ __('navigation.pricing_plan.index') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('store.form_order.index')" :active="request()->routeIs('store.form_order.index')">
-                {{ __('navigation.form_order') }}
-            </x-responsive-nav-link>
+            @include('layouts.navigation_admin_responsive')
         </div>
 
         <!-- Responsive Settings Options -->
