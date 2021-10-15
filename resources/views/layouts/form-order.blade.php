@@ -23,4 +23,10 @@
         </x-slot>
         Informasi Produk
     </x-timeline.header>
+    <x-timeline.header :href="route('store.form_order.pilih_layout')" :active="request()->routeIs('store.form_order.pilih_layout')">
+        <x-slot name="counter">
+            5
+        </x-slot>
+        Pilih Layout
+    </x-timeline.header>
 </x-timeline>

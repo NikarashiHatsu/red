@@ -27,6 +27,7 @@ Route::group(['middleware' => 'verified:auth'], function() {
             Route::view('/informasi_aplikasi', 'store.form_order.informasi_aplikasi')->name('informasi_aplikasi');
             Route::view('/informasi_media_sosial', 'store.form_order.informasi_media_sosial')->name('informasi_media_sosial');
             Route::view('/informasi_produk', 'store.form_order.informasi_produk')->name('informasi_produk');
+            Route::view('/pilih_layout', 'store.form_order.pilih_layout')->name('pilih_layout');
         });
     });
 
