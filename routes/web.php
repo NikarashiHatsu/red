@@ -17,8 +17,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('auth_redirector', function() {
+    $user = auth()->user();
+
+    if ($user->role == 'user') {
+        return redirect()->route('store.index');
+    }
+
+    if ($user->role == 'admin') {
+        return redirect()->route('admin.index');
+    }
+
+    return abort(401);
+})->middleware('auth')->name('auth_redirector');
+
 Route::group(['middleware' => 'verified:auth'], function() {
-    Route::group(['prefix' => 'store', 'as' => 'store.'], function() {
+    Route::group(['prefix' => 'store', 'as' => 'store.', 'middleware' => 'user'], function() {
         Route::view('/', 'store.index')->name('index');
         Route::view('/pricing_plan', 'store.pricing_plan.index')->name('pricing_plan');
 
@@ -31,8 +45,9 @@ Route::group(['middleware' => 'verified:auth'], function() {
         });
     });
 
-    Route::redirect('/dashboard', '/store')->name('dashboard');
+    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function() {
+        Route::view('/', 'admin.index')->name('index');
+    });
 });
-
 
 require __DIR__.'/auth.php';

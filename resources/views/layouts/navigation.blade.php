@@ -5,29 +5,15 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('auth_redirector') }}">
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('store.index')" :active="request()->routeIs('store.index')">
-                        {{ __('navigation.dashboard') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('store.pricing_plan')" :active="request()->routeIs('store.pricing_plan')">
-                        {{ __('navigation.pricing_plan') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('store.form_order.index')" :active="request()->routeIs('store.form_order.index')">
-                        {{ __('navigation.form_order') }}
-                    </x-nav-link>
-                </div>
+                @include('layouts.navigation_user')
+                
+                @include('layouts.navigation_admin')
             </div>
 
             <!-- Settings Dropdown -->
