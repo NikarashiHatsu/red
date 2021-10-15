@@ -34,7 +34,7 @@ Route::get('auth_redirector', function() {
 Route::group(['middleware' => 'verified:auth'], function() {
     Route::group(['prefix' => 'store', 'as' => 'store.', 'middleware' => 'user'], function() {
         Route::view('/', 'store.index')->name('index');
-        Route::view('/pricing_plan', 'store.pricing_plan.index')->name('pricing_plan');
+        Route::view('/pricing_plan', 'store.pricing_plan.index')->name('pricing_plan.index');
 
         Route::group(['prefix' => 'form_order', 'as' => 'form_order.'], function() {
             Route::view('/', 'store.form_order.index')->name('index');
@@ -47,6 +47,7 @@ Route::group(['middleware' => 'verified:auth'], function() {
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function() {
         Route::view('/', 'admin.index')->name('index');
+        Route::view('/user_request', 'admin.user_request.index')->name('user_request.index');
     });
 });
 

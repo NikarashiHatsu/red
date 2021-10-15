@@ -6,7 +6,7 @@
     </div>
 
     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-        <x-nav-link :href="route('store.pricing_plan')" :active="request()->routeIs('store.pricing_plan')">
+        <x-nav-link :href="route('store.pricing_plan.index')" :active="request()->routeIs('store.pricing_plan.index')">
             {{ __('navigation.pricing_plan') }}
         </x-nav-link>
     </div>

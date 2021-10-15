@@ -12,7 +12,7 @@
 
                 <!-- Navigation Links -->
                 @include('layouts.navigation_user')
-                
+
                 @include('layouts.navigation_admin')
             </div>
 
@@ -65,8 +65,8 @@
                 {{ __('navigation.dashboard') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('store.pricing_plan')" :active="request()->routeIs('store.pricing_plan')">
-                {{ __('navigation.pricing_plan') }}
+            <x-responsive-nav-link :href="route('store.pricing_plan.index')" :active="request()->routeIs('store.pricing_plan.index')">
+                {{ __('navigation.pricing_plan.index') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="route('store.form_order.index')" :active="request()->routeIs('store.form_order.index')">

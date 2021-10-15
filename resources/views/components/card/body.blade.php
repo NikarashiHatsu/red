@@ -1,3 +1,3 @@
-<div class="p-6">
+<div {{ $attributes->merge(['class' => 'p-6']) }}>
     {{ $slot }}
 </div>
