@@ -18,18 +18,6 @@ class PricingPlanPolicy
      */
     public function viewAny(User $user)
     {
-        return $user;
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\PricingPlan  $pricingPlan
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(User $user, PricingPlan $pricingPlan)
-    {
         return $user->role == 'admin';
     }
 
@@ -53,7 +41,7 @@ class PricingPlanPolicy
      */
     public function update(User $user, PricingPlan $pricingPlan)
     {
-        return $user->role == 'admin';
+        return $user->role == 'admin' && $user->id == $pricingPlan->user_id;
     }
 
     /**
@@ -65,7 +53,7 @@ class PricingPlanPolicy
      */
     public function delete(User $user, PricingPlan $pricingPlan)
     {
-        return $user->role == 'admin';
+        return $user->role == 'admin' && $user->id == $pricingPlan->user_id;
     }
 
     /**
@@ -77,7 +65,7 @@ class PricingPlanPolicy
      */
     public function restore(User $user, PricingPlan $pricingPlan)
     {
-        return $user->role == 'admin';
+        return $user->role == 'admin' && $user->id == $pricingPlan->user_id;
     }
 
     /**
@@ -89,6 +77,6 @@ class PricingPlanPolicy
      */
     public function forceDelete(User $user, PricingPlan $pricingPlan)
     {
-        return $user->role == 'admin';
+        return $user->role == 'admin' && $user->id == $pricingPlan->user_id;
     }
 }

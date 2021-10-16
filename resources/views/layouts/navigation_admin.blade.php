@@ -5,6 +5,24 @@
         </x-nav-link>
     </div>
 
+    <div class="hidden sm:flex sm:items-center sm:ml-10">
+        <x-dropdown align="left">
+            <x-slot name="trigger">
+                <button class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                    <div>{{ __('navigation.master_data') }}</div>
+
+                    <i class="fas fa-chevron-down fa-xs ml-2"></i>
+                </button>
+            </x-slot>
+
+            <x-slot name="content">
+                <x-dropdown-link :href="route('admin.master.pricing_plan.index')">
+                    {{ __('navigation.pricing_plan') }}
+                </x-dropdown-link>
+            </x-slot>
+        </x-dropdown>
+    </div>
+
     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
         <x-nav-link :href="route('admin.user_request.index')" :active="request()->routeIs('admin.user_request.index')">
             {{ __('navigation.user_request') }}

@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PricingPlanDataTable;
 use App\Models\PricingPlan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PricingPlanController extends Controller
 {
-    // TODO: Implement gate for this controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\DataTables\PricingPlanDataTable  $dataTable
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PricingPlanDataTable $dataTable)
     {
-        // TODO: Return list of pricing plan available
+        Gate::authorize('viewAny', PricingPlan::class);
+
+        return $dataTable->render('admin.master.pricing_plan.index', [
+            'pricing_plans' => PricingPlan::all(),
+        ]);
     }
 
     /**
@@ -25,65 +31,9 @@ class PricingPlanController extends Controller
      */
     public function create()
     {
-        // TODO: Return form to create new pricing plan
-    }
+        Gate::authorize('create', PricingPlan::class);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => ['required', 'string'],
-            'has_app' => ['required', 'boolean'],
-            'has_released_on_google_play' => ['required', 'boolean'],
-            'number_of_products' => ['required', 'integer'],
-            'has_blog' => ['required', 'boolean'],
-            'has_hosting_and_domain' => ['required', 'boolean'],
-            'has_self_manage' => ['required', 'boolean'],
-            'has_online_payment' => ['required', 'boolean'],
-            'has_whatsapp_integration' => ['required', 'obolean'],
-            'has_sale_transaction' => ['required', 'boolean'],
-            'has_aposerba_integration' => ['required', 'boolean'],
-            'has_ad_mob_integration' => ['required', 'boolean'],
-            'price' => ['required', 'integer'],
-        ]);
-
-        try {
-            PricingPlan::create($request->only([
-                'name',
-                'has_app',
-                'has_released_on_google_play',
-                'number_of_products',
-                'has_blog',
-                'has_hosting_and_domain',
-                'has_self_manage',
-                'has_online_payment',
-                'has_whatsapp_integration',
-                'has_sale_transaction',
-                'has_aposerba_integration',
-                'has_ad_mob_integration',
-                'price',
-            ]));
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal membuat Paket Harga: ' . $e->getMessage());
-        }
-
-        return redirect()->back()->with('success', 'Berhasil membuat Paket Harga.');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\PricingPlan  $pricingPlan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PricingPlan $pricingPlan)
-    {
-        // TODO: Detail pricing plan
+        return view('admin.master.pricing_plan.create');
     }
 
     /**
@@ -94,55 +44,11 @@ class PricingPlanController extends Controller
      */
     public function edit(PricingPlan $pricingPlan)
     {
-        // TODO: Edit pricing plan
-    }
+        Gate::authorize('update', $pricingPlan);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PricingPlan  $pricingPlan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PricingPlan $pricingPlan)
-    {
-        $request->validate([
-            'name' => ['required', 'string'],
-            'has_app' => ['required', 'boolean'],
-            'has_released_on_google_play' => ['required', 'boolean'],
-            'number_of_products' => ['required', 'integer'],
-            'has_blog' => ['required', 'boolean'],
-            'has_hosting_and_domain' => ['required', 'boolean'],
-            'has_self_manage' => ['required', 'boolean'],
-            'has_online_payment' => ['required', 'boolean'],
-            'has_whatsapp_integration' => ['required', 'obolean'],
-            'has_sale_transaction' => ['required', 'boolean'],
-            'has_aposerba_integration' => ['required', 'boolean'],
-            'has_ad_mob_integration' => ['required', 'boolean'],
-            'price' => ['required', 'integer'],
+        return view('admin.master.pricing_plan.edit', [
+            'pricingPlan' => $pricingPlan
         ]);
-
-        try {
-            $pricingPlan->update($request->only([
-                'name',
-                'has_app',
-                'has_released_on_google_play',
-                'number_of_products',
-                'has_blog',
-                'has_hosting_and_domain',
-                'has_self_manage',
-                'has_online_payment',
-                'has_whatsapp_integration',
-                'has_sale_transaction',
-                'has_aposerba_integration',
-                'has_ad_mob_integration',
-                'price',
-            ]));
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal mengubah Paket Harga: ' . $e->getMessage());
-        }
-
-        return redirect()->back()->with('success', 'Berhasil mengubah Paket Harga.');
     }
 
     /**
@@ -153,6 +59,8 @@ class PricingPlanController extends Controller
      */
     public function destroy(PricingPlan $pricingPlan)
     {
+        Gate::authorize('delete', $pricingPlan);
+
         try {
             $pricingPlan->delete();
         } catch (\Exception $e) {

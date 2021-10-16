@@ -11,12 +11,16 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/jQueryLibraries.js') }}"></script>
+
+        @livewireStyles()
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased text-gray-700">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -32,5 +36,61 @@
                 {{ $slot }}
             </main>
         </div>
+
+        @livewireScripts()
+
+        @if (session()->has('success'))
+            <script>
+                jQuery(function() {
+                    swal.fire(
+                        'Berhasil',
+                        '{{ session()->get("success") }}',
+                        'success'
+                    )
+                })
+            </script>
+        @endif
+
+        @if (session()->has('error'))
+            <script>
+                jQuery(function() {
+                    swal.fire(
+                        'Gagal',
+                        '{{ session()->get("error") }}',
+                        'error'
+                    )
+                })
+            </script>
+        @endif
+
+        <script>
+            function confirmDeletion(event)
+            {
+                let form = $(event.target).parents('form');
+
+                swal.fire({
+                    title: 'Hapus data?',
+                    text: 'Apakah Anda yakin ingin menghapus data ini?',
+                    icon: 'warning',
+                    showCancelButton: false
+                }).then((result) => {
+                    if (result.value) {
+                        form.submit();
+
+                        return swal.fire(
+                            'Dikonfirmasi',
+                            'Data akan dihapus.',
+                            'success'
+                        );
+                    }
+
+                    return swal.fire(
+                        'Dibatalkan',
+                        'Data tetap disimpan.',
+                        'warning'
+                    );
+                });
+            }
+        </script>
     </body>
 </html>

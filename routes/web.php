@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PricingPlanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,11 @@ Route::group(['middleware' => 'verified:auth'], function() {
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function() {
         Route::view('/', 'admin.index')->name('index');
+
+        Route::group(['prefix' => 'master', 'as' => 'master.'], function() {
+            Route::resource('pricing_plan', PricingPlanController::class)->only(['index', 'create', 'edit', 'destroy']);
+        });
+
         Route::view('/user_request', 'admin.user_request.index')->name('user_request.index');
     });
 });

@@ -15,6 +15,7 @@ class PricingPlan extends Model
     }
 
     protected $fillable = [
+        'user_id',
         'name',
         'has_app',
         'has_released_on_google_play',

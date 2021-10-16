@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePricingPlanTable extends Migration
+class CreatePricingPlansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreatePricingPlanTable extends Migration
      */
     public function up()
     {
-        Schema::create('pricing_plan', function (Blueprint $table) {
+        Schema::create('pricing_plans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->comment('Admin whom makes this pricing plan.')->constrained();
             $table->string('name');
             $table->boolean('has_app');
             $table->boolean('has_released_on_google_play');
@@ -40,6 +41,10 @@ class CreatePricingPlanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pricing_plan');
+        Schema::table('pricing_plans', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('user_id');
+        });
+
+        Schema::dropIfExists('pricing_plans');
     }
 }
