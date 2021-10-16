@@ -9,6 +9,25 @@ class PricingPlan extends Model
 {
     use SoftDeletes;
 
+    public function getNarrativeProductCountAttribute()
+    {
+        if ($this->number_of_products < 0) {
+            return "Tidak terbatas";
+        }
+
+        return $this->number_of_products . ' Produk';
+    }
+
+    public function getModifiedPriceAttribute()
+    {
+        return 'Rp' . number_format($this->price, 0, ',', '.') . ',-';
+    }
+
+    public function getButtonAttribute()
+    {
+        return 'Pilih ' . $this->name;
+    }
+
     public function getNarativeNumberOfProducts(): string
     {
         return $this->number_of_products . ' Produk';

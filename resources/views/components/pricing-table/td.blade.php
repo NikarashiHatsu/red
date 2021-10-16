@@ -3,6 +3,8 @@
     'value' => null,
     'process' => false,
     'key' => null,
+    'pricing-plan-id' => null,
+    'form-order' => null,
 ])
 
 <td {{ $attributes->merge(['class' => 'px-4 py-3 border']) }}>
@@ -10,9 +12,18 @@
         @if ($process)
             {{-- Indicate key is button --}}
             @if ($key == 'button')
-                <x-button>
-                    {{ __($value) }}
-                </x-button>
+                <form wire:submit.prevent="update({{ $pricingPlanId }})" {{ $formOrder->pricing_plan_id == $pricingPlanId ? 'disabled' : '' }}>
+                    <input type="hidden" name="pricing_plan_id" wire:model="formOrder.pricing_plan_id" />
+                    @if ($formOrder->pricing_plan_id == $pricingPlanId)
+                        <x-button disabled>
+                            {{ __($value) }}
+                        </x-button>
+                    @else
+                        <x-button>
+                            {{ __($value) }}
+                        </x-button>
+                    @endif
+                </form>
 
             {{-- Indicate string --}}
             @elseif (is_string($value))

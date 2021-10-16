@@ -17,6 +17,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(PricingPlan::class);
     }
 
+    public function formOrder()
+    {
+        return $this->hasOne(FormOrder::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
