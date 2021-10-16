@@ -31,21 +31,6 @@ class StorePricingPlan extends Component
 
     protected $rules = [
         'formOrder.pricing_plan_id' => ['required', 'integer', 'exists:pricing_plans,id'],
-        'formOrder.store_banner_path' => ['nullable', 'string'],
-        'formOrder.store_logo_path' => ['nullable', 'string'],
-        'formOrder.store_owner' => ['nullable', 'string'],
-        'formOrder.store_name' => ['nullable', 'string'],
-        'formOrder.application_name' => ['nullable', 'string'],
-        'formOrder.application_description' => ['nullable', 'string'],
-        'formOrder.store_address' => ['nullable', 'string'],
-        'formOrder.store_url' => ['nullable', 'string'],
-        'formOrder.whatsapp_number' => ['nullable', 'string'],
-        'formOrder.youtube_url' => ['nullable', 'string'],
-        'formOrder.facebook_url' => ['nullable', 'string'],
-        'formOrder.instagram_url' => ['nullable', 'string'],
-        'formOrder.twitter_url' => ['nullable', 'string'],
-        'formOrder.layout_id' => ['nullable', 'string'],
-        'formOrder.layout_color' => ['nullable', 'string'],
     ];
 
     public function update($pricing_plan_id)
