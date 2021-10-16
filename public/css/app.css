@@ -1374,6 +1374,10 @@ select {
 .fill-current {
 	fill: currentColor !important;
 }
+.object-cover {
+	-o-object-fit: cover !important;
+	   object-fit: cover !important;
+}
 .p-2 {
 	padding: 0.5rem !important;
 }
