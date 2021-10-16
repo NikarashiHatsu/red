@@ -1,3 +1,35 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.dataTables_length, .dataTables_filter {
+    @apply block;
+}
+
+.dataTables_length label {
+    @apply flex items-center;
+}
+
+.dataTables_length label select {
+    @apply w-16 mx-2;
+}
+
+.dataTables_filter label {
+    @apply flex items-center justify-end;
+}
+
+.dataTables_filter label input {
+    @apply w-36 ml-2 px-2 py-1 rounded-md border border-gray-300;
+}
+
+.dataTables_paginate {
+    @apply flex justify-end;
+}
+
+.dataTables_wrapper {
+    @apply overflow-x-auto;
+}
+
+.dataTable tr {
+    @apply align-middle;
+}
