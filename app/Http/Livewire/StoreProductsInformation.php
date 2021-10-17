@@ -12,8 +12,10 @@ class StoreProductsInformation extends Component
 {
     use WithFileUploads;
 
-    public $products;
     public Product $product;
+
+    public $products;
+    public $confirm_product_deletion;
     public $product_photo_path;
     public $number_of_products;
     public $products_left;
@@ -93,6 +95,28 @@ class StoreProductsInformation extends Component
         Gate::authorize('create', Product::class);
 
         $this->product = new Product;
+    }
+
+    public function delete_product(Product $product)
+    {
+        $this->confirm_product_deletion = $product;
+    }
+
+    public function cancel_deletion()
+    {
+        $this->confirm_product_deletion = null;
+    }
+
+    public function confirm_deletion()
+    {
+        try {
+            $this->confirm_product_deletion->delete();
+        } catch (\Exception $e) {
+            session()->flash('error', 'Produk gagal dihapus: ' . $e->getMessage());
+        }
+
+        $this->products = auth()->user()->products;
+        session()->flash('success', 'Produk berhasil dihapus');
     }
 
     public function mount()

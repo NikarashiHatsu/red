@@ -1221,6 +1221,14 @@ select {
 	border-top-left-radius: 0.25rem !important;
 	border-top-right-radius: 0.25rem !important;
 }
+.rounded-l-none {
+	border-top-left-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+}
+.rounded-r-none {
+	border-top-right-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
 .border {
 	border-width: 1px !important;
 }

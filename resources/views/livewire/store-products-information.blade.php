@@ -51,9 +51,25 @@
                                     Rp{{ number_format($prod->price, 0, '.', '.') }},-
                                 </td>
                                 <td class="border p-2">
-                                    <x-blue-button wire:click="edit_product({{ $prod }})">
-                                        <i class="fas fa-edit"></i>
-                                    </x-blue-button>
+                                    <div class="flex">
+                                        <x-blue-button wire:click="edit_product({{ $prod }})">
+                                            <i class="fas fa-edit"></i>
+                                        </x-blue-button>
+                                        @if ($confirm_product_deletion == $prod)
+                                            <div class="flex">
+                                                <x-red-button wire:click="confirm_deletion()" class="ml-2 rounded-r-none">
+                                                    <i class="fas fa-trash"></i>
+                                                </x-red-button>
+                                                <x-button wire:click="cancel_deletion()" class="rounded-l-none">
+                                                    <i class="fas fa-times"></i>
+                                                </x-button>
+                                            </div>
+                                        @else
+                                            <x-red-button wire:click="delete_product({{ $prod }})" class="ml-2">
+                                                <i class="fas fa-trash"></i>
+                                            </x-red-button>
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                         @empty
