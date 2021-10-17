@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -10,25 +11,8 @@ class StoreProductsInformation extends Component
 {
     use WithFileUploads;
 
-    /**
-     * List of the products.
-     *
-     * @var mixed
-     */
     public $products;
-
-    /**
-     * The product instance.
-     *
-     * @var Product
-     */
     public Product $product;
-
-    /**
-     * A single photo of the form.
-     *
-     * @var mixed
-     */
     public $product_photo_path;
 
     protected $rules = [
@@ -46,6 +30,8 @@ class StoreProductsInformation extends Component
 
     public function add_product()
     {
+        Gate::authorize('create', Product::class);
+        
         $this->validate();
 
         try {
@@ -63,11 +49,15 @@ class StoreProductsInformation extends Component
 
     public function edit_product(Product $product)
     {
+        Gate::authorize('update', $product);
+
         $this->product = $product;
     }
 
     public function update_product()
     {
+        Gate::authorize('update', $this->product);
+
         $this->validate();
 
         try {
@@ -84,6 +74,8 @@ class StoreProductsInformation extends Component
 
     public function new_product()
     {
+        Gate::authorize('create', Product::class);
+
         $this->product = new Product;
     }
 
