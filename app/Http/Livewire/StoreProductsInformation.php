@@ -15,6 +15,8 @@ class StoreProductsInformation extends Component
     public $products;
     public Product $product;
     public $product_photo_path;
+    public $number_of_products;
+    public $products_left;
 
     protected $rules = [
         'product.name' => ['required', 'string'],
@@ -31,6 +33,10 @@ class StoreProductsInformation extends Component
 
     public function add_product()
     {
+        if ($this->products_left <= 0) {
+            return session()->flash('error', 'Jumlah produk sudah mencapai batas maksimal');
+        }
+
         Gate::authorize('create', Product::class);
 
         $this->validate();
@@ -52,6 +58,7 @@ class StoreProductsInformation extends Component
     {
         Gate::authorize('update', $product);
 
+        $this->product_photo_path = null;
         $this->product = $product;
     }
 
@@ -62,8 +69,10 @@ class StoreProductsInformation extends Component
         $this->validate();
 
         try {
-            if (Storage::exists($this->product->product_photo_path)) {
-                Storage::delete($this->product->product_photo_path);
+            if ($this->product_photo_path) {
+                if (Storage::exists($this->product->product_photo_path)) {
+                    Storage::delete($this->product->product_photo_path);
+                }
 
                 $this->product->product_photo_path = $this->product_photo_path->store('product_photos');
             }
@@ -90,6 +99,8 @@ class StoreProductsInformation extends Component
     {
         $this->products = auth()->user()->products;
         $this->product = new Product;
+        $this->number_of_products = auth()->user()->form_order->pricing_plan->number_of_products;
+        $this->products_left = $this->number_of_products - $this->products->count();
     }
 
     public function render()
