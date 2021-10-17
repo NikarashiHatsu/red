@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\FormOrder;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -42,6 +43,8 @@ class StoreInformationForm extends Component
 
     public function update()
     {
+        Gate::authorize('update', $this->form_order);
+
         $this->validate();
 
         try {

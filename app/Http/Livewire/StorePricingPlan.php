@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\FormOrder;
 use App\Models\PricingPlan;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class StorePricingPlan extends Component
@@ -35,6 +36,8 @@ class StorePricingPlan extends Component
 
     public function update($pricing_plan_id)
     {
+        Gate::authorize('update', $this->form_order);
+
         $this->form_order->pricing_plan_id = $pricing_plan_id;
 
         $this->validate();

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\FormOrder;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class StoreSocialMediaInformation extends Component
@@ -24,6 +25,8 @@ class StoreSocialMediaInformation extends Component
 
     public function update()
     {
+        Gate::authorize('update', $this->form_order);
+
         $this->validate();
 
         try {
