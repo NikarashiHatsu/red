@@ -29,7 +29,7 @@ class StoreApplicationInformation extends Component
         session()->flash('success', 'Informasi Aplikasi berhasil disimpan.');
     }
 
-    public function mount()
+    public function mount() 
     {
         $this->formOrder = auth()->user()->formOrder()->firstOrCreate();
     }
