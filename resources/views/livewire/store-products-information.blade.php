@@ -1,12 +1,16 @@
 <div class="flex flex-col">
-    @if ($products_left <= 0)
+    @if ($products_left < 1)
         <div class="bg-red-50 border border-red-300 text-red-700 rounded px-4 py-3 mt-6">
             Kuota produk Anda habis, upgrade ke <a href="{{ route('store.pricing_plan.index') }}" class="underline hover:text-red-900">paket harga</a> yang lebih tinggi atau hapus beberapa produk Anda.
         </div>
+    @endif
+
+    @if ($products_left < 0)
         <div class="bg-yellow-50 border border-yellow-300 text-yellow-700 rounded px-4 py-3 mt-4">
             Produk yang melebihi kuota secara otomatis tidak akan terpilih saat permintaan pembuatan toko diajukan. Pengeditan/penghapusan terhadap produk tersebut masih bisa dilakukan.
         </div>
     @endif
+
     <div class="grid grid-cols-12 grid-flow-row gap-6 mt-4">
         <x-card class="col-span-12 sm:col-span-6 lg:col-span-8">
             <x-card.header>

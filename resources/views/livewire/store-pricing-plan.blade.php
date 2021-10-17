@@ -27,6 +27,4 @@
             </x-pricing-table.tbody>
         </x-pricing-table>
     </x-card.body>
-
-    <x-success-and-error-swal />
 </x-card>
