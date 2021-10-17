@@ -10,7 +10,7 @@ class StorePricingPlan extends Component
 {
     public $pricing_plans;
 
-    public FormOrder $formOrder;
+    public FormOrder $form_order;
 
     public $pricing_keys = [
         'name' => '',
@@ -30,17 +30,17 @@ class StorePricingPlan extends Component
     ];
 
     protected $rules = [
-        'formOrder.pricing_plan_id' => ['required', 'integer', 'exists:pricing_plans,id'],
+        'form_order.pricing_plan_id' => ['required', 'integer', 'exists:pricing_plans,id'],
     ];
 
     public function update($pricing_plan_id)
     {
-        $this->formOrder->pricing_plan_id = $pricing_plan_id;
+        $this->form_order->pricing_plan_id = $pricing_plan_id;
 
         $this->validate();
 
         try {
-            $this->formOrder->update();
+            $this->form_order->update();
         } catch (\Exception $e) {
             return session()->flash('error', 'Gagal memilih paket harga: ' . $e->getMessage());
         }
@@ -52,7 +52,7 @@ class StorePricingPlan extends Component
     public function mount()
     {
         $this->pricing_plans = PricingPlan::all();
-        $this->formOrder = auth()->user()->formOrder()->firstOrCreate();
+        $this->form_order = auth()->user()->form_order()->firstOrCreate();
     }
 
     public function render()

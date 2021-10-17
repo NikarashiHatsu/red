@@ -16,7 +16,7 @@
                         </x-pricing-table.td>
                         @foreach ($pricing_plans as $pricing_plan)
                             <x-pricing-table.td
-                                :form-order="$formOrder"
+                                :form-order="$form_order"
                                 :key="$pricing_key"
                                 :value="$pricing_plan->$pricing_key"
                                 :process="true"

@@ -8,8 +8,8 @@
                 @if ($store_banner_path)
                     <img src="{{ $store_banner_path->temporaryUrl() }}" class="w-full h-full rounded object-cover" />
                 @else
-                    @if ($formOrder->store_banner_path)
-                        <img src="{{ asset($formOrder->store_banner_path) }}" class="w-full h-full rounded object-cover" />
+                    @if ($form_order->store_banner_path)
+                        <img src="{{ asset($form_order->store_banner_path) }}" class="w-full h-full rounded object-cover" />
                     @else
                         16:5
                     @endif
@@ -28,8 +28,8 @@
                     @if ($store_logo_path)
                         <img src="{{ $store_logo_path->temporaryUrl() }}" class="w-full h-full rounded-full object-cover" />
                     @else
-                        @if ($formOrder->store_logo_path)
-                            <img src="{{ asset($formOrder->store_logo_path) }}" class="w-full h-full rounded-full object-cover" />
+                        @if ($form_order->store_logo_path)
+                            <img src="{{ asset($form_order->store_logo_path) }}" class="w-full h-full rounded-full object-cover" />
                         @else
                             16:5
                         @endif
@@ -42,14 +42,14 @@
 
     <div class="flex flex-col mt-4">
         <label for="store_owner">Nama Pemilik Toko <span class="text-red-500">*</span></label>
-        @error('formOrder.store_owner') <span class="text-red-500 text-xs tracking-wider">{{ $message }}</span> @enderror
-        <input type="text" name="store_owner" wire:model="formOrder.store_owner" id="store_owner" class="mt-2 rounded border-gray-300" required>
+        @error('form_order.store_owner') <span class="text-red-500 text-xs tracking-wider">{{ $message }}</span> @enderror
+        <input type="text" name="store_owner" wire:model="form_order.store_owner" id="store_owner" class="mt-2 rounded border-gray-300" required>
     </div>
 
     <div class="flex flex-col mt-4">
         <label for="store_name">Nama Toko <span class="text-red-500">*</span></label>
-        @error('formOrder.store_name') <span class="text-red-500 text-xs tracking-wider">{{ $message }}</span> @enderror
-        <input type="text" name="store_name" wire:model="formOrder.store_name" id="store_name" class="mt-2 rounded border-gray-300" required>
+        @error('form_order.store_name') <span class="text-red-500 text-xs tracking-wider">{{ $message }}</span> @enderror
+        <input type="text" name="store_name" wire:model="form_order.store_name" id="store_name" class="mt-2 rounded border-gray-300" required>
     </div>
 
     <div class="flex justify-end mt-4">

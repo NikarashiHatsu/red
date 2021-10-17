@@ -12,7 +12,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function pricingPlans()
+    public function pricing_plans()
     {
         return $this->hasMany(PricingPlan::class);
     }
@@ -22,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Product::class);
     }
 
-    public function formOrder()
+    public function form_order()
     {
         return $this->hasOne(FormOrder::class);
     }

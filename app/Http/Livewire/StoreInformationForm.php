@@ -14,11 +14,11 @@ class StoreInformationForm extends Component
     public $store_banner_path;
     public $store_logo_path;
 
-    public FormOrder $formOrder;
+    public FormOrder $form_order;
 
     protected $rules = [
-        'formOrder.store_owner' => ['required', 'string'],
-        'formOrder.store_name' => ['required', 'string'],
+        'form_order.store_owner' => ['required', 'string'],
+        'form_order.store_name' => ['required', 'string'],
     ];
 
     public function updatedStoreBannerPath()
@@ -37,7 +37,7 @@ class StoreInformationForm extends Component
 
     public function mount()
     {
-        $this->formOrder = auth()->user()->formOrder()->firstOrCreate();
+        $this->form_order = auth()->user()->form_order()->firstOrCreate();
     }
 
     public function update()
@@ -46,18 +46,18 @@ class StoreInformationForm extends Component
 
         try {
             if ($this->store_banner_path) {
-                if (Storage::exists($this->formOrder->store_banner_path)) Storage::delete($this->formOrder->store_banner_path);
+                if (Storage::exists($this->form_order->store_banner_path)) Storage::delete($this->form_order->store_banner_path);
 
-                $this->formOrder->store_banner_path = $this->store_banner_path->store('store_banners');
+                $this->form_order->store_banner_path = $this->store_banner_path->store('store_banners');
             }
 
             if ($this->store_logo_path) {
-                if (Storage::exists($this->formOrder->store_logo_path)) Storage::delete($this->formOrder->store_logo_path);
+                if (Storage::exists($this->form_order->store_logo_path)) Storage::delete($this->form_order->store_logo_path);
 
-                $this->formOrder->store_logo_path = $this->store_logo_path->store('store_logos');
+                $this->form_order->store_logo_path = $this->store_logo_path->store('store_logos');
             }
 
-            $this->formOrder->update();
+            $this->form_order->update();
         } catch (\Exception $e) {
             return session()->flash('error', 'Informasi toko gagal disimpan: ' . $e->getMessage());
         }

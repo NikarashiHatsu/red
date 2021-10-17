@@ -7,19 +7,19 @@ use Livewire\Component;
 
 class StoreSocialMediaInformation extends Component
 {
-    public FormOrder $formOrder;
+    public FormOrder $form_order;
 
     protected $rules = [
-        'formOrder.whatsapp_number' => ['required', 'integer'],
-        'formOrder.youtube_url' => ['nullable', 'url'],
-        'formOrder.facebook_url' => ['nullable', 'url'],
-        'formOrder.instagram_url' => ['nullable', 'url'],
-        'formOrder.twitter_url' => ['nullable', 'url'],
+        'form_order.whatsapp_number' => ['required', 'integer'],
+        'form_order.youtube_url' => ['nullable', 'url'],
+        'form_order.facebook_url' => ['nullable', 'url'],
+        'form_order.instagram_url' => ['nullable', 'url'],
+        'form_order.twitter_url' => ['nullable', 'url'],
     ];
 
     public function mount()
     {
-        $this->formOrder = auth()->user()->formOrder()->firstOrCreate();
+        $this->form_order = auth()->user()->form_order()->firstOrCreate();
     }
 
     public function update()
@@ -27,7 +27,7 @@ class StoreSocialMediaInformation extends Component
         $this->validate();
 
         try {
-            $this->formOrder->update();
+            $this->form_order->update();
         } catch (\Exception $e) {
             return session()->flash('error', 'Informasi Sosial Media gagal disimpan: ' . $e->getMessage());
         }

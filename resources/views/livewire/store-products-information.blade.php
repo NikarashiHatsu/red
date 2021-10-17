@@ -1,7 +1,14 @@
 <div class="grid grid-cols-12 grid-flow-row gap-6 mt-6">
     <x-card class="col-span-12 sm:col-span-6 lg:col-span-8">
         <x-card.header>
-            List Produk
+            <div class="flex items-center justify-between">
+                <span>
+                    List Produk
+                </span>
+                <span>
+                    Sisa slot produk: {{ auth()->user()->form_order->pricing_plan->number_of_products }}
+                </span>
+            </div>
         </x-card.header>
         <x-card.body>
             <table class="w-full hidden sm:table">
@@ -66,7 +73,7 @@
             </x-card.header>
         @endif
         <x-card.body>
-            <form wire:submit.prevent="{{ $product->product_photo_path ? 'update_product' : 'add_product' }}" autocomplete="off">
+            <form wire:submit.prevent="{{ $product->product_photo_path ? 'update_product' : 'add_product' }}" autocomplete="off" >
                 @csrf
                 <div class="flex flex-col">
                     <label for="product_photo_path">Foto Produk <span class="text-red-500">*</span></label>

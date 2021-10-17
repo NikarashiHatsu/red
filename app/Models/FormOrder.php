@@ -10,6 +10,11 @@ class FormOrder extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public function pricing_plan()
+    {
+        return $this->belongsTo(PricingPlan::class);
+    }
+
     protected $fillable = [
         'user_id',
         'pricing_plan_id',

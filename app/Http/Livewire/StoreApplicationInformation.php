@@ -7,13 +7,13 @@ use Livewire\Component;
 
 class StoreApplicationInformation extends Component
 {
-    public FormOrder $formOrder;
+    public FormOrder $form_order;
 
     protected $rules = [
-        'formOrder.application_name' => ['required', 'string'],
-        'formOrder.application_description' => ['required', 'string'],
-        'formOrder.store_address' => ['required', 'string'],
-        'formOrder.store_url' => ['nullable', 'url'],
+        'form_order.application_name' => ['required', 'string'],
+        'form_order.application_description' => ['required', 'string'],
+        'form_order.store_address' => ['required', 'string'],
+        'form_order.store_url' => ['nullable', 'url'],
     ];
 
     public function update()
@@ -21,7 +21,7 @@ class StoreApplicationInformation extends Component
         $this->validate();
 
         try {
-            $this->formOrder->update();
+            $this->form_order->update();
         } catch (\Exception $e) {
             return session()->flash('error', 'Informasi Aplikasi gagal disimpan: ' . $e->getMessage());
         }
@@ -29,9 +29,9 @@ class StoreApplicationInformation extends Component
         session()->flash('success', 'Informasi Aplikasi berhasil disimpan.');
     }
 
-    public function mount() 
+    public function mount()
     {
-        $this->formOrder = auth()->user()->formOrder()->firstOrCreate();
+        $this->form_order = auth()->user()->form_order()->firstOrCreate();
     }
 
     public function render()
