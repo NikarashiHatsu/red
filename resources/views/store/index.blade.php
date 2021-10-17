@@ -67,9 +67,18 @@
                         </x-card.list>
 
                         <x-card.list href="{{ route('store.form_order.application_information') }}" class="flex items-center">
-                            <span class="w-4 h-4 bg-red-500 text-white rounded-full flex items-center justify-center">
-                                <i class="fas fa-times fa-xs"></i>
-                            </span>
+                            @if (auth()->user()->formOrder?->application_name &&
+                                 auth()->user()->formOrder?->application_description &&
+                                 auth()->user()->formOrder?->store_address)
+                                <span class="w-4 h-4 bg-green-500 text-white rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check fa-xs"></i>
+                                </span>
+                            @else
+                                <span class="w-4 h-4 bg-red-500 text-white rounded-full flex items-center justify-center">
+                                    <i class="fas fa-times fa-xs"></i>
+                                </span>
+                            @endif
+
                             <span class="ml-2">
                                 {{ __('store.application_information') }}
                             </span>
