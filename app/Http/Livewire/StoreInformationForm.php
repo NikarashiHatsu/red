@@ -48,13 +48,13 @@ class StoreInformationForm extends Component
             if ($this->store_banner_path) {
                 if (Storage::exists($this->formOrder->store_banner_path)) Storage::delete($this->formOrder->store_banner_path);
 
-                $this->formOrder->store_banner_path = $this->store_banner_path->store('store_banners/' . $this->formOrder->id);
+                $this->formOrder->store_banner_path = $this->store_banner_path->store('store_banners');
             }
 
             if ($this->store_logo_path) {
                 if (Storage::exists($this->formOrder->store_logo_path)) Storage::delete($this->formOrder->store_logo_path);
 
-                $this->formOrder->store_logo_path = $this->store_logo_path->store('store_logos/' . $this->formOrder->id);
+                $this->formOrder->store_logo_path = $this->store_logo_path->store('store_logos');
             }
 
             $this->formOrder->update();
