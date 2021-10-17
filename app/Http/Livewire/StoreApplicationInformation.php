@@ -13,7 +13,7 @@ class StoreApplicationInformation extends Component
         'formOrder.application_name' => ['required', 'string'],
         'formOrder.application_description' => ['required', 'string'],
         'formOrder.store_address' => ['required', 'string'],
-        'formOrder.store_url' => ['nullable', 'string'],
+        'formOrder.store_url' => ['nullable', 'url'],
     ];
 
     public function update()
