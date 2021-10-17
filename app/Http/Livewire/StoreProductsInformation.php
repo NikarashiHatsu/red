@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -31,7 +32,7 @@ class StoreProductsInformation extends Component
     public function add_product()
     {
         Gate::authorize('create', Product::class);
-        
+
         $this->validate();
 
         try {
@@ -61,6 +62,12 @@ class StoreProductsInformation extends Component
         $this->validate();
 
         try {
+            if (Storage::exists($this->product->product_photo_path)) {
+                Storage::delete($this->product->product_photo_path);
+
+                $this->product->product_photo_path = $this->product_photo_path->store('product_photos');
+            }
+
             $this->product->update();
         } catch (\Exception $e) {
             return session()->flash('error', 'Produk gagal diperbarui: ' . $e->getMessage());
