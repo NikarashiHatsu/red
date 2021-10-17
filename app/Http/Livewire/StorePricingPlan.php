@@ -46,6 +46,7 @@ class StorePricingPlan extends Component
         }
 
         session()->flash('success', 'Berhasil memilih paket harga.');
+        return redirect()->route('store.form_order.index');
     }
 
     public function mount()

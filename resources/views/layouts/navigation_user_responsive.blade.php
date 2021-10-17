@@ -7,7 +7,9 @@
         {{ __('navigation.pricing_plan') }}
     </x-responsive-nav-link>
 
-    <x-responsive-nav-link :href="route('store.form_order.index')" :active="request()->routeIs('store.form_order.index')">
-        {{ __('navigation.form_order') }}
-    </x-responsive-nav-link>
+    @if (auth()->user()->formOrder?->pricing_plan_id)
+        <x-responsive-nav-link :href="route('store.form_order.index')" :active="request()->routeIs('store.form_order.index')">
+            {{ __('navigation.form_order') }}
+        </x-responsive-nav-link>
+    @endif
 @endif
