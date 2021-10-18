@@ -32,9 +32,9 @@
                             <tr class="{{ $loop->iteration > $number_of_products ? 'opacity-50' : '' }}">
                                 <td class="border p-2">
                                     <div class="flex items-center">
-                                        <a href="{{ asset($prod->product_photo_path) }}" target="_blank">
+                                        <a href="{{ Storage::url($prod->product_photo_path) }}" target="_blank">
                                             <div class="w-10 h-10">
-                                                <img src="{{ asset($prod->product_photo_path) }}" class="w-full h-full object-cover rounded border" />
+                                                <img src="{{ Storage::url($prod->product_photo_path) }}" class="w-full h-full object-cover rounded border" />
                                             </div>
                                         </a>
 
@@ -113,7 +113,7 @@
                                         <img src="{{ $product_photo_path->temporaryUrl() }}" class="w-full h-full rounded object-cover" />
                                     @else
                                         @if ($product->product_photo_path)
-                                            <img src="{{ asset($product->product_photo_path) }}" class="w-full h-full rounded object-cover" />
+                                            <img src="{{ Storage::url($product->product_photo_path) }}" class="w-full h-full rounded object-cover" />
                                         @else
                                             1:1
                                         @endif

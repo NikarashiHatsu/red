@@ -9,7 +9,7 @@
                     <img src="{{ $store_banner_path->temporaryUrl() }}" class="w-full h-full rounded object-cover" />
                 @else
                     @if ($form_order->store_banner_path)
-                        <img src="{{ asset($form_order->store_banner_path) }}" class="w-full h-full rounded object-cover" />
+                        <img src="{{ Storage::url($form_order->store_banner_path) }}" class="w-full h-full rounded object-cover" />
                     @else
                         16:5
                     @endif
@@ -29,7 +29,7 @@
                         <img src="{{ $store_logo_path->temporaryUrl() }}" class="w-full h-full rounded-full object-cover" />
                     @else
                         @if ($form_order->store_logo_path)
-                            <img src="{{ asset($form_order->store_logo_path) }}" class="w-full h-full rounded-full object-cover" />
+                            <img src="{{ Storage::url($form_order->store_logo_path) }}" class="w-full h-full rounded-full object-cover" />
                         @else
                             1:1
                         @endif
