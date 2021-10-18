@@ -27,7 +27,7 @@
                 <button class="mr-2">
                     <i class="far fa-thumbs-up"></i>
                 </button>
-                <button>
+                <button> 
                     <i class="fas fa-cart-plus"></i>
                 </button>
             </div>
@@ -40,10 +40,12 @@
     <div class="bg-white p-4 mt-4">
         <div class="flex flex-col">
             <div class="flex items-center">
-                <div class="w-12 h-12 border rounded-full">
-                    @if ($formOrder->store_banner_path)
-                        <img src="{{ Storage::url($formOrder->store_banner_path) }}" class="w-full h-full rounded-full object-cover" />
-                    @endif
+                <div class="flex">
+                    <div class="w-12 h-12 border rounded-full">
+                        @if ($formOrder->store_banner_path)
+                            <img src="{{ Storage::url($formOrder->store_banner_path) }}" class="w-full h-full rounded-full object-cover" />
+                        @endif
+                    </div>
                 </div>
                 <div class="flex flex-col ml-4">
                     <h6 class="font-semibold">
