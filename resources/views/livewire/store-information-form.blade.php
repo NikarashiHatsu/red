@@ -31,7 +31,7 @@
                         @if ($form_order->store_logo_path)
                             <img src="{{ asset($form_order->store_logo_path) }}" class="w-full h-full rounded-full object-cover" />
                         @else
-                            16:5
+                            1:1
                         @endif
                     @endif
                 </label>
