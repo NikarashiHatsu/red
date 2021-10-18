@@ -89,11 +89,17 @@
                             </div>
                         </div>
 
-                        <x-dynamic-component
-                            :component="$store_product_detail_component"
-                            :form-order="$form_order"
-                            :color-scheme-detail="$color_scheme_detail"
-                            :product="$product_displayed" />
+                        @if ($product_displayed)
+                            <x-dynamic-component
+                                :component="$store_product_detail_component"
+                                :form-order="$form_order"
+                                :color-scheme-detail="$color_scheme_detail"
+                                :product="$product_displayed" />
+                        @else
+                            <div class="p-4">
+                                Anda belum menambahkan produk
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

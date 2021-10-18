@@ -9,7 +9,7 @@ use Livewire\Component;
 class StoreLayoutPicker extends Component
 {
     public FormOrder $form_order;
-    public Product $product_displayed;
+    public $product_displayed;
     public $store_layout_component = null;
     public $store_product_detail_component = null;
 
@@ -257,7 +257,7 @@ class StoreLayoutPicker extends Component
     public function mount()
     {
         $this->form_order = auth()->user()->form_order;
-        $this->product_displayed = auth()->user()->products()->first();
+        $this->product_displayed = auth()->user()->products()->first() ?? null;
 
         if ($this->form_order->layout_id) {
             $this->store_layout_component = 'store-layouts.layout-' . $this->form_order->layout_id;

@@ -14,7 +14,7 @@
 
     <div class="aspect-w-1 aspect-h-1 border-b bg-white">
         <div class="w-full h-full">
-            <img src="{{ asset($product->product_photo_path) }}" class="w-full h-full object-cover" />
+            <img src="{{ Storage::url($product->product_photo_path) }}" class="w-full h-full object-cover" />
         </div>
     </div>
 
@@ -42,7 +42,7 @@
             <div class="flex items-center">
                 <div class="w-12 h-12 border rounded-full">
                     @if ($formOrder->store_banner_path)
-                        <img src="{{ asset($formOrder->store_banner_path) }}" class="w-full h-full rounded-full object-cover" />
+                        <img src="{{ Storage::url($formOrder->store_banner_path) }}" class="w-full h-full rounded-full object-cover" />
                     @endif
                 </div>
                 <div class="flex flex-col ml-4">

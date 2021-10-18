@@ -8,7 +8,7 @@
 
     <div class="aspect-w-16 aspect-h-7 border-b">
         @if ($formOrder->store_banner_path)
-            <img src="{{ asset($formOrder->store_banner_path) }}" class="w-full h-full object-cover">
+            <img src="{{ Storage::url($formOrder->store_banner_path) }}" class="w-full h-full object-cover">
         @endif
     </div>
 
@@ -17,7 +17,7 @@
             <div class="flex flex-col w-16">
                 <div class="w-16 h-16 border rounded-full">
                     @if ($formOrder->store_logo_path)
-                        <img src="{{ asset($formOrder->store_logo_path) }}" class="w-full h-full object-cover rounded-full">
+                        <img src="{{ Storage::url($formOrder->store_logo_path) }}" class="w-full h-full object-cover rounded-full">
                     @endif
                 </div>
             </div>
@@ -71,7 +71,7 @@
                     <div class="aspect-w-1 aspect-h-1 border-b">
                         <div class="w-full h-full">
                             @if ($product->product_photo_path)
-                                <img src="{{ asset($product->product_photo_path) }}" class="w-full h-full rounded-t object-cover" />
+                                <img src="{{ Storage::url($product->product_photo_path) }}" class="w-full h-full rounded-t object-cover" />
                             @endif
                         </div>
                     </div>
