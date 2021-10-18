@@ -1,6 +1,6 @@
 <div class="flex flex-col">
     @if ($have_ipaymu_sid && $transaction != null && $transaction->status == 'pending')
-        <x-card class="mt-0 bg-blue-500 text-white">
+        <x-card class="mb-6 bg-blue-500 text-white">
             <x-card.body>
                 Anda memiliki pembayaran yang belum diselesaikan dengan nominal sebesar
                 <b>Rp{{ number_format($form_order->pricing_plan->price, 0, '.', '.') }},-</b>
@@ -9,7 +9,7 @@
         </x-card>
     @endif
 
-    <x-card class="mt-6">
+    <x-card>
         <x-card.header>
             <h5 class="text-lg">
                 {{ __('store.submission_requirements') }}
