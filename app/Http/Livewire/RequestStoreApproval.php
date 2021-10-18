@@ -26,7 +26,7 @@ class RequestStoreApproval extends Component
 
         $user = auth()->user();
         $products = $user->products;
-        $form_order = $user->form_order;
+        $form_order = $user->form_order()->firstOrCreate();
 
         $this->have_chosen_pricing_plan = $form_order->pricing_plan_id;
         $this->have_store_information = $form_order->store_banner_path && $form_order->store_logo_path && $form_order->store_owner && $form_order->store_name;
