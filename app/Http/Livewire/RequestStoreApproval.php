@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Transaction;
 use iPaymu\iPaymu;
 use Livewire\Component;
 
@@ -15,8 +14,12 @@ class RequestStoreApproval extends Component
     public $have_products;
     public $have_chosen_layout_and_color_theme;
     public $have_all_prerequisites;
+
+    public $form_order;
+    public $have_ipaymu_sid;
     public $is_requested;
     public $redirect_payment = null;
+    public $transaction = null;
 
     public function mount()
     {
@@ -35,6 +38,9 @@ class RequestStoreApproval extends Component
         $this->have_products = $products->count() > 0;
         $this->have_chosen_layout_and_color_theme = $form_order->layout_id && $form_order->layout_color;
         $this->is_requested = $form_order->is_requested;
+        $this->have_ipaymu_sid = $form_order->sid;
+        $this->transaction = $user->transaction;
+        $this->form_order = $form_order;
 
         $this->have_all_prerequisites = $this->have_chosen_pricing_plan &&
                                         $this->have_store_information &&

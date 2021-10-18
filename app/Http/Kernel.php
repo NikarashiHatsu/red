@@ -66,7 +66,8 @@ class Kernel extends HttpKernel
 
         // Custom middleware
         'has_pricing_plan' => \App\Http\Middleware\HasPricingPlan::class,
-        
+        'restrict_access_after_request' => \App\Http\Middleware\RestrictAccessAfterRequest::class,
+
         // Role middleware
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'user' => \App\Http\Middleware\UserMiddleware::class,
