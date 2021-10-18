@@ -27,6 +27,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(FormOrder::class);
     }
 
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

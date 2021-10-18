@@ -33,5 +33,7 @@ class FormOrder extends Model
         'twitter_url',
         'layout_id',
         'layout_color',
+        'is_requested',
+        'sid',
     ];
 }

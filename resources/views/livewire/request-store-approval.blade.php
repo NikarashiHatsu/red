@@ -103,15 +103,23 @@
 
     <x-card.body>
         <div class="flex justify-end">
-            @if ($have_all_prerequisites)
-                <x-button>
+            @if ($is_requested || !$have_all_prerequisites)
+                <x-button disabled>
                     {{ __('store.submit_application_creation') }}
                 </x-button>
-            @else
-                <x-button disabled>
+            @elseif ($have_all_prerequisites)
+                <x-button wire:click="send_request">
                     {{ __('store.submit_application_creation') }}
                 </x-button>
             @endif
         </div>
     </x-card.body>
+
+    @if ($redirect_payment)
+        <script>
+            window.location.href = '{{ $redirect_payment }}'
+        </script>
+    @endif
+
+    <x-success-and-error-swal />
 </x-card>
