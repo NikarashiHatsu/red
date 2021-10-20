@@ -10,6 +10,11 @@ class FormOrder extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function pricing_plan()
     {
         return $this->belongsTo(PricingPlan::class);
@@ -34,6 +39,8 @@ class FormOrder extends Model
         'layout_id',
         'layout_color',
         'is_requested',
+        'is_request_accepted',
+        'disapproval_message',
         'sid',
     ];
 }

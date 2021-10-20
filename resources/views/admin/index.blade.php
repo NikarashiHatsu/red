@@ -16,9 +16,7 @@
                             </h5>
                         </x-card.header>
                         <x-card.body>
-                            <p>
-                                Belum ada toko yang menunggu persetujuan.
-                            </p>
+                            <livewire:admin.user-requests />
                         </x-card.body>
                     </x-card>
                 </div>

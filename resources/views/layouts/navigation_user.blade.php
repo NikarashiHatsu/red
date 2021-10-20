@@ -11,13 +11,13 @@
                 {{ __('navigation.pricing_plan') }}
             </x-nav-link>
         </div>
+    @endif
 
-        @if (auth()->user()->form_order->pricing_plan_id)
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <x-nav-link :href="route('store.form_order.index')" :active="request()->routeIs('store.form_order.index')">
-                    {{ __('navigation.form_order') }}
-                </x-nav-link>
-            </div>
-        @endif
+    @if (auth()->user()->form_order->pricing_plan_id)
+        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            <x-nav-link :href="route('store.form_order.index')" :active="request()->routeIs('store.form_order.index')">
+                {{ __('navigation.form_order') }}
+            </x-nav-link>
+        </div>
     @endif
 @endif

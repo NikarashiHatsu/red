@@ -104,6 +104,21 @@ class RequestStoreApproval extends Component
         $this->redirect_payment = $redirect_payment['Data']['Url'];
     }
 
+    public function resend_request()
+    {
+        try {
+            $this->form_order->update([
+                'is_requested' => true,
+                'is_request_accepted' => null,
+                'disapproval_message' => null,
+            ]);
+
+            return session()->flash('success', 'Pengajuan berhasil dikirim.');
+        } catch (\Exception $e) {
+            return session()->flash('error', 'Pengajuan gagal dikirim: ' . $e->getMessage());
+        }
+    }
+
     public function render()
     {
         return view('livewire.request-store-approval');
