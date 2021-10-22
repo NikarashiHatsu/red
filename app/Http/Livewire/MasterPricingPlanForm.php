@@ -38,7 +38,7 @@ class MasterPricingPlanForm extends Component
         $this->validate();
 
         try {
-            auth()->user()->pricingPlans()->save($this->pricingPlan);
+            auth()->user()->pricing_plans()->save($this->pricingPlan);
         } catch (\Exception $e) {
             return session()->flash('error', 'Gagal membuat Paket Harga:' . $e->getMessage());
         }
