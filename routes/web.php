@@ -33,6 +33,15 @@ Route::get('auth_redirector', function() {
     return abort(401);
 })->middleware('auth')->name('auth_redirector');
 
+Route::group(['prefix' => 'merchant', 'as' => 'merchant.'], function() {
+    Route::get('/', \App\Http\Livewire\Merchant\Index::class)->name('index');
+    Route::get('/{merchant}', \App\Http\Livewire\Merchant\Show::class)->name('show');
+});
+
+Route::group(['prefix' => 'product', 'as' => 'product.'], function() {
+    Route::get('/{show}', \App\Http\Livewire\Product\Show::class)->name('show');
+});
+
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'store', 'as' => 'store.', 'middleware' => 'user:verified'], function() {
         Route::view('/', 'store.index')->name('index');
@@ -59,6 +68,7 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::view('/user_request', 'admin.user_request.index')->name('user_request.index');
         Route::get('/user_request/show/{form_order}', \App\Http\Livewire\Admin\UserRequest\Show::class)->name('user_request.show');
+        Route::get('/progress/index', \App\Http\Livewire\Admin\Progress\Index::class)->name('progress.index');
     });
 });
 

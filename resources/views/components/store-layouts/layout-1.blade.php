@@ -1,8 +1,6 @@
 <div class="relative h-full overflow-y-auto rounded-b-2xl">
     <div class="transition-colors duration-300 ease-in-out relative flex items-center justify-between {{ $colorSchemeDetail[$formOrder->layout_color]['navbar_color']  }} py-4 px-3 shadow-lg z-50">
-        <span class="font-semibold">
-            Tema
-        </span>
+        <span class="font-semibold"></span>
         <i class="fas fa-shopping-cart"></i>
     </div>
 
@@ -34,25 +32,25 @@
             </div>
             <div class="flex flex-col ml-4">
                 @if ($formOrder->whatsapp_number)
-                    <a href="javascript:void(0)" class="flex items-center mt-1 text-xs {{ $colorSchemeDetail[$formOrder->layout_color]['anchor_color'] }}">
+                    <a href="{{ 'https://wa.me/' . $formOrder->whatsapp_number }}" target="_blank" class="flex items-center mt-1 text-xs {{ $colorSchemeDetail[$formOrder->layout_color]['anchor_color'] }}">
                         <i class="fab fa-whatsapp fa-sm mr-1"></i>
                         <span>WhatsApp</span>
                     </a>
                 @endif
                 @if ($formOrder->youtube_url)
-                    <a href="javascript:void(0)" class="flex items-center mt-1 text-xs {{ $colorSchemeDetail[$formOrder->layout_color]['anchor_color'] }}">
+                    <a href="{{ $formOrder->youtube_url }}" target="_blank" class="flex items-center mt-1 text-xs {{ $colorSchemeDetail[$formOrder->layout_color]['anchor_color'] }}">
                         <i class="fab fa-youtube fa-sm mr-1"></i>
                         <span>YouTube</span>
                     </a>
                 @endif
                 @if ($formOrder->instagram_url)
-                    <a href="javascript:void(0)" class="flex items-center mt-1 text-xs {{ $colorSchemeDetail[$formOrder->layout_color]['anchor_color'] }}">
+                    <a href="{{ $formOrder->instagram_url }}" target="_blank" class="flex items-center mt-1 text-xs {{ $colorSchemeDetail[$formOrder->layout_color]['anchor_color'] }}">
                         <i class="fab fa-instagram fa-sm mr-1"></i>
                         <span>Instagram</span>
                     </a>
                 @endif
                 @if ($formOrder->twitter_url)
-                    <a href="javascript:void(0)" class="flex items-center mt-1 text-xs {{ $colorSchemeDetail[$formOrder->layout_color]['anchor_color'] }}">
+                    <a href="{{ $formOrder->twitter_url }}" target="_blank" class="flex items-center mt-1 text-xs {{ $colorSchemeDetail[$formOrder->layout_color]['anchor_color'] }}">
                         <i class="fab fa-twitter fa-sm mr-1"></i>
                         <span>Twitter</span>
                     </a>
@@ -67,7 +65,11 @@
         </span>
         <div class="grid grid-cols-3 grid-flow-row gap-4 mt-4">
             @forelse ($products as $product)
+                @if ($clickableProduct ?? false)
+                <a href="{{ route('product.show', $product) }}" class="flex flex-col border rounded cursor-pointer {{ $colorSchemeDetail[$formOrder->layout_color]['anchor_color'] }}">
+                @else
                 <a wire:click="change_product_displayed({{ $product }})" class="flex flex-col border rounded cursor-pointer {{ $colorSchemeDetail[$formOrder->layout_color]['anchor_color'] }}">
+                @endif
                     <div class="aspect-w-1 aspect-h-1 border-b">
                         <div class="w-full h-full">
                             @if ($product->product_photo_path)
