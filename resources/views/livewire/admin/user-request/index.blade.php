@@ -21,7 +21,7 @@
                     <div class="p-4 border-b flex items-center justify-between" href="{{ route('admin.user_request.show', $form_order) }}" target="_blank">
                         <div class="flex">
                             <div class="w-24 h-24">
-                                <img src="{{ asset($form_order->store_logo_path) }}" class="w-24 h-24 max-w-none border rounded object-cover">
+                                <img src="{{ Storage::url($form_order->store_logo_path) }}" class="w-24 h-24 max-w-none border rounded object-cover">
                             </div>
                             <div class="ml-4">
                                 <p>
@@ -80,7 +80,7 @@
                     <div class="p-4 border-b flex items-center justify-between" href="{{ route('admin.user_request.show', $form_order) }}" target="_blank">
                         <div class="flex">
                             <div class="w-24 h-24">
-                                <img src="{{ asset($form_order->store_logo_path) }}" class="w-24 h-24 max-w-none border rounded object-cover">
+                                <img src="{{ Storage::url($form_order->store_logo_path) }}" class="w-24 h-24 max-w-none border rounded object-cover">
                             </div>
                             <div class="ml-4">
                                 <p>
@@ -139,7 +139,7 @@
                     <div class="p-4 border-b flex items-center justify-between" href="{{ route('admin.user_request.show', $form_order) }}" target="_blank">
                         <div class="flex">
                             <div class="w-24 h-24">
-                                <img src="{{ asset($form_order->store_logo_path) }}" class="w-24 h-24 max-w-none border rounded object-cover">
+                                <img src="{{ Storage::url($form_order->store_logo_path) }}" class="w-24 h-24 max-w-none border rounded object-cover">
                             </div>
                             <div class="ml-4">
                                 <p>
