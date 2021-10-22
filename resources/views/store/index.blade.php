@@ -104,7 +104,7 @@
                                         </div>
                                     </div>
                                 @endif
-                            @elseif ($form_order->disapproval_message)
+                            @elseif ($form_order->disapproval_message ?? false)
                                 <p>
                                     Permintaan pengajuan tidak disetujui, alasan: <i>{{ $form_order->disapproval_message }}</i>.
                                 </p>

@@ -9,7 +9,7 @@
         </x-responsive-nav-link>
     @endif
 
-    @if (auth()->user()->form_order->pricing_plan_id)
+    @if (auth()->user()->form_order->pricing_plan_id ?? false)
         <x-responsive-nav-link :href="route('store.form_order.index')" :active="request()->routeIs('store.form_order.index')">
             {{ __('navigation.form_order') }}
         </x-responsive-nav-link>
