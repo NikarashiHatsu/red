@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/store/notify', function() {
+    return response()->json(request()->all());
     try {
         FormOrder::where('sid', request()->sid)->update([
             'is_requested' => 1,
