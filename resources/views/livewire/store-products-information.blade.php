@@ -127,19 +127,19 @@
                     <div class="flex flex-col mt-4">
                         <label for="name">Nama Produk <span class="text-red-500">*</span></label>
                         @error('product.name') <span class="text-red-500 text-xs tracking-wider">{{ $message }}</span> @enderror
-                        <input type="text" name="name" wire:model="product.name" id="name" class="mt-2 rounded border-gray-300" required />
+                        <input type="text" name="name" wire:model.defer="product.name" id="name" class="mt-2 rounded border-gray-300" required />
                     </div>
 
                     <div class="flex flex-col mt-4">
                         <label for="price">Harga Produk <span class="text-red-500">*</span></label>
                         @error('product.price') <span class="text-red-500 text-xs tracking-wider">{{ $message }}</span> @enderror
-                        <input type="number" name="price" wire:model="product.price" id="price" class="mt-2 rounded border-gray-300" required />
+                        <input type="number" name="price" wire:model.defer="product.price" id="price" class="mt-2 rounded border-gray-300" required />
                     </div>
 
                     <div class="flex flex-col mt-4">
                         <label for="description">Deskripsi Produk <span class="text-red-500">*</span></label>
                         @error('product.description') <span class="text-red-500 text-xs tracking-wider">{{ $message }}</span> @enderror
-                        <textarea name="description" wire:model="product.description" id="description" rows="5" class="mt-2 rounded border-gray-300"></textarea>
+                        <textarea name="description" wire:model.defer="product.description" id="description" rows="5" class="mt-2 rounded border-gray-300"></textarea>
                     </div>
 
                     <div class="flex justify-end mt-4">
