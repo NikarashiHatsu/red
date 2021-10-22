@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\FormOrder;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,11 @@ Route::post('/store/notify', function() {
     try {
         FormOrder::where('sid', request()->sid)->update([
             'is_requested' => 1,
+        ]);
+
+        Transaction::where('trx_id', request()->trx_id)->update([
+            'status' => request()->status,
+            'via' => request()->via,
         ]);
     } catch (\Exception $e) {
         return response()->json([

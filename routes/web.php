@@ -36,7 +36,10 @@ Route::get('auth_redirector', function() {
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'store', 'as' => 'store.', 'middleware' => 'user:verified'], function() {
         Route::view('/', 'store.index')->name('index');
-        Route::view('/pricing_plan', 'store.pricing_plan.index')->name('pricing_plan.index');
+
+        Route::group(['middleware' => 'restrict_access_after_request'], function() {
+            Route::view('/pricing_plan', 'store.pricing_plan.index')->name('pricing_plan.index');
+        });
 
         Route::group(['prefix' => 'form_order', 'as' => 'form_order.', 'middleware' => 'has_pricing_plan'], function() {
             Route::view('/', 'store.form_order.index')->name('index');
@@ -55,6 +58,7 @@ Route::group(['middleware' => 'auth'], function() {
         });
 
         Route::view('/user_request', 'admin.user_request.index')->name('user_request.index');
+        Route::get('/user_request/show/{form_order}', \App\Http\Livewire\Admin\UserRequest\Show::class)->name('user_request.show');
     });
 });
 

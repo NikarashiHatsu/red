@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Admin\UserRequest;
 
 use App\Models\FormOrder;
 use App\Models\Product;
+use App\Models\Progress;
 use Livewire\Component;
 
-class StoreLayoutPicker extends Component
+class Show extends Component
 {
     public FormOrder $form_order;
-    public $product_displayed;
-    public $products;
-    public $store_layout_component = null;
-    public $store_product_detail_component = null;
+    public Product $product;
+
+    public $disapproval_message = '';
+    public $disapprove = '';
 
     public $color_schemes_available = [
         [
@@ -214,61 +215,70 @@ class StoreLayoutPicker extends Component
         ],
     ];
 
-    public $layouts = [
-        1 => 'Tokopedia',
+    protected $rules = [
+        'disapproval_message' => ['string'],
     ];
 
-    public function update_color($color)
-    {
-        try {
-            $this->form_order->update([
-                'layout_color' => $color,
-            ]);
-        } catch (\Exception $e) {
-            session()->flash('error', 'Tema Warna gagal diperbarui: ' . $e->getMessage());
-            return;
-        }
-
-        session()->flash('success', 'Tema Warna berhasil diperbarui.');
-        return;
+    public function mount(FormOrder $form_order) {
+        $this->form_order = $form_order;
+        $this->product = $form_order->user->products->first();
+        $this->disapprove = false;
+        $this->disapproval_message = '';
     }
 
     public function change_product_displayed(Product $product)
     {
-        $this->product_displayed = $product;
+        $this->product = $product;
     }
 
-    public function update_layout($layout_id)
+    public function approve()
     {
         try {
             $this->form_order->update([
-                'layout_id' => $layout_id,
+                'is_request_accepted' => true,
+            ]);
+
+            Progress::create([
+                'user_id' => $this->form_order->user->id,
             ]);
         } catch (\Exception $e) {
-            session()->flash('error', 'Tema Warna gagal diperbarui: ' . $e->getMessage());
-            return;
+            return session()->flash('error', 'Permintaan gagal disetujui: ' . $e->getMessage());
         }
 
-        $this->store_layout_component = 'store-layouts.layout-' . $layout_id;
-        $this->store_product_detail_component = 'product-detail-layouts.layout-' . $layout_id;
-        session()->flash('success', 'Tema Warna berhasil diperbarui.');
-        return;
+        return session()->flash('success', 'Permintaan berhasil disetujui.');
     }
 
-    public function mount()
+    public function disapprove()
     {
-        $this->form_order = auth()->user()->form_order;
-        $this->products = $this->form_order->user->products;
-        $this->product_displayed = $this->products->first() ?? null;
+        $this->disapprove = true;
+        $this->disapproval_message = '';
+    }
 
-        if ($this->form_order->layout_id) {
-            $this->store_layout_component = 'store-layouts.layout-' . $this->form_order->layout_id;
-            $this->store_product_detail_component = 'product-detail-layouts.layout-' . $this->form_order->layout_id;
+    public function cancel_disapproval()
+    {
+        $this->disapprove = false;
+    }
+
+    public function confirm_disapproval()
+    {
+        $this->validate();
+
+        try {
+            $this->form_order->update([
+                'is_requested' => null,
+                'is_request_accepted' => false,
+                'disapproval_message' => $this->disapproval_message,
+            ]);
+        } catch (\Exception $e) {
+            return session()->flash('error', 'Gagal mengirim pesan ketidaksetujuan: ' . $e->getMessage());
         }
+
+        $this->reset(['disapproval_message', 'disapprove']);
+        return session()->flash('success', 'Pesan ketidaksetujuan berhasil dikirim.');
     }
 
     public function render()
     {
-        return view('livewire.store-layout-picker');
+        return view('livewire.admin.user-request.show');
     }
 }

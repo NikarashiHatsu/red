@@ -32,6 +32,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Transaction::class);
     }
 
+    public function progress()
+    {
+        return $this->hasOne(Progress::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
