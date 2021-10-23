@@ -27,6 +27,11 @@ class User extends Authenticatable
         return $this->hasOne(FormOrder::class);
     }
 
+    public function form_order_with_id()
+    {
+        return $this->hasOne(FormOrder::class, 'user_id', 'id');
+    }
+
     public function transaction()
     {
         return $this->hasOne(Transaction::class);
