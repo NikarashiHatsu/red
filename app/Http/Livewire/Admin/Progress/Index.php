@@ -13,13 +13,11 @@ class Index extends Component
     public function render()
     {
         return view('livewire.admin.progress.index', [
-            'incomplete_progresses' => Progress::query()
-                ->where('is_apk_created', null)
+            'incomplete_progresses' => Progress::where('is_apk_created', null)
                 ->orWhere('is_published_on_google_play', null)
                 ->orWhere('google_play_url', null)
                 ->paginate(10),
-            'completed_progresses' => Progress::query()
-                ->where('is_apk_created', true)
+            'completed_progresses' => Progress::where('is_apk_created', true)
                 ->where('is_published_on_google_play', true)
                 ->where('google_play_url', '!=', null)
                 ->paginate(),
