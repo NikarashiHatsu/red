@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->hasOne(Transaction::class);
     }
 
+    public function duitku_transaction()
+    {
+        return $this->hasOne(DuitkuTransaction::class);
+    }
+
     public function progress()
     {
         return $this->hasOne(Progress::class);

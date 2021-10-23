@@ -1,5 +1,6 @@
 @php
-    $transaction = auth()->user()->transaction;
+    # $transaction = auth()->user()->transaction;
+    $transaction = auth()->user()->duitku_transaction;
     $form_order = auth()->user()->form_order;
     $progress = auth()->user()->progress;
 @endphp
@@ -24,11 +25,11 @@
                                             {{ __('store.greeting', ['name' => auth()->user()->name]) }}
                                         </span>
 
-                                        @if ($transaction->status == 'pending')
+                                        @if ($transaction->result_code == '01')
                                             <span class="text-base px-3 py-2 rounded border bg-blue-50 border-blue-300 text-blue-700">
                                                 Pembayaran belum diselesaikan
                                             </span>
-                                        @elseif ($transaction->status == 'berhasil')
+                                        @elseif ($transaction->result_code == '02')
                                             @if ($form_order->is_request_accepted)
                                                 <span class="text-base px-3 py-2 rounded border bg-green-50 border-green-300 text-green-700">
                                                     Permintaan pengajuan dalam antrian

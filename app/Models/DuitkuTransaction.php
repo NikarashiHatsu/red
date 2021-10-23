@@ -10,6 +10,7 @@ class DuitkuTransaction extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'form_order_id',
         'reference',
         'merchant_code',

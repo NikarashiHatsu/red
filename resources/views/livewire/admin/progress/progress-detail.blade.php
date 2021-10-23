@@ -36,7 +36,7 @@
                 @endif
             </div>
             <div class="col-span-1 flex flex-col">
-                @if ($progress->is_apk_created)
+                @if ($progress->is_published_on_google_play)
                     <x-button wire:click="completePublish" disabled>
                         Upload <i class="fas fa-check ml-2"></i>
                     </x-button>

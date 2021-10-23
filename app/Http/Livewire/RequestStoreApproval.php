@@ -243,6 +243,7 @@ class RequestStoreApproval extends Component
             $result = json_decode($request, true);
 
             DuitkuTransaction::create([
+                'user_id' => $user->id,
                 'form_order_id' => $form_order->id,
                 'reference' => $result['reference'],
             ]);
