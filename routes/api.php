@@ -40,3 +40,64 @@ Route::post('/store/notify', function() {
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'duitku', 'as' => 'duitku.'], function() {
+    Route::get('return', function(Request $request) {
+        $transaction = \App\Models\DuitkuTransaction::updateOrCreate(
+            ['reference' => $request->reference],
+            [
+                'merchant_order_id' => $request->merchantOrderId,
+                'result_code' => $request->resultCode,
+            ]
+        );
+
+        \App\Models\FormOrder::where('id', $transaction->form_order_id)->update([
+            'is_requested' => true,
+        ]);
+
+        return redirect()->route('store.index');
+    })->name('return');
+
+    Route::get('callback', function(Request $request) {
+        $apiKey = config('duitku.api_key');
+        $merchantCode = $request->merchantCode ?? null;
+        $merchantOrderId = $request->merchantOrderId ?? null;
+        $merchantUserId = $request->merchantUserId ?? null;
+        $amount = $request->amount ?? null;
+        $productDetail = $request->productDetail ?? null;
+        $additionalParam = $request->additionalParam ?? null;
+        $paymentMethod = $request->paymentCode ?? null;
+        $resultCode = $request->resultCode ?? null;
+        $reference = $request->reference ?? null;
+        $signature = $request->signature ?? null;
+
+        if(!empty($merchantCode) && !empty($amount) && !empty($merchantOrderId) && !empty($signature))
+        {
+            $params = $merchantCode . $amount . $merchantOrderId . $apiKey;
+            $calcSignature = md5($params);
+
+            if($signature == $calcSignature) {
+                \App\Models\DuitkuTransaction::updateOrCreate(
+                    ['reference' => $reference],
+                    [
+                        'merchant_code' => $merchantCode,
+                        'merchant_order_id' => $merchantOrderId,
+                        'merchant_user_id' => $merchantUserId,
+                        'amount' => $amount,
+                        'product_detail' => $productDetail,
+                        'additional_param' => $additionalParam,
+                        'payment_method' => $paymentMethod,
+                        'result_code' => $resultCode,
+                        'signature' => $signature,
+                    ]
+                );
+
+                echo "SUCCESS";
+            } else {
+                throw new Exception('Bad Signature');
+            }
+        } else {
+            throw new Exception('Bad Parameter');
+        }
+    })->name('callback');
+});

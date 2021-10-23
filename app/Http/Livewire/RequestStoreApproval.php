@@ -2,6 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\DuitkuTransaction;
+use App\Models\FormOrder;
+use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use iPaymu\iPaymu;
 use Livewire\Component;
 
@@ -55,6 +59,53 @@ class RequestStoreApproval extends Component
         $user = auth()->user();
         $form_order = $user->form_order;
 
+        // $this->request_ipaymu_transaction($form_order, $user);
+        echo $this->request_duitku_transaction($form_order, $user);
+    }
+
+    public function resend_request()
+    {
+        try {
+            $this->form_order->update([
+                'is_requested' => true,
+                'is_request_accepted' => null,
+                'disapproval_message' => null,
+            ]);
+
+            return session()->flash('success', 'Pengajuan berhasil dikirim.');
+        } catch (\Exception $e) {
+            return session()->flash('error', 'Pengajuan gagal dikirim: ' . $e->getMessage());
+        }
+    }
+
+    public function render()
+    {
+        return view('livewire.request-store-approval');
+    }
+
+    private function save_transaction()
+    {
+        if (!auth()->user()->transaction()->exists()) {
+            try {
+                auth()->user()->transaction()->create([
+                    'trx_id' => request()->trx_id,
+                    'status' => request()->status,
+                    'tipe' => request()->tipe,
+                    'via' => request()->via,
+                    'channel' => request()->channel,
+                    'va' => request()->va ?? null,
+                ]);
+            } catch (\Exception $e) {
+                return session()->flash('error', 'Gagal menyimpan data transaksi.');
+            }
+
+            session()->flash('success', 'Berhasil menyimpan data transaksi.');
+            return redirect()->route('store.index');
+        }
+    }
+
+    private function request_ipaymu_transaction(FormOrder $form_order, User $user)
+    {
         $ipaymu_api_key = config('ipaymu.ipaymu_api_key');
         $ipaymu_va = config('ipaymu.ipaymu_virtual_account');
         $ipaymu_prod = config('ipaymu.ipaymu_production');
@@ -104,44 +155,101 @@ class RequestStoreApproval extends Component
         $this->redirect_payment = $redirect_payment['Data']['Url'];
     }
 
-    public function resend_request()
+    private function request_duitku_transaction(FormOrder $form_order, User $user)
     {
-        try {
-            $this->form_order->update([
-                'is_requested' => true,
-                'is_request_accepted' => null,
-                'disapproval_message' => null,
+        $merchantCode = config('duitku.merchant_code');
+        $merchantKey = config('duitku.api_key');
+        $paymentAmount = $form_order->pricing_plan->price;
+        $paymentMethod = 'BK';
+        $merchantOrderId = time() . '';
+        $productDetails = 'BWI App Store';
+        $email = $user->email;
+        $phoneNumber = $form_order->whatsapp_number;
+        $customerVaName = $user->name;
+        $callbackUrl = route('duitku.callback');
+        $returnUrl = route('duitku.return');
+        $expiryPeriod = 10;
+        $signature = md5($merchantCode . $merchantOrderId . $paymentAmount . $merchantKey);
+
+        // Customer Detail
+        $name = $user->name;
+        $address = $form_order->store_address;
+
+        $address = array(
+            'firstName' => $name,
+            'address' => $address,
+            'phone' => $phoneNumber,
+        );
+
+        $customerDetail = array(
+            'firstName' => $name,
+            'email' => $email,
+            'phoneNumber' => $phoneNumber,
+            'billingAddress' => $address,
+            'shippingAddress' => $address
+        );
+
+        $item1 = array(
+            'name' => $form_order->pricing_plan->name,
+            'price' => $form_order->pricing_plan->price,
+            'quantity' => 1
+        );
+
+        $itemDetails = array(
+            $item1
+        );
+
+        $params = array(
+            'merchantCode' => $merchantCode,
+            'paymentAmount' => $paymentAmount,
+            'paymentMethod' => $paymentMethod,
+            'merchantOrderId' => $merchantOrderId,
+            'productDetails' => $productDetails,
+            'customerVaName' => $customerVaName,
+            'email' => $email,
+            'phoneNumber' => $phoneNumber,
+            'itemDetails' => $itemDetails,
+            'customerDetail' => $customerDetail,
+            'callbackUrl' => $callbackUrl,
+            'returnUrl' => $returnUrl,
+            'signature' => $signature,
+            'expiryPeriod' => $expiryPeriod
+        );
+
+        $params_string = json_encode($params);
+
+        if (config('duitku.production')) {
+            $url = 'https://passport.duitku.com/webapi/api/merchant/v2/inquiry'; // Production
+        } else {
+            $url = 'https://sandbox.duitku.com/webapi/api/merchant/v2/inquiry'; // Sandbox
+        }
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($params_string))
+        );
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+        $request = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if($httpCode == 200) {
+            $result = json_decode($request, true);
+
+            DuitkuTransaction::create([
+                'form_order_id' => $form_order->id,
+                'reference' => $result['reference'],
             ]);
 
-            return session()->flash('success', 'Pengajuan berhasil dikirim.');
-        } catch (\Exception $e) {
-            return session()->flash('error', 'Pengajuan gagal dikirim: ' . $e->getMessage());
-        }
-    }
-
-    public function render()
-    {
-        return view('livewire.request-store-approval');
-    }
-
-    private function save_transaction()
-    {
-        if (!auth()->user()->transaction()->exists()) {
-            try {
-                auth()->user()->transaction()->create([
-                    'trx_id' => request()->trx_id,
-                    'status' => request()->status,
-                    'tipe' => request()->tipe,
-                    'via' => request()->via,
-                    'channel' => request()->channel,
-                    'va' => request()->va ?? null,
-                ]);
-            } catch (\Exception $e) {
-                return session()->flash('error', 'Gagal menyimpan data transaksi.');
-            }
-
-            session()->flash('success', 'Berhasil menyimpan data transaksi.');
-            return redirect()->route('store.index');
+            $this->redirect_payment = $result['paymentUrl'];
+        } else {
+            Log::critical('DUITKU TRANSACTION INIT FAILED:' . $httpCode);
         }
     }
 }
