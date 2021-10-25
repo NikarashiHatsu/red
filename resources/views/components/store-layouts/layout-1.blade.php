@@ -96,11 +96,16 @@
     </div>
 
     <div class="mt-4 px-4 pb-4">
-        <p class="text-xs">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod amet
-            quisquam officia veniam ipsam iste nesciunt quidem, quis earum ut
-            eaque esse aperiam labore dolor libero necessitatibus, sequi velit
-            illum.
-        </p>
+        <div class="text-xs">
+            <p class="mb-2 font-semibold">
+                {{ $formOrder->store_name }}
+            </p>
+            <p class="mb-2">
+                {{ $formOrder->store_address }}
+            </p>
+            <p>
+                <i class="fab fa-whatsapp mr-1"></i>{{ $formOrder->whatsapp_number }}
+            </p>
+        </div>
     </div>
 </div>
