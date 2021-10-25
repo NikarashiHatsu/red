@@ -52,6 +52,7 @@ class StoreProductsInformation extends Component
 
         $this->product_photo_path = null;
         $this->products = auth()->user()->products;
+        $this->products_left = $this->number_of_products - $this->products->count();
         $this->new_product();
         session()->flash('success', 'Produk berhasil ditambahkan');
     }
