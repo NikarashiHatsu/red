@@ -16,7 +16,7 @@ class RestrictAccessAfterRequest
      */
     public function handle(Request $request, Closure $next)
     {
-        $transaction = $request->user()->has('transaction') || $request->user()->has('duitku_transaction');
+        $transaction = $request->user()->duitku_transaction;
 
         abort_if($transaction, 403, 'Akses ke halaman ini setelah mengirimkan pengajuan tidak diperbolehkan.');
 

@@ -3,7 +3,7 @@
         {{ __('navigation.dashboard') }}
     </x-responsive-nav-link>
 
-    @if (!auth()->user()->has('transaction') || !auth()->user()->has('duitku_transaction'))
+    @if (!auth()->user()->duitku_transaction)
         <x-responsive-nav-link :href="route('store.pricing_plan.index')" :active="request()->routeIs('store.pricing_plan.index')">
             {{ __('navigation.pricing_plan') }}
         </x-responsive-nav-link>
