@@ -9,7 +9,6 @@ class Show extends Component
 {
     public $component;
     public $form_order;
-    public $products;
 
     public $color_schemes_available = [
         [
@@ -222,12 +221,13 @@ class Show extends Component
 
         $this->component = 'store-layouts.layout-' . $merchant->layout_id;
         $this->form_order = $merchant;
-        $this->products = $merchant->user->products;
     }
 
     public function render()
     {
-        return view('livewire.merchant.show')
+        return view('livewire.merchant.show', [
+                'products' => $this->form_order->user->products()->paginate(6),
+            ])
             ->layout('layouts.guest');
     }
 }

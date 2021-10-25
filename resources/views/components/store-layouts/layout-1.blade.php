@@ -61,7 +61,7 @@
 
     <div class="transition-colors duration-300 ease-in-out mt-4 border-t border-b {{ $colorSchemeDetail[$formOrder->layout_color]['light_color'] }} {{ $colorSchemeDetail[$formOrder->layout_color]['border_color'] }} py-4 text-xs px-4">
         <span>
-            {{ $products->count() }} Produk
+            {{ $products->total() }} Produk
         </span>
         <div class="grid grid-cols-3 grid-flow-row gap-4 mt-4">
             @forelse ($products as $product)
@@ -89,6 +89,9 @@
             @empty
                 <i>Belum ada produk</i>
             @endforelse
+        </div>
+        <div class="w-full mt-4">
+            {{ $products->onEachSide(0)->links() }}
         </div>
     </div>
 

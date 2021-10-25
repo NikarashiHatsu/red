@@ -5,12 +5,14 @@ namespace App\Http\Livewire;
 use App\Models\FormOrder;
 use App\Models\Product;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class StoreLayoutPicker extends Component
 {
+    use WithPagination;
+
     public FormOrder $form_order;
     public $product_displayed;
-    public $products;
     public $store_layout_component = null;
     public $store_product_detail_component = null;
 
@@ -215,7 +217,7 @@ class StoreLayoutPicker extends Component
     ];
 
     public $layouts = [
-        1 => 'Tokopedia',
+        1 => 'Layout 1',
     ];
 
     public function update_color($color)
@@ -258,8 +260,7 @@ class StoreLayoutPicker extends Component
     public function mount()
     {
         $this->form_order = auth()->user()->form_order;
-        $this->products = $this->form_order->user->products;
-        $this->product_displayed = $this->products->first() ?? null;
+        $this->product_displayed = $this->form_order->user->products->first() ?? null;
 
         if ($this->form_order->layout_id) {
             $this->store_layout_component = 'store-layouts.layout-' . $this->form_order->layout_id;
@@ -269,6 +270,11 @@ class StoreLayoutPicker extends Component
 
     public function render()
     {
-        return view('livewire.store-layout-picker');
+        $products = $this->form_order->user->products()->take($this->form_order->pricing_plan->number_of_products);
+
+        return view('livewire.store-layout-picker', [
+            'products' => $products->paginate(6),
+            'product_count' => $products->get()->count(),
+        ]);
     }
 }

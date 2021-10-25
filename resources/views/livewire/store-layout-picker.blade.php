@@ -64,7 +64,8 @@
                             :component="$store_layout_component"
                             :products="$products"
                             :form-order="$form_order"
-                            :color-scheme-detail="$color_scheme_detail" />
+                            :color-scheme-detail="$color_scheme_detail"
+                            :product-count="$product_count" />
                     </div>
                 </div>
                 <p class="italic text-red-500 text-sm mt-4">

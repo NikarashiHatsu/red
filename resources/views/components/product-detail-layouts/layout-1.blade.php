@@ -27,7 +27,7 @@
                 <button class="mr-2">
                     <i class="far fa-thumbs-up"></i>
                 </button>
-                <button> 
+                <button>
                     <i class="fas fa-cart-plus"></i>
                 </button>
             </div>

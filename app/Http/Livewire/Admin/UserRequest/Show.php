@@ -6,9 +6,12 @@ use App\Models\FormOrder;
 use App\Models\Product;
 use App\Models\Progress;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Show extends Component
 {
+    use WithPagination;
+
     public FormOrder $form_order;
     public Product $product;
 
@@ -279,6 +282,8 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.admin.user-request.show');
+        return view('livewire.admin.user-request.show', [
+            'products' => $this->form_order->user->products()->paginate(6),
+        ]);
     }
 }
