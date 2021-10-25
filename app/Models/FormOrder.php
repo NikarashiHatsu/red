@@ -36,6 +36,8 @@ class FormOrder extends Model
         'facebook_url',
         'instagram_url',
         'twitter_url',
+        'api_merchant_code',
+        'api_integration_key',
         'layout_id',
         'layout_color',
         'is_requested',

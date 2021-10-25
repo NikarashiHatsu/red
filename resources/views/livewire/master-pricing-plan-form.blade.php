@@ -164,6 +164,21 @@
     </div>
 
     <div class="flex flex-col mt-4">
+        <label for="has_ad_mob_integration">Apakah aplikasi bisa terintegrasi dengan API Duitku? <span class="text-red-500">*</span></label>
+        @error('pricingPlan.has_api_integration') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+        <div class="flex">
+            <div class="flex items-center mt-2">
+                <input type="radio" name="has_api_integration" wire:model.defer="pricingPlan.has_api_integration" id="has_api_integration_true" value="1" />
+                <label for="has_api_integration_true" class="ml-1">Ya</label>
+            </div>
+            <div class="flex items-center mt-2 ml-4">
+                <input type="radio" name="has_api_integration" wire:model.defer="pricingPlan.has_api_integration" id="has_api_integration_false" value="0" />
+                <label for="has_api_integration_false" class="ml-1">Tidak</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col mt-4">
         <label for="price">Harga Paket Harga ini <span class="text-red-500">*</span></label>
         @error('pricingPlan.price') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
         <input type="number" wire:model.defer="pricingPlan.price" id="price" class="rounded border border-gray-300 mt-2" required />

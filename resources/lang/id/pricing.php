@@ -16,5 +16,6 @@ return [
     'sale_transaction' => 'Transaksi penjualan',
     'aposerba_integration' => 'Integrasi Aposerba',
     'ad_mob_integration' => 'Integrasi Ad Mob',
+    'has_api_integration' => 'Integrasi API Duitku',
     'price' => 'Harga',
 ];

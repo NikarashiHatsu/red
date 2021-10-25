@@ -14,7 +14,8 @@ return [
     'online_payment' => 'Online payment',
     'whatsapp_integration' => 'WhatsApp integration',
     'sale_transaction' => 'Sale transaction',
-    'aposerba_integration' => 'Aposerba Integration',
+    // 'aposerba_integration' => 'Aposerba Integration',
     'ad_mob_integration' => 'Ad Mob Integration',
+    'has_api_integration' => 'Duitku API Integration',
     'price' => 'Price',
 ];

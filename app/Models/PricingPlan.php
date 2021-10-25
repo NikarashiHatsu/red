@@ -48,5 +48,6 @@ class PricingPlan extends Model
         'has_aposerba_integration',
         'has_ad_mob_integration',
         'price',
+        'has_api_integration',
     ];
 }

@@ -24,8 +24,9 @@ class StorePricingPlan extends Component
         'has_online_payment' => 'pricing.online_payment',
         'has_whatsapp_integration' => 'pricing.whatsapp_integration',
         'has_sale_transaction' => 'pricing.sale_transaction',
-        'has_aposerba_integration' => 'pricing.aposerba_integration',
+        // 'has_aposerba_integration' => 'pricing.aposerba_integration',
         'has_ad_mob_integration' => 'pricing.ad_mob_integration',
+        'has_api_integration' => 'pricing.has_api_integration',
         'modified_price' => 'pricing.price',
         'button' => '',
     ];

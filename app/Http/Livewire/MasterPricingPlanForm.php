@@ -24,6 +24,7 @@ class MasterPricingPlanForm extends Component
         'pricingPlan.has_aposerba_integration' => ['required', 'boolean'],
         'pricingPlan.has_ad_mob_integration' => ['required', 'boolean'],
         'pricingPlan.price' => ['required', 'integer'],
+        'pricingPlan.has_api_integration' => ['required', 'boolean'],
     ];
 
     public function mount(PricingPlan $pricingPlan)
