@@ -10,6 +10,11 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     protected $fillable = [
         'user_id',
         'product_photo_path',

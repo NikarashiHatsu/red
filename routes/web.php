@@ -39,7 +39,7 @@ Route::group(['prefix' => 'merchant', 'as' => 'merchant.'], function() {
 });
 
 Route::group(['prefix' => 'product', 'as' => 'product.'], function() {
-    Route::get('/{show}', \App\Http\Livewire\Product\Show::class)->name('show');
+    Route::get('/{product}', \App\Http\Livewire\Product\Show::class)->name('show');
 });
 
 Route::group(['middleware' => 'auth'], function() {
