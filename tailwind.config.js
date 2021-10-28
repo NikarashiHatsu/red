@@ -22,6 +22,11 @@ module.exports = {
                 handwriting: ['Dancing Script', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                blueGray: colors.blueGray,
+                coolGray: colors.coolGray,
+                gray: colors.gray,
+                trueGray: colors.trueGray,
+                warmGray: colors.warmGray,
                 red: colors.red,
                 orange: colors.orange,
                 amber: colors.amber,

@@ -8,6 +8,8 @@ use Livewire\Component;
 
 class FrontPage extends Component
 {
+    use \App\Http\Livewire\Traits\Colors;
+
     public $featured_products;
     public $featured_merchants;
 
