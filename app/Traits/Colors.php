@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Traits;
+namespace App\Traits;
 
 trait Colors {
     public $color_schemes_available = [

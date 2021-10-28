@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 class StoreLayoutPicker extends Component
 {
     use WithPagination,
-        \App\Http\Livewire\Traits\Colors;
+        \App\Traits\Colors;
 
     public FormOrder $form_order;
     public $product_displayed;

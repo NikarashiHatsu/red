@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 class Show extends Component
 {
     use WithPagination,
-        \App\Http\Livewire\Traits\Colors;
+        \App\Traits\Colors;
 
     public FormOrder $form_order;
     public Product $product;
