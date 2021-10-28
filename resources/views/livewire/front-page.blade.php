@@ -10,7 +10,9 @@
                 class="transition-shadow duration-300 ease-in-out hover:text-gray-700 flex flex-col col-span-12 sm:col-span-4 md:col-span-3 lg:col-span-2 bg-white rounded-lg shadow hover:shadow-xl">
                 {{-- <img src="{{ Storage::url($product->product_photo_path) }}" class="w-full h-full object-cover rounded-t-lg" /> --}}
                 <div class="aspect-w-1 aspect-h-1">
-                    <img src="https://picsum.photos/seed/{{ rand(0, 12) }}/200/300"
+                    {{-- <img src="https://picsum.photos/seed/{{ rand(0, 12) }}/200/300"
+                        class="w-full h-full object-cover rounded-t-lg" /> --}}
+                    <img src="{{ Storage::url($product->product_photo_path) }}"
                         class="w-full h-full object-cover rounded-t-lg" />
                 </div>
                 <div class="p-3">
@@ -66,7 +68,7 @@
                         <span>{{ $form_order->user->products()->count() }} produk</span>
                     </p>
                     <div class="grid grid-cols-3 grid-flow-row gap-4 p-4">
-                        @foreach ($form_order->user->products()->take(3)->get() as $product)
+                        @foreach ($form_order->user->products()->take(6)->get() as $product)
                             <a
                                 href="{{ route('product.show', $product) }}"
                                 class="transition-shadow duration-300 ease-in-out col-span-1 hover:text-gray-700 hover:shadow-xl flex flex-col border rounded">
