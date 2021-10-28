@@ -11,7 +11,9 @@ class UserRequests extends Component
 
     public function mount()
     {
-        $this->form_orders = FormOrder::where('is_request_accepted', null)->get();
+        $this->form_orders = FormOrder::where('is_request_accepted', null)
+            ->where('is_requested', true)
+            ->get();
     }
 
     public function render()
