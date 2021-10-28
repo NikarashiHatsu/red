@@ -10,6 +10,18 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public function has_form_order()
+    {
+        return $this->hasOneThrough(
+            FormOrder::class,
+            User::class,
+            'id',
+            'user_id',
+            'id',
+            'id'
+        );
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);

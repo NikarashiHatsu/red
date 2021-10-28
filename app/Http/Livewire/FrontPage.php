@@ -13,7 +13,7 @@ class FrontPage extends Component
 
     public function mount()
     {
-        $this->featured_products = Product::take(12)->get();
+        $this->featured_products = Product::has('has_form_order')->take(12)->get();
         $this->featured_merchants = FormOrder::where('is_request_accepted', 1)->take(6)->get();
     }
 
