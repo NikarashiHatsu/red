@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', \App\Http\Livewire\FrontPage::class)->name('index');
 
 Route::get('auth_redirector', function() {
     $user = auth()->user();

@@ -17,6 +17,9 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                display: ['"Exo 2"', ...defaultTheme.fontFamily.sans],
+                serif: ['Andada Pro', ...defaultTheme.fontFamily.sans],
+                handwriting: ['Dancing Script', ...defaultTheme.fontFamily.sans],
             },
             colors: {
                 red: colors.red,
