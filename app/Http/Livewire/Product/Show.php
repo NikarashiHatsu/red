@@ -7,6 +7,8 @@ use Livewire\Component;
 
 class Show extends Component
 {
+    use \App\Traits\Colors;
+
     public $product;
     public $component;
     public $form_order;
