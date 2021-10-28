@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\PricingPlanController;
 use Illuminate\Support\Facades\Route;
 
 /*

@@ -6,7 +6,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin:veri
     Route::view('/', 'admin.index')->name('index');
 
     Route::group(['prefix' => 'master', 'as' => 'master.'], function() {
-        Route::resource('pricing_plan', PricingPlanController::class)->only(['index', 'create', 'edit', 'destroy']);
+        Route::resource('pricing_plan', App\Http\Controllers\PricingPlanController::class)->only(['index', 'create', 'edit', 'destroy']);
     });
 
     Route::view('/user_request', 'admin.user_request.index')->name('user_request.index');
