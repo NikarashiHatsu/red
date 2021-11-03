@@ -109,7 +109,7 @@
             Deskripsi Produk
         </h6>
         <p class="mt-2">
-            {{ nl2br($product->description) }}
+            {!! nl2br($product->description) !!}
         </p>
     </div>
 
