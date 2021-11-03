@@ -20,7 +20,7 @@
                         </x-card.header>
                         @forelse ($incomplete_progresses as $incomplete_progress)
                             <div class="flex justify-between p-4 border-b">
-                                <div class="flex justify-center">
+                                <div class="flex justify-center w-full">
                                     <img src="{{ Storage::url($incomplete_progress->user->form_order_with_id->store_logo_path) }}" class="w-32 h-32 rounded object-cover max-w-none" />
                                     <div class="flex-col ml-4">
                                         <h5 class="text-lg">
@@ -57,7 +57,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="flex flex-col">
+                                <div class="flex flex-col w-full">
                                     <livewire:admin.progress.progress-detail
                                         :progress="$incomplete_progress"
                                     />
