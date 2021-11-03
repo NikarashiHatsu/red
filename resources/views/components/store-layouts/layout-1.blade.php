@@ -4,7 +4,7 @@
         <i class="fas fa-shopping-cart"></i>
     </div>
 
-    <div class="aspect-w-16 aspect-h-7 border-b">
+    <div class="aspect-w-16 aspect-h-9 border-b">
         @if ($formOrder->store_banner_path)
             <img src="{{ Storage::url($formOrder->store_banner_path) }}" class="w-full h-full object-cover">
         @endif

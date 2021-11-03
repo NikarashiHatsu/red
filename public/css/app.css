@@ -880,6 +880,9 @@ select {
 .aspect-h-8 {
 	--tw-aspect-h: 8;
 }
+.aspect-h-9 {
+	--tw-aspect-h: 9;
+}
 .fixed {
 	position: fixed !important;
 }

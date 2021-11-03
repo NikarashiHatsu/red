@@ -3,7 +3,7 @@
     <div class="flex flex-col">
         <label for="store_banner_path">Banner Toko <span class="text-red-500">*</span></label>
         @error('store_banner_path') <span class="text-red-500 text-xs tracking-wider">{{ $message }}</span> @enderror
-        <div class="aspect-w-16 aspect-h-5 mt-2">
+        <div class="aspect-w-16 aspect-h-9 mt-2">
             <label for="store_banner_path" class="transition duration-300 ease-in-out hover:bg-gray-50 w-full h-full rounded border border-gray-300 flex items-center justify-center cursor-pointer text-sm text-gray-500">
                 @if ($store_banner_path)
                     <img src="{{ $store_banner_path->temporaryUrl() }}" class="w-full h-full rounded object-cover" />
@@ -11,7 +11,7 @@
                     @if ($form_order->store_banner_path)
                         <img src="{{ Storage::url($form_order->store_banner_path) }}" class="w-full h-full rounded object-cover" />
                     @else
-                        16:5
+                        16:9
                     @endif
                 @endif
             </label>
