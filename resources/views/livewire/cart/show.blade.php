@@ -39,11 +39,15 @@
                 <button wire:click="decrement" class="px-2 bg-white rounded-l-lg {{ $cart->quantity == 1 ? 'opacity-50' : '' }}" {{ $cart->quantity == 1 ? 'disabled' : '' }}>
                     <i class="fas fa-minus fa-sm"></i>
                 </button>
-                <input type="number" value="{{ $cart->quantity }}" class="w-12 px-0 text-xs border-none border-gray-300 text-center focus:outline-none focus:ring-0" min="1" max"{{ $cart->product }}>
+                <input wire:blur="set_amount" wire:model="quantity" type="number" value="{{ $cart->quantity }}" class="w-12 px-0 text-xs border-none border-gray-300 text-center focus:outline-none focus:ring-0" min="1" />
                 <button wire:click="increment" class="px-2 bg-white rounded-r-lg">
                     <i class="fas fa-plus fa-sm"></i>
                 </button>
             </div>
+        </div>
+
+        <div class="flex justify-end p-1 mt-1">
+            Rp{{ number_format($cart->quantity * $cart->product->price, 0, '.', '.') }}
         </div>
     </div>
 </div>

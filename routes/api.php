@@ -43,19 +43,38 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'duitku', 'as' => 'duitku.'], function() {
     Route::get('return', function(Request $request) {
-        $transaction = \App\Models\DuitkuTransaction::updateOrCreate(
-            ['reference' => $request->reference],
-            [
+        if (\App\Models\DuitkuTransaction::where('reference', $request->reference)->exists()) {
+            $transaction = \App\Models\DuitkuTransaction::updateOrCreate(
+                ['reference' => $request->reference],
+                [
+                    'merchant_order_id' => $request->merchantOrderId,
+                    'result_code' => $request->resultCode,
+                ]
+            );
+
+            \App\Models\FormOrder::where('id', $transaction->form_order_id)->update([
+                'is_requested' => true,
+            ]);
+
+            return redirect()->route('store.index');
+        }
+
+        if (\App\Models\Sale::where('reference', $request->reference)->exists()) {
+            $sales = \App\Models\Sale::where('reference', $request->reference);
+            $sales->update([
                 'merchant_order_id' => $request->merchantOrderId,
                 'result_code' => $request->resultCode,
-            ]
-        );
+                'is_paid' => 1,
+            ]);
 
-        \App\Models\FormOrder::where('id', $transaction->form_order_id)->update([
-            'is_requested' => true,
-        ]);
+            $sales->each(function($sale) {
+                \App\Models\Cart::where('product_id', $sale->product_id)
+                    ->where('user_id', $sale->user_id)
+                    ->delete();
+            });
 
-        return redirect()->route('store.index');
+            return redirect()->route('cart.index')->with('success', 'Berhasil membeli barang');
+        }
     })->name('return');
 
     Route::get('callback', function(Request $request) {
