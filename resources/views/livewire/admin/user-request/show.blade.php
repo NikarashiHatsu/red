@@ -81,24 +81,24 @@
                         <x-card.body>
                             <table>
                                 <tr>
-                                    <td>Nama Aplikasi</td>
-                                    <td class="px-2">:</td>
-                                    <td>{{ $form_order->application_name ?? '-' }}</td>
+                                    <td class="align-top">Nama Aplikasi</td>
+                                    <td class="align-top px-2">:</td>
+                                    <td class="align-top">{{ $form_order->application_name ?? '-' }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Deskripsi Aplikasi</td>
-                                    <td class="px-2">:</td>
-                                    <td>{{ $form_order->application_description ?? '-' }}</td>
+                                    <td class="align-top">Deskripsi Aplikasi</td>
+                                    <td class="align-top px-2">:</td>
+                                    <td class="align-top">{{ $form_order->application_description ?? '-' }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Alamat Toko</td>
-                                    <td class="px-2">:</td>
-                                    <td>{{ $form_order->store_address ?? '-' }}</td>
+                                    <td class="align-top">Alamat Toko</td>
+                                    <td class="align-top px-2">:</td>
+                                    <td class="align-top">{{ $form_order->store_address ?? '-' }}</td>
                                 </tr>
                                 <tr>
-                                    <td>URL Toko</td>
-                                    <td class="px-2">:</td>
-                                    <td>{{ $form_order->store_url ?? '-' }}</td>
+                                    <td class="align-top">URL Toko</td>
+                                    <td class="align-top px-2">:</td>
+                                    <td class="align-top">{{ $form_order->store_url ?? '-' }}</td>
                                 </tr>
                             </table>
                         </x-card.body>
