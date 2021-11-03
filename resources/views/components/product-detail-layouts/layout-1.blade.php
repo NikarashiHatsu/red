@@ -55,13 +55,19 @@
                             </button>
                         </form>
                     @else
-                        <form action="{{ route('cart.store') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{ $product->id }}" />
+                        @if ($clickable)
+                            <form action="{{ route('cart.store') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}" />
+                                <button>
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </form>
+                        @else
                             <button>
                                 <i class="fas fa-cart-plus"></i>
                             </button>
-                        </form>
+                        @endif
                     @endif
                 @endguest
 
