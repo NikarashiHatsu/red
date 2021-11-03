@@ -22,7 +22,7 @@
                             {{ $product->name }}
                         </p>
                         @auth
-                        @if ($products_in_cart->contains($product->id))
+                        @if ($products_in_cart?->contains($product->id))
                             <div class="w-6 h-6 flex items-center justify-center text-xxs bg-blue-500 rounded-full">
                                 <i class="fas fa-shopping-cart text-white"></i>
                             </div>
@@ -91,7 +91,7 @@
                                             {{ $product->name }}
                                         </p>
                                         @auth
-                                        @if ($products_in_cart->contains($product->id))
+                                        @if ($products_in_cart?->contains($product->id))
                                             <div class="w-4 h-4 flex items-center justify-center text-xxs sm:text-sm bg-blue-500 rounded-full">
                                                 <i class="fa-xs fas fa-shopping-cart text-white"></i>
                                             </div>
