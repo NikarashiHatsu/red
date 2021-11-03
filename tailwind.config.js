@@ -15,7 +15,11 @@ module.exports = {
 
     theme: {
         extend: {
+            fontSize: {
+                'xxs': '.625rem',
+            },
             fontFamily: {
+                rbt: ['Roboto Condensed', ...defaultTheme.fontFamily.sans],
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
                 display: ['"Exo 2"', ...defaultTheme.fontFamily.sans],
                 serif: ['Andada Pro', ...defaultTheme.fontFamily.sans],

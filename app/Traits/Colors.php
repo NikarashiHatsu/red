@@ -98,6 +98,7 @@ trait Colors {
         null => [
             'navbar_color' => 'text-gray-700',
             'anchor_color' => 'hover:text-gray-800',
+            'colorised_text' => 'text-gray-800',
             'light_color' => 'bg-gray-50',
             'border_color' => 'border-gray-200',
             'card_list_color' => 'bg-gray-50 hover:bg-gray-100',
@@ -105,6 +106,7 @@ trait Colors {
         'Blue Gray' => [
             'navbar_color' => 'bg-blueGray-500 text-white',
             'anchor_color' => 'hover:text-blueGray-600',
+            'colorised_text' => 'text-blueGray-600',
             'light_color' => 'bg-blueGray-50',
             'border_color' => 'border-blueGray-200',
             'card_list_color' => 'bg-blueGray-500 hover:bg-blueGray-600 text-white',
@@ -112,6 +114,7 @@ trait Colors {
         'Cool Gray' => [
             'navbar_color' => 'bg-coolGray-500 text-white',
             'anchor_color' => 'hover:text-coolGray-600',
+            'colorised_text' => 'text-coolGray-600',
             'light_color' => 'bg-coolGray-50',
             'border_color' => 'border-coolGray-200',
             'card_list_color' => 'bg-coolGray-500 hover:bg-coolGray-600 text-white',
@@ -119,6 +122,7 @@ trait Colors {
         'Gray' => [
             'navbar_color' => 'bg-gray-500 text-white',
             'anchor_color' => 'hover:text-gray-600',
+            'colorised_text' => 'text-gray-600',
             'light_color' => 'bg-gray-50',
             'border_color' => 'border-gray-200',
             'card_list_color' => 'bg-gray-500 hover:bg-gray-600 text-white',
@@ -126,6 +130,7 @@ trait Colors {
         'True Gray' => [
             'navbar_color' => 'bg-trueGray-500 text-white',
             'anchor_color' => 'hover:text-trueGray-600',
+            'colorised_text' => 'text-trueGray-600',
             'light_color' => 'bg-trueGray-50',
             'border_color' => 'border-trueGray-200',
             'card_list_color' => 'bg-trueGray-500 hover:bg-trueGray-600 text-white',
@@ -133,6 +138,7 @@ trait Colors {
         'Warm Gray' => [
             'navbar_color' => 'bg-warmGray-500 text-white',
             'anchor_color' => 'hover:text-warmGray-600',
+            'colorised_text' => 'text-warmGray-600',
             'light_color' => 'bg-warmGray-50',
             'border_color' => 'border-warmGray-200',
             'card_list_color' => 'bg-warmGray-500 hover:bg-warmGray-600 text-white',
@@ -140,6 +146,7 @@ trait Colors {
         'Red' => [
             'navbar_color' => 'bg-red-500 text-white',
             'anchor_color' => 'hover:text-red-600',
+            'colorised_text' => 'text-red-600',
             'light_color' => 'bg-red-50',
             'border_color' => 'border-red-200',
             'card_list_color' => 'bg-red-500 hover:bg-red-600 text-white',
@@ -147,6 +154,7 @@ trait Colors {
         'Orange' => [
             'navbar_color' => 'bg-orange-500 text-white',
             'anchor_color' => 'hover:text-orange-600',
+            'colorised_text' => 'text-orange-600',
             'light_color' => 'bg-orange-50',
             'border_color' => 'border-orange-200',
             'card_list_color' => 'bg-orange-500 hover:bg-orange-600 text-white',
@@ -154,6 +162,7 @@ trait Colors {
         'Amber' => [
             'navbar_color' => 'bg-amber-500 text-white',
             'anchor_color' => 'hover:text-amber-600',
+            'colorised_text' => 'text-amber-600',
             'light_color' => 'bg-amber-50',
             'border_color' => 'border-amber-200',
             'card_list_color' => 'bg-amber-500 hover:bg-amber-600 text-white',
@@ -161,6 +170,7 @@ trait Colors {
         'Yellow' => [
             'navbar_color' => 'bg-yellow-500 text-white',
             'anchor_color' => 'hover:text-yellow-600',
+            'colorised_text' => 'text-yellow-600',
             'light_color' => 'bg-yellow-50',
             'border_color' => 'border-yellow-200',
             'card_list_color' => 'bg-yellow-500 hover:bg-yellow-600 text-white',
@@ -168,6 +178,7 @@ trait Colors {
         'Lime' => [
             'navbar_color' => 'bg-lime-500 text-white',
             'anchor_color' => 'hover:text-lime-600',
+            'colorised_text' => 'text-lime-600',
             'light_color' => 'bg-lime-50',
             'border_color' => 'border-lime-200',
             'card_list_color' => 'bg-lime-500 hover:bg-lime-600 text-white',
@@ -175,6 +186,7 @@ trait Colors {
         'Green' => [
             'navbar_color' => 'bg-green-500 text-white',
             'anchor_color' => 'hover:text-green-600',
+            'colorised_text' => 'text-green-600',
             'light_color' => 'bg-green-50',
             'border_color' => 'border-green-200',
             'card_list_color' => 'bg-green-500 hover:bg-green-600 text-white',
@@ -182,6 +194,7 @@ trait Colors {
         'Emerald' => [
             'navbar_color' => 'bg-emerald-500 text-white',
             'anchor_color' => 'hover:text-emerald-600',
+            'colorised_text' => 'text-emerald-600',
             'light_color' => 'bg-emerald-50',
             'border_color' => 'border-emerald-200',
             'card_list_color' => 'bg-emerald-500 hover:bg-emerald-600 text-white',
@@ -189,6 +202,7 @@ trait Colors {
         'Teal' => [
             'navbar_color' => 'bg-teal-500 text-white',
             'anchor_color' => 'hover:text-teal-600',
+            'colorised_text' => 'text-teal-600',
             'light_color' => 'bg-teal-50',
             'border_color' => 'border-teal-200',
             'card_list_color' => 'bg-teal-500 hover:bg-teal-600 text-white',
@@ -196,6 +210,7 @@ trait Colors {
         'Cyan' => [
             'navbar_color' => 'bg-cyan-500 text-white',
             'anchor_color' => 'hover:text-cyan-600',
+            'colorised_text' => 'text-cyan-600',
             'light_color' => 'bg-cyan-50',
             'border_color' => 'border-cyan-200',
             'card_list_color' => 'bg-cyan-500 hover:bg-cyan-600 text-white',
@@ -203,6 +218,7 @@ trait Colors {
         'Sky' => [
             'navbar_color' => 'bg-sky-500 text-white',
             'anchor_color' => 'hover:text-sky-600',
+            'colorised_text' => 'text-sky-600',
             'light_color' => 'bg-sky-50',
             'border_color' => 'border-sky-200',
             'card_list_color' => 'bg-sky-500 hover:bg-sky-600 text-white',
@@ -210,6 +226,7 @@ trait Colors {
         'Blue' => [
             'navbar_color' => 'bg-blue-500 text-white',
             'anchor_color' => 'hover:text-blue-600',
+            'colorised_text' => 'text-blue-600',
             'light_color' => 'bg-blue-50',
             'border_color' => 'border-blue-200',
             'card_list_color' => 'bg-blue-500 hover:bg-blue-600 text-white',
@@ -217,6 +234,7 @@ trait Colors {
         'Indigo' => [
             'navbar_color' => 'bg-indigo-500 text-white',
             'anchor_color' => 'hover:text-indigo-600',
+            'colorised_text' => 'text-indigo-600',
             'light_color' => 'bg-indigo-50',
             'border_color' => 'border-indigo-200',
             'card_list_color' => 'bg-indigo-500 hover:bg-indigo-600 text-white',
@@ -224,6 +242,7 @@ trait Colors {
         'Violet' => [
             'navbar_color' => 'bg-violet-500 text-white',
             'anchor_color' => 'hover:text-violet-600',
+            'colorised_text' => 'text-violet-600',
             'light_color' => 'bg-violet-50',
             'border_color' => 'border-violet-200',
             'card_list_color' => 'bg-violet-500 hover:bg-violet-600 text-white',
@@ -231,6 +250,7 @@ trait Colors {
         'Purple' => [
             'navbar_color' => 'bg-purple-500 text-white',
             'anchor_color' => 'hover:text-purple-600',
+            'colorised_text' => 'text-purple-600',
             'light_color' => 'bg-purple-50',
             'border_color' => 'border-purple-200',
             'card_list_color' => 'bg-purple-500 hover:bg-purple-600 text-white',
@@ -238,6 +258,7 @@ trait Colors {
         'Fuchsia' => [
             'navbar_color' => 'bg-fuchsia-500 text-white',
             'anchor_color' => 'hover:text-fuchsia-600',
+            'colorised_text' => 'text-fuchsia-600',
             'light_color' => 'bg-fuchsia-50',
             'border_color' => 'border-fuchsia-200',
             'card_list_color' => 'bg-fuchsia-500 hover:bg-fuchsia-600 text-white',
@@ -245,6 +266,7 @@ trait Colors {
         'Pink' => [
             'navbar_color' => 'bg-pink-500 text-white',
             'anchor_color' => 'hover:text-pink-600',
+            'colorised_text' => 'text-pink-600',
             'light_color' => 'bg-pink-50',
             'border_color' => 'border-pink-200',
             'card_list_color' => 'bg-pink-500 hover:bg-pink-600 text-white',
@@ -252,6 +274,7 @@ trait Colors {
         'Rose' => [
             'navbar_color' => 'bg-rose-500 text-white',
             'anchor_color' => 'hover:text-rose-600',
+            'colorised_text' => 'text-rose-600',
             'light_color' => 'bg-rose-50',
             'border_color' => 'border-rose-200',
             'card_list_color' => 'bg-rose-500 hover:bg-rose-600 text-white',
