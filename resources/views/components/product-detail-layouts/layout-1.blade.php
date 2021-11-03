@@ -16,7 +16,7 @@
             </div>
         @endif
 
-        <span class="font-semibold">
+        <span class="font-semibold line-clamp-1 ml-2">
             {{ $product->name }}
         </span>
     </div>
@@ -109,7 +109,7 @@
             Deskripsi Produk
         </h6>
         <p class="mt-2">
-            {{ $product->description }}
+            {{ nl2br($product->description) }}
         </p>
     </div>
 

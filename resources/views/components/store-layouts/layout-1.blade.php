@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col bg-white p-2">
-                        <p>
+                        <p class="line-clamp-2">
                             {{ $product->name }}
                         </p>
                         <p class="font-semibold mt-1">
