@@ -62,7 +62,7 @@
                 onclick="window.location.href = '{{ route('merchant.show', $form_order->id) }}'"
                 class="transition-shadow duration-300 ease-in-out hover:text-gray-700 cursor-pointer flex flex-col col-span-12 md:col-span-6 lg:col-span-4 bg-white rounded-lg shadow hover:shadow-xl">
                 <div class="relative">
-                    <div class="aspect-w-16 aspect-h-8">
+                    <div class="aspect-w-16 aspect-h-9">
                         <img src="{{ Storage::url($form_order->store_banner_path) }}" class="object-cover rounded-t-lg">
                     </div>
                     <div class="w-20 h-20 -mt-10 mx-auto">
