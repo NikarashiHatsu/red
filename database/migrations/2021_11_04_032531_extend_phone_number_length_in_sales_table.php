@@ -14,7 +14,7 @@ class ExtendPhoneNumberLengthInSalesTable extends Migration
     public function up()
     {
         Schema::table('sales', function (Blueprint $table) {
-            $table->integer('phone_number', 16)->nullable()->change();
+            $table->bigInteger('phone_number')->nullable()->change();
         });
     }
 
@@ -26,7 +26,7 @@ class ExtendPhoneNumberLengthInSalesTable extends Migration
     public function down()
     {
         Schema::table('sales', function (Blueprint $table) {
-            $table->integer('phone_number', 11)->nullable()->change();
+            $table->integer('phone_number')->nullable()->change();
         });
     }
 }
