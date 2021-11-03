@@ -1,11 +1,20 @@
 <div class="relative h-full overflow-y-auto rounded-b-2xl bg-gray-100 text-sm">
     <div class="bg-white transition duration-300 ease-in-out relative flex items-center justify-between {{ $colorSchemeDetail[$formOrder->layout_color]['navbar_color'] }} py-4 px-3 shadow-lg z-50">
-        <div class="flex items-center">
-            <i class="fas fa-arrow-left mr-2"></i>
-            <span>
-                Kembali
-            </span>
-        </div>
+        @if ($clickable)
+            <a href="{{ route('index') }}" class="flex items-center underline hover:text-white">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>
+                    Kembali
+                </span>
+            </a>
+        @else
+            <div class="flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>
+                    Kembali
+                </span>
+            </div>
+        @endif
 
         <span class="font-semibold">
             {{ $product->name }}
@@ -27,9 +36,35 @@
                 <button class="mr-2">
                     <i class="far fa-thumbs-up"></i>
                 </button>
-                <button>
-                    <i class="fas fa-cart-plus"></i>
-                </button>
+
+                @guest
+                    <form action="{{ route('cart.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}" />
+                        <button>
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+                    </form>
+                @else
+                    @if (auth()->user()->carts()->where('product_id', $product->id)->exists())
+                        <form action="{{ route('cart.destroy', auth()->user()->carts()->where('product_id', $product->id)->first()->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="{{ $colorSchemeDetail[$formOrder->layout_color]['colorised_text'] }}">
+                                <i class="fas fa-cart-arrow-down"></i>
+                            </button>
+                        </form>
+                    @else
+                        <form action="{{ route('cart.store') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}" />
+                            <button>
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </form>
+                    @endif
+                @endguest
+
             </div>
         </div>
         <p class="mt-2 leading-snug line-clamp-2">
@@ -113,4 +148,5 @@
             corporis itaque vel, esse dolorum enim rem!
         </p>
     </div>
+    <x-success-and-error-swal />
 </div>

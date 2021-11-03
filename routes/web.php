@@ -41,6 +41,12 @@ Route::group(['prefix' => 'product', 'as' => 'product.'], function() {
 Route::group(['middleware' => 'auth'], function() {
     require __DIR__ . '/store.php';
     require __DIR__ . '/admin.php';
+
+    Route::group(['prefix' => 'cart', 'as' => 'cart.'], function() {
+        Route::get('/', \App\Http\Livewire\Cart\Index::class)->name('index');
+        Route::post('/', [\App\Http\Controllers\CartController::class, 'store'])->name('store');
+        Route::delete('/{cart}', [\App\Http\Controllers\CartController::class, 'destroy'])->name('destroy');
+    });
 });
 
 require __DIR__.'/auth.php';

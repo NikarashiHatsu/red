@@ -5,6 +5,7 @@
             :product="$product"
             :form-order="$form_order"
             :color-scheme-detail="$color_scheme_detail"
+            :clickable="true"
         />
     </div>
 </div>
