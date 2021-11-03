@@ -23,7 +23,7 @@ class CartController extends Controller
         try {
             auth()->user()->carts()->create([
                 'product_id' => $request->product_id,
-                'store_id' => Product::find($request->product_id)->has_form_order->store_id,
+                'store_id' => Product::find($request->product_id)->has_form_order->id,
                 'quantity' => 1,
             ]);
         } catch (\Exception $e) {
