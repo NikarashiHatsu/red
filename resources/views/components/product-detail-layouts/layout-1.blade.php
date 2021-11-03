@@ -55,7 +55,7 @@
                             </button>
                         </form>
                     @else
-                        @if ($clickable)
+                        @if ($clickable ?? false)
                             <form action="{{ route('cart.store') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}" />
