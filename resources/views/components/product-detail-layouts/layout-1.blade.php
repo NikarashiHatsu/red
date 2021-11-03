@@ -83,8 +83,8 @@
             <div class="flex items-center">
                 <div class="flex">
                     <div class="w-12 h-12 border rounded-full">
-                        @if ($formOrder->store_banner_path)
-                            <img src="{{ Storage::url($formOrder->store_banner_path) }}" class="w-full h-full rounded-full object-cover" />
+                        @if ($formOrder->store_logo_path)
+                            <img src="{{ Storage::url($formOrder->store_logo_path) }}" class="w-full h-full rounded-full object-cover" />
                         @endif
                     </div>
                 </div>
