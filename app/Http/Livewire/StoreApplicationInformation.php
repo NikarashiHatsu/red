@@ -17,8 +17,8 @@ class StoreApplicationInformation extends Component
         'form_order.application_name' => ['required', 'string'],
         'form_order.application_description' => ['required', 'string'],
         'form_order.store_address' => ['required', 'string'],
-        'form_order.api_merchant_code' => ['required_if:has_api_integration,1', 'string'],
-        'form_order.api_integration_key' => ['required_if:has_api_integration,1', 'string'],
+        'form_order.api_merchant_code' => ['nullable', 'required_if:has_api_integration,1', 'string'],
+        'form_order.api_integration_key' => ['nullable', 'required_if:has_api_integration,1', 'string'],
         'form_order.store_url' => ['nullable', 'url'],
     ];
 
