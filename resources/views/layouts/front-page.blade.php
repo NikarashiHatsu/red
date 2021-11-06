@@ -57,7 +57,7 @@
                                 </x-slot>
 
                                 <x-slot name="content">
-                                    @if (auth()->user()->store)
+                                    @if (auth()->user()->form_order)
                                         <x-dropdown-link :href="route('auth_redirector')">
                                             Toko
                                         </x-dropdown-link>
