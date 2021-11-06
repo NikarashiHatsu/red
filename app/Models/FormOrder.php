@@ -44,5 +44,7 @@ class FormOrder extends Model
         'is_request_accepted',
         'disapproval_message',
         'sid',
+        'direct_transfer_bank',
+        'direct_transfer_to',
     ];
 }

@@ -20,6 +20,12 @@ class StoreInformationForm extends Component
     protected $rules = [
         'form_order.store_owner' => ['required', 'string'],
         'form_order.store_name' => ['required', 'string'],
+        'form_order.direct_transfer_bank' => ['nullable', 'string'],
+        'form_order.direct_transfer_to' => ['required_with:form_order.direct_transfer_bank', 'nullable', 'string'],
+    ];
+
+    protected $messages = [
+        'form_order.direct_transfer_to.required_with' => 'Kolom No. Rekening wajib diisi jika kolom Nama Bank memiliki isian.',
     ];
 
     public function updatedStoreBannerPath()

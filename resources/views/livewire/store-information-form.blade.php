@@ -52,6 +52,18 @@
         <input type="text" name="store_name" wire:model.defer="form_order.store_name" id="store_name" class="mt-2 rounded border-gray-300" required>
     </div>
 
+    <div class="flex flex-col mt-4">
+        <label for="direct_transfer_bank">Nama Bank</label>
+        @error('form_order.direct_transfer_bank') <span class="text-red-500 text-xs tracking-wider">{{ $message }}</span> @enderror
+        <input type="text" name="direct_transfer_bank" wire:model.defer="form_order.direct_transfer_bank" id="direct_transfer_bank" class="mt-2 rounded border-gray-300" />
+    </div>
+
+    <div class="flex flex-col mt-4">
+        <label for="direct_transfer_to">No. Rekening</label>
+        @error('form_order.direct_transfer_to') <span class="text-red-500 text-xs tracking-wider">{{ $message }}</span> @enderror
+        <input type="text" name="direct_transfer_to" wire:model.defer="form_order.direct_transfer_to" id="direct_transfer_to" class="mt-2 rounded border-gray-300" />
+    </div>
+
     <div class="flex justify-end mt-4">
         <x-button>
             Simpan
