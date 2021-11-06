@@ -10,7 +10,7 @@
         @endif
     </div>
 
-    <div class="px-4 mt-4">
+    <div class="p-4 bg-white">
         <div class="flex">
             <div class="flex flex-col w-16">
                 <div class="w-16 h-16 border rounded-full">
@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <div class="transition-colors duration-300 ease-in-out mt-4 border-t border-b {{ $colorSchemeDetail[$formOrder->layout_color]['light_color'] }} {{ $colorSchemeDetail[$formOrder->layout_color]['border_color'] }} py-4 text-xs px-4">
+    <div class="transition-colors duration-300 ease-in-out border-t border-b {{ $colorSchemeDetail[$formOrder->layout_color]['light_color'] }} {{ $colorSchemeDetail[$formOrder->layout_color]['border_color'] }} py-4 text-xs px-4">
         <span>
             {{ $products->total() }} Produk
         </span>
@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    <div class="mt-4 px-4 pb-4">
+    <div class="p-4 bg-white">
         <div class="text-xs">
             <p class="mb-2 font-semibold">
                 {{ $formOrder->store_name }}
