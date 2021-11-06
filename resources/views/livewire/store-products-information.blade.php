@@ -23,6 +23,7 @@
                             <th class="border p-2 text-center">Foto</th>
                             <th class="border p-2 text-center">Nama</th>
                             <th class="border p-2 text-center">Deskripsi</th>
+                            <th class="border p-2 text-center">Stok</th>
                             <th class="border p-2 text-center">Harga</th>
                             <th class="border p-2 text-center">Opsi</th>
                         </tr>
@@ -44,12 +45,17 @@
                                     </div>
                                 </td>
                                 <td class="border p-2">
-                                    {{ $prod->name }}
+                                    <p class="line-clamp-3">
+                                        {{ $prod->name }}
+                                    </p>
                                 </td>
                                 <td class="border p-2">
                                     <p class="line-clamp-3">
                                         {{ $prod->description }}
                                     </p>
+                                </td>
+                                <td class="border p-2">
+                                    {{ $prod->stock }}
                                 </td>
                                 <td class="border p-2">
                                     Rp{{ number_format($prod->price, 0, '.', '.') }},-
@@ -140,6 +146,12 @@
                         <label for="description">Deskripsi Produk <span class="text-red-500">*</span></label>
                         @error('product.description') <span class="text-red-500 text-xs tracking-wider">{{ $message }}</span> @enderror
                         <textarea name="description" wire:model.defer="product.description" id="description" rows="5" class="mt-2 rounded border-gray-300"></textarea>
+                    </div>
+
+                    <div class="flex flex-col mt-4">
+                        <label for="stock">Stok Produk <span class="text-red-500">*</span></label>
+                        @error('product.stock') <span class="text-red-500 text-xs tracking-wider">{{ $message }}</span> @enderror
+                        <input type="number" wire:model.defer="product.stock" id="stock" class="mt-2 rounded border-gray-300">
                     </div>
 
                     <div class="flex justify-end mt-4">

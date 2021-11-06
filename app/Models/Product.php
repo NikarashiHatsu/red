@@ -32,6 +32,7 @@ class Product extends Model
         'product_photo_path',
         'name',
         'price',
+        'stock',
         'description',
     ];
 }

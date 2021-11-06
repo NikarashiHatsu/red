@@ -11,7 +11,7 @@
         @foreach ($featured_products as $product)
             <a
                 href="{{ route('product.show', $product) }}"
-                class="transition-shadow duration-300 ease-in-out hover:text-gray-700 flex flex-col col-span-4 sm:col-span-4 md:col-span-3 lg:col-span-2 bg-white rounded-lg shadow hover:shadow-xl">
+                class="transition-shadow duration-300 ease-in-out hover:text-gray-700 flex flex-col col-span-4 sm:col-span-4 md:col-span-3 lg:col-span-2 bg-white rounded-lg shadow hover:shadow-xl {{ $product->stock == 0 ? 'opacity-50' : '' }}">
                 <div class="aspect-w-1 aspect-h-1">
                     <img src="{{ Storage::url($product->product_photo_path) }}"
                         class="w-full h-full object-cover rounded-t-lg" />
@@ -81,7 +81,7 @@
                         @foreach ($form_order->user->products()->take(6)->get() as $product)
                             <a
                                 href="{{ route('product.show', $product) }}"
-                                class="transition-shadow duration-300 ease-in-out col-span-1 hover:text-gray-700 hover:shadow-xl flex flex-col border rounded">
+                                class="transition-shadow duration-300 ease-in-out col-span-1 hover:text-gray-700 hover:shadow-xl flex flex-col border rounded {{ $product->stock == 0 ? 'opacity-50' : '' }}">
                                 <div class="aspect-w-1 aspect-h-1">
                                     <img src="{{ Storage::url($product->product_photo_path) }}" class="w-full h-full object-cover rounded border">
                                 </div>

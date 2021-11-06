@@ -1,12 +1,14 @@
-<div class="flex justify-between border-b mb-4 pb-4">
+<div class="flex justify-between border-b mb-4 pb-4 {{ $cart->product->stock == 0 ? 'opacity-25' : '' }}">
     <div class="flex items-center w-full">
         <div class="w-24 h-24 rounded-lg border">
             <img src="{{ Storage::url($cart->product->product_photo_path) }}" class="w-full h-full object-cover" />
         </div>
         <div class="flex flex-col ml-4 max-w-xs">
-            <p class="line-clamp-1">
-                {{ $cart->product->name }} - {{ $cart->product->description }}
-            </p>
+            <a href="{{ route('product.show', $cart->product->id) }}">
+                <p class="line-clamp-1">
+                    {{ $cart->product->name }} - {{ $cart->product->description }}
+                </p>
+            </a>
             <p class="font-semibold mb-4">
                 Rp{{ number_format($cart->product->price, 0, '.', '.')}},-
             </p>
@@ -16,7 +18,9 @@
                 </div>
                 <div class="flex flex-col ml-2">
                     <p class="text-sm">
-                        {{ $cart->store->store_name }}
+                        <a href="{{ route('merchant.show', $cart->store->id) }}">
+                            {{ $cart->store->store_name }}
+                        </a>
                     </p>
                     <p class="text-xs">
                         {{ $cart->store->store_address }}
@@ -26,6 +30,9 @@
         </div>
     </div>
     <div class="flex flex-col">
+        <p class="italic text-right text-xs mb-1">
+            Tersisa {{ $cart->product->stock }} produk
+        </p>
         <div class="flex items-center">
             <form action="{{ route('cart.destroy', $cart) }}" method="post">
                 @csrf
@@ -36,11 +43,11 @@
             </form>
 
             <div class="flex border rounded-lg ml-4">
-                <button wire:click="decrement" class="px-2 bg-white rounded-l-lg {{ $cart->quantity == 1 ? 'opacity-50' : '' }}" {{ $cart->quantity == 1 ? 'disabled' : '' }}>
+                <button wire:click="decrement" class="px-2 bg-white rounded-l-lg {{ $cart->quantity == 1 || $cart->product->stock == 0 ? 'opacity-50' : '' }}" {{ $cart->quantity == 1 || $cart->product->stock == 0 ? 'disabled' : '' }}>
                     <i class="fas fa-minus fa-sm"></i>
                 </button>
-                <input wire:blur="set_amount" wire:model="quantity" type="number" value="{{ $cart->quantity }}" class="w-12 px-0 text-xs border-none border-gray-300 text-center focus:outline-none focus:ring-0" min="1" />
-                <button wire:click="increment" class="px-2 bg-white rounded-r-lg">
+                <input wire:blur="set_amount" wire:model="quantity" type="number" value="{{ $cart->quantity }}" class="w-12 px-0 text-xs border-none border-gray-300 text-center focus:outline-none focus:ring-0" min="1" max="{{ $cart->product->stock }}" {{ $cart->product->stock == 0 ? 'disabled' : '' }} />
+                <button wire:click="increment" class="px-2 bg-white rounded-r-lg {{ $cart->quantity >= $cart->product->stock || $cart->product->stock == 0 ? 'opacity-50' : '' }}" {{ $cart->quantity >= $cart->product->stock || $cart->product->stock == 0 ? 'disabled' : '' }}>
                     <i class="fas fa-plus fa-sm"></i>
                 </button>
             </div>

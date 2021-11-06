@@ -12,6 +12,7 @@ class Index extends Component
     public $address;
     public $phone_number;
     public $redirect_payment = null;
+    public $available_product = 0;
 
     protected $listeners = [
         'quantity_updated' => 'count_payment'
@@ -20,12 +21,22 @@ class Index extends Component
     public function count_payment()
     {
         $this->payment_total = $this->carts->map(function($cart) {
-                return $cart->quantity * $cart->product->price;
-            })->sum();
+            if ($cart->product->stock == 0) {
+                return 0;
+            }
+
+            return $cart->quantity * $cart->product->price;
+        })->sum();
 
         $this->product_total = $this->carts->map(function($cart) {
-                return $cart->quantity;
-            })->sum();
+            if ($cart->product->stock == 0) {
+                return 0;
+            }
+
+            $this->available_product = $this->available_product + 1;
+
+            return $cart->quantity;
+        })->sum();
     }
 
     public function checkout()
@@ -61,13 +72,17 @@ class Index extends Component
             'shippingAddress' => $address
         );
 
-        $itemDetails = $this->carts->map(function($cart) {
+        $itemDetails = $this->carts->filter(function($cart) {
+            if ($cart->product->stock != 0) {
+                return $cart;
+            };
+        })->map(function($cart) {
             return [
                 'name' => $cart->product->name,
                 'price' => $cart->product->price * $cart->quantity,
                 'quantity' => $cart->quantity,
             ];
-        });
+        })->values();
 
         $params = array(
             'merchantCode' => $merchantCode,
@@ -112,7 +127,11 @@ class Index extends Component
         if($httpCode == 200) {
             $result = json_decode($request, true);
 
-            $this->carts->each(function($cart) use($result) {
+            $this->carts->filter(function($cart) {
+                if ($cart->product->stock != 0) {
+                    return $cart;
+                }
+            })->each(function($cart) use($result) {
                 \App\Models\Sale::create([
                     'user_id' => auth()->user()->id,
                     'product_id' => $cart->product->id,
@@ -130,7 +149,7 @@ class Index extends Component
 
             $this->redirect_payment = $result['paymentUrl'];
         } else {
-            \Illuminate\Support\Facades\Log::critical('DUITKU TRANSACTION INIT FAILED:' . $httpCode);
+            return redirect()->back()->with('error', 'Transaksi gagal: ' . $request['Message']);
         }
     }
 

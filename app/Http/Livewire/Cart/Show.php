@@ -30,6 +30,14 @@ class Show extends Component
 
     public function set_amount()
     {
+        if ($this->quantity >= $this->cart->product->stock) {
+            $this->cart->update([
+                'quantity' => $this->cart->product->stock,
+            ]);
+            $this->quantity = $this->cart->product->stock;
+            $this->emitUp('quantity_updated');
+        }
+
         $this->cart->update([
             'quantity' => $this->quantity,
         ]);

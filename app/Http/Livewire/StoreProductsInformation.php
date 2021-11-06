@@ -24,6 +24,7 @@ class StoreProductsInformation extends Component
         'product.name' => ['required', 'string'],
         'product.price' => ['required', 'integer'],
         'product.description' => ['required', 'string'],
+        'product.stock' => ['required', 'integer', 'gt:0'],
     ];
 
     public function updatedProductPhotoPath()

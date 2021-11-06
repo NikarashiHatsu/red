@@ -28,14 +28,24 @@
     </div>
 
     <div class="flex flex-col p-4 bg-white">
+        @if ($product->stock == 0)
+            <div class="bg-yellow-50 border px-3 py-2 border-yellow-300 text-yellow-700 rounded mb-2">
+                <i class="fas fa-exclamation-triangle mr-1"></i>
+                <span>Stok produk telah habis</span>
+            </div>
+        @endif
+
         <div class="flex items-center justify-between">
             <h5 class="text-lg font-semibold">
                 Rp{{ number_format($product->price, 0, '.', '.') }},-
             </h5>
             <div class="flex items-center">
-                <button class="mr-2">
+                {{-- <button class="mr-2">
                     <i class="far fa-thumbs-up"></i>
-                </button>
+                </button> --}}
+                <a href="https://wa.me/{{ $formOrder->whatsapp_number }}" class="mr-2">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
 
                 @guest
                     <form action="{{ route('cart.store') }}" method="post">
@@ -59,7 +69,7 @@
                             <form action="{{ route('cart.store') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}" />
-                                <button>
+                                <button class="{{ $product->stock == 0 ? 'text-gray-400' : '' }}" {{ $product->stock == 0 ? 'disabled' : '' }}>
                                     <i class="fas fa-cart-plus"></i>
                                 </button>
                             </form>
@@ -76,6 +86,9 @@
         <p class="mt-2 leading-snug line-clamp-2">
             {{ $product->name }} - {{ $product->description }}
         </p>
+        <p class="mt-2 italic text-xs">
+            Stok tersisa: {{ $product->stock }} produk
+        </p>
     </div>
 
     <div class="bg-white p-4 mt-4">
@@ -89,9 +102,11 @@
                     </div>
                 </div>
                 <div class="flex flex-col ml-4">
-                    <h6 class="font-semibold">
-                        {{ $formOrder->store_name }}
-                    </h6>
+                    <a href="{{ route('merchant.show', $formOrder->id) }}">
+                        <h6 class="font-semibold">
+                            {{ $formOrder->store_name }}
+                        </h6>
+                    </a>
                     <p class="text-xs line-clamp-2">
                         {{ $formOrder->store_address }}
                     </p>
@@ -119,7 +134,7 @@
         </p>
     </div>
 
-    <div class="bg-white p-4 mt-4">
+    {{-- <div class="bg-white p-4 mt-4">
         <div class="flex items-center justify-between">
             <h6 class="font-semibold">
                 Ulasan Pembeli
@@ -153,6 +168,7 @@
             necessitatibus similique nisi ipsa iusto explicabo totam quos ad
             corporis itaque vel, esse dolorum enim rem!
         </p>
-    </div>
+    </div> --}}
+
     <x-success-and-error-swal />
 </div>
