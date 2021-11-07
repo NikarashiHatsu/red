@@ -22,7 +22,7 @@
     <nav class="bg-white shadow-lg py-4 sm:py-2 px-4 2xl:px-0">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="{{ route('index') }}" class="items-center hidden sm:flex">
-                <img src="{{ asset('images/logo.png') }}" class="w-16 h-16 object-contain" />
+                <img src="{{ asset('images/logo.webp') }}" class="w-16 h-16 object-contain" />
                 <div class="flex flex-col ml-2">
                     <span class="font-handwriting text-2xl">Pasar Rakyat</span>
                     <span class="font-serif text-gray-500 text-xs italic">Murah merakyat!</span>
@@ -119,7 +119,7 @@
     ">
         <div class="flex flex-col">
             <a href="{{ route('index') }}" class="flex items-center px-3 py-2 border-b">
-                <img src="{{ asset('images/logo.png') }}" class="w-16 h-16 object-contain" />
+                <img src="{{ asset('images/logo.webp') }}" class="w-16 h-16 object-contain" />
                 <div class="flex flex-col ml-2">
                     <span class="font-handwriting text-xl">Pasar Rakyat</span>
                     <span class="font-serif text-gray-500 text-xs italic">Murah merakyat!</span>
