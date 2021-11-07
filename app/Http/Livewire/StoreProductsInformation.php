@@ -66,6 +66,18 @@ class StoreProductsInformation extends Component
         $this->product = $product;
     }
 
+    public function copy_product(Product $product)
+    {
+        Gate::authorize('update', $product);
+
+        $new_product = new Product;
+        $new_product->name = $product->name;
+        $new_product->price = $product->price;
+        $new_product->description = $product->description;
+        $new_product->stock = $product->stock;
+        $this->product = $new_product;
+    }
+
     public function update_product()
     {
         Gate::authorize('update', $this->product);
@@ -125,8 +137,12 @@ class StoreProductsInformation extends Component
     {
         $this->products = auth()->user()->products;
         $this->product = new Product;
-        $this->number_of_products = auth()->user()->form_order->pricing_plan->number_of_products;
-        $this->products_left = $this->number_of_products - $this->products->count();
+        $this->number_of_products = auth()->user()->form_order->pricing_plan->number_of_products == -1
+            ? 'infinity'
+            : auth()->user()->form_order->pricing_plan->number_of_products;
+        $this->products_left = auth()->user()->form_order->pricing_plan->number_of_products == -1
+            ? 'infinity'
+            : $this->number_of_products - $this->products->count();
     }
 
     public function render()

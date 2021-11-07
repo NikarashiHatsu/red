@@ -14,17 +14,21 @@ class StoreInformationForm extends Component
 
     public $store_banner_path;
     public $store_logo_path;
+    public $direct_transfer;
 
     public FormOrder $form_order;
 
     protected $rules = [
+        'direct_transfer' => ['nullable', 'boolean'],
         'form_order.store_owner' => ['required', 'string'],
         'form_order.store_name' => ['required', 'string'],
-        'form_order.direct_transfer_bank' => ['nullable', 'string'],
-        'form_order.direct_transfer_to' => ['required_with:form_order.direct_transfer_bank', 'nullable', 'string'],
+        'form_order.direct_transfer_bank' => ['required_if:direct_transfer,1', 'nullable', 'string'],
+        'form_order.direct_transfer_to' => ['required_if:direct_transfer,1', 'required_with:form_order.direct_transfer_bank', 'nullable', 'string'],
     ];
 
     protected $messages = [
+        'form_order.direct_transfer_bank.required_if' => 'Kolom Nama Bank wajib diisi jika Anda memilih opsi transfer langsung.',
+        'form_order.direct_transfer_to.required_if' => 'Kolom No. Rekening wajib diisi jika Anda memilih opsi transfer langsung.',
         'form_order.direct_transfer_to.required_with' => 'Kolom No. Rekening wajib diisi jika kolom Nama Bank memiliki isian.',
     ];
 
@@ -45,6 +49,7 @@ class StoreInformationForm extends Component
     public function mount()
     {
         $this->form_order = auth()->user()->form_order()->firstOrCreate();
+        $this->direct_transfer = $this->form_order->direct_transfer_bank && $this->form_order->direct_transfer_to;
     }
 
     public function update()

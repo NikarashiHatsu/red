@@ -10,6 +10,7 @@ class StoreApplicationInformation extends Component
 {
     public FormOrder $form_order;
     public $has_api_integration;
+    public $has_direct_transfer;
 
     protected $rules = [
         'has_api_integration' => ['boolean', 'nullable'],
@@ -51,6 +52,7 @@ class StoreApplicationInformation extends Component
     {
         $this->form_order = auth()->user()->form_order()->firstOrCreate();
         $this->has_api_integration = $this->form_order->api_integration_key && $this->form_order->api_merchant_code;
+        $this->has_direct_transfer = $this->form_order->direct_transfer_bank && $this->form_order->direct_transfer_to;
     }
 
     public function render()

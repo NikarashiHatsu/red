@@ -43,6 +43,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'duitku', 'as' => 'duitku.'], function() {
     Route::get('return', function(Request $request) {
+        // BEGIN: UNTUK PENGAJUAN TOKO
+        if ($request->resultCode == '02') {
+            \App\Models\DuitkuTransaction::where('reference', $request->reference)->delete();
+
+            return redirect()->route('store.index');
+        }
+
         if (\App\Models\DuitkuTransaction::where('reference', $request->reference)->exists()) {
             $transaction = \App\Models\DuitkuTransaction::updateOrCreate(
                 ['reference' => $request->reference],
@@ -52,13 +59,27 @@ Route::group(['prefix' => 'duitku', 'as' => 'duitku.'], function() {
                 ]
             );
 
+            $limit = \App\Models\FormOrder::where('id', $transaction->form_order_id)
+                ->first()
+                ->pricing_plan
+                ->number_of_products;
+
+            \App\Models\Product::where('user_id', $transaction->form_order_id)
+                ->each(function($prod, $index) use($limit) {
+                    if ($index >= $limit) {
+                        $prod->delete();
+                    }
+                });
+
             \App\Models\FormOrder::where('id', $transaction->form_order_id)->update([
                 'is_requested' => true,
             ]);
 
             return redirect()->route('store.index');
         }
+        // END: UNTUK PENGAJUAN TOKO
 
+        // BEGIN: PEMBELIAN BARANG
         if (\App\Models\Sale::where('reference', $request->reference)->exists()) {
             $sales = \App\Models\Sale::where('reference', $request->reference);
             $sales->update([
@@ -75,6 +96,7 @@ Route::group(['prefix' => 'duitku', 'as' => 'duitku.'], function() {
 
             return redirect()->route('cart.index')->with('success', 'Berhasil membeli barang');
         }
+        // END: PEMBELIAN BARANG
     })->name('return');
 
     Route::get('callback', function(Request $request) {

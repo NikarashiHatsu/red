@@ -1,13 +1,19 @@
 <div class="flex flex-col">
-    @if ($products_left < 1)
+    @if ($products_left != 'infinity' && $products_left < 1)
         <div class="bg-red-50 border border-red-300 text-red-700 rounded px-4 py-3 mt-6">
             Kuota produk Anda habis, upgrade ke <a href="{{ route('store.pricing_plan.index') }}" class="underline hover:text-red-900">paket harga</a> yang lebih tinggi atau hapus beberapa produk Anda.
         </div>
     @endif
 
-    @if ($products_left < 0)
+    @if ($products_left != 'infinity' && $products_left < 0)
         <div class="bg-yellow-50 border border-yellow-300 text-yellow-700 rounded px-4 py-3 mt-4">
-            Produk yang melebihi kuota secara otomatis tidak akan terpilih saat permintaan pembuatan toko diajukan. Pengeditan/penghapusan terhadap produk tersebut masih bisa dilakukan.
+            Produk yang melebihi kuota secara otomatis tidak akan terpilih
+            saat permintaan pembuatan toko diajukan. Pengeditan/penghapusan
+            terhadap produk tersebut masih bisa dilakukan.
+            <b>
+                Produk yang melebihi kuota akan dihapus secara otomatis pada
+                saat pengajuan toko dibuat.
+            </b>
         </div>
     @endif
 
@@ -65,6 +71,9 @@
                                         <x-blue-button wire:click="edit_product({{ $prod }})">
                                             <i class="fas fa-edit"></i>
                                         </x-blue-button>
+                                        <x-blue-button wire:click="copy_product({{ $prod }})" class="ml-2">
+                                            <i class="fas fa-copy"></i>
+                                        </x-blue-button>
                                         @if ($confirm_product_deletion == $prod)
                                             <div class="flex">
                                                 <x-red-button wire:click="confirm_deletion()" class="ml-2 rounded-r-none">
@@ -84,7 +93,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="border py-2 text-center">
+                                <td colspan="6" class="border py-2 text-center">
                                     Belum ada data
                                 </td>
                             </tr>

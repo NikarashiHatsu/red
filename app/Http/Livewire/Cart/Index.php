@@ -12,7 +12,7 @@ class Index extends Component
     public $address;
     public $phone_number;
     public $redirect_payment = null;
-    public $available_product = 0;
+    public $available_products = 0;
 
     protected $listeners = [
         'quantity_updated' => 'count_payment'
@@ -21,7 +21,7 @@ class Index extends Component
     public function count_payment()
     {
         $this->payment_total = $this->carts->map(function($cart) {
-            if ($cart->product->stock == 0) {
+            if ($cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null) {
                 return 0;
             }
 
@@ -29,11 +29,11 @@ class Index extends Component
         })->sum();
 
         $this->product_total = $this->carts->map(function($cart) {
-            if ($cart->product->stock == 0) {
+            if ($cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null) {
                 return 0;
             }
 
-            $this->available_product = $this->available_product + 1;
+            $this->available_products = $this->available_products + 1;
 
             return $cart->quantity;
         })->sum();

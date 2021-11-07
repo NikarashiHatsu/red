@@ -25,11 +25,11 @@
                                             {{ __('store.greeting', ['name' => auth()->user()->name]) }}
                                         </span>
 
-                                        @if ($transaction->result_code == '01')
+                                        @if ($transaction->result_code == '02')
                                             <span class="text-base px-3 py-2 rounded border bg-blue-50 border-blue-300 text-blue-700">
                                                 Pembayaran belum diselesaikan
                                             </span>
-                                        @elseif ($transaction->result_code == '02')
+                                        @elseif ($transaction->result_code == '00')
                                             @if ($form_order->is_request_accepted)
                                                 <span class="text-base px-3 py-2 rounded border bg-green-50 border-green-300 text-green-700">
                                                     Permintaan pengajuan dalam antrian
@@ -127,4 +127,6 @@
             </div>
         </div>
     </div>
+
+    <x-success-and-error-swal />
 </x-app-layout>

@@ -1,9 +1,15 @@
-<div class="flex justify-between border-b mb-4 pb-4 {{ $cart->product->stock == 0 ? 'opacity-25' : '' }}">
+<div class="flex justify-between border-b mb-4 pb-4 {{ $cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null ? 'opacity-40' : '' }}">
     <div class="flex items-center w-full">
         <div class="w-24 h-24 rounded-lg border">
             <img src="{{ Storage::url($cart->product->product_photo_path) }}" class="w-full h-full object-cover" />
         </div>
         <div class="flex flex-col ml-4 max-w-xs">
+            @if ($cart->product->has_form_order->direct_transfer_bank != null)
+                <div class="bg-blue-50 border border-blue-300 text-blue-700 rounded px-3 py-2 text-sm mb-2">
+                    Transfer langsung ke {{ $cart->product->has_form_order->direct_transfer_bank }}
+                    dengan norek {{ $cart->product->has_form_order->direct_transfer_to }}
+                </div>
+            @endif
             <a href="{{ route('product.show', $cart->product->id) }}">
                 <p class="line-clamp-1">
                     {{ $cart->product->name }} - {{ $cart->product->description }}
@@ -43,11 +49,11 @@
             </form>
 
             <div class="flex border rounded-lg ml-4">
-                <button wire:click="decrement" class="px-2 bg-white rounded-l-lg {{ $cart->quantity == 1 || $cart->product->stock == 0 ? 'opacity-50' : '' }}" {{ $cart->quantity == 1 || $cart->product->stock == 0 ? 'disabled' : '' }}>
+                <button wire:click="decrement" class="px-2 bg-white rounded-l-lg {{ $cart->quantity == 1 || $cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null ? 'opacity-50' : '' }}" {{ $cart->quantity == 1 || $cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null ? 'disabled' : '' }}>
                     <i class="fas fa-minus fa-sm"></i>
                 </button>
-                <input wire:blur="set_amount" wire:model="quantity" type="number" value="{{ $cart->quantity }}" class="w-12 px-0 text-xs border-none border-gray-300 text-center focus:outline-none focus:ring-0" min="1" max="{{ $cart->product->stock }}" {{ $cart->product->stock == 0 ? 'disabled' : '' }} />
-                <button wire:click="increment" class="px-2 bg-white rounded-r-lg {{ $cart->quantity >= $cart->product->stock || $cart->product->stock == 0 ? 'opacity-50' : '' }}" {{ $cart->quantity >= $cart->product->stock || $cart->product->stock == 0 ? 'disabled' : '' }}>
+                <input wire:blur="set_amount" wire:model="quantity" type="number" value="{{ $cart->quantity }}" class="w-12 px-0 text-xs border-none border-gray-300 text-center focus:outline-none focus:ring-0" min="1" max="{{ $cart->product->stock }}" {{ $cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null ? 'disabled' : '' }} />
+                <button wire:click="increment" class="px-2 bg-white rounded-r-lg {{ $cart->quantity >= $cart->product->stock || $cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null ? 'opacity-50' : '' }}" {{ $cart->quantity >= $cart->product->stock || $cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null ? 'disabled' : '' }}>
                     <i class="fas fa-plus fa-sm"></i>
                 </button>
             </div>

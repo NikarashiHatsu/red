@@ -1,10 +1,13 @@
 <div class="py-12 max-w-7xl mx-auto">
     <div class="grid grid-cols-12 grid-flow-row gap-6">
         <div class="col-span-12 sm:col-span-8">
-            <div class="bg-yellow-50 border border-yellow-300 text-yellow-700 px-3 py-2 rounded mb-4">
-                <i class="fas fa-exclamation-triangle mr-1"></i>
-                <span>Ada beberapa barang yang tidak bisa dibeli.</span>
-            </div>
+            @if ($carts->count() != $available_products)
+                <div class="bg-yellow-50 border border-yellow-300 text-yellow-700 px-3 py-2 rounded mb-4">
+                    <i class="fas fa-exclamation-triangle mr-1"></i>
+                    <span>Ada beberapa barang yang tidak bisa dibeli.</span>
+                </div>
+            @endif
+
             @forelse ($carts as $cart)
                 <livewire:cart.show
                     :key="$cart->id"
@@ -19,7 +22,7 @@
                 <p class="p-4 border-b">
                     Total pembayaran
                 </p>
-                @if ($available_product > 0)
+                @if ($available_products > 0)
                     <div class="flex items-center justify-between p-4">
                         <span>
                             {{ $product_total }} Produk
