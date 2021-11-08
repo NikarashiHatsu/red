@@ -1,15 +1,9 @@
-<div class="flex justify-between border-b mb-4 pb-4 {{ $cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null ? 'opacity-40' : '' }}">
+<div class="flex justify-between border-b py-4 px-4 {{ $cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null ? 'bg-yellow-100 border-yellow-300' : '' }}">
     <div class="flex items-center w-full">
         <div class="w-24 h-24 rounded-lg border">
             <img src="{{ Storage::url($cart->product->product_photo_path) }}" class="w-full h-full object-cover" />
         </div>
-        <div class="flex flex-col ml-4 max-w-xs">
-            @if ($cart->product->has_form_order->direct_transfer_bank != null)
-                <div class="bg-blue-50 border border-blue-300 text-blue-700 rounded px-3 py-2 text-sm mb-2">
-                    Transfer langsung ke {{ $cart->product->has_form_order->direct_transfer_bank }}
-                    dengan norek {{ $cart->product->has_form_order->direct_transfer_to }}
-                </div>
-            @endif
+        <div class="flex flex-col ml-4 max-w-lg">
             <a href="{{ route('product.show', $cart->product->id) }}">
                 <p class="line-clamp-1">
                     {{ $cart->product->name }} - {{ $cart->product->description }}
@@ -22,19 +16,33 @@
                 <div class="w-8 h-8 rounded-full border">
                     <img src="{{ Storage::url($cart->store->store_logo_path) }}" class="w-full h-full object-cover rounded-full">
                 </div>
-                <div class="flex flex-col ml-2">
-                    <p class="text-sm">
-                        <a href="{{ route('merchant.show', $cart->store->id) }}">
-                            {{ $cart->store->store_name }}
-                        </a>
-                    </p>
-                    <p class="text-xs">
-                        {{ $cart->store->store_address }}
-                    </p>
+                <div class="flex flex-row items-center">
+                    <div class="flex flex-col ml-2">
+                        <p class="text-sm">
+                            <a href="{{ route('merchant.show', $cart->store->id) }}">
+                                {{ $cart->store->store_name }}
+                            </a>
+                        </p>
+                        <p class="text-xs">
+                            {{ $cart->store->store_address }}
+                        </p>
+                    </div>
+                    @if ($cart->product->stock == 0)
+                        <div class="bg-red-50 border border-red-300 text-red-700 rounded px-3 py-2 text-sm ml-4 opacity-100">
+                            Stok habis
+                        </div>
+                    @endif
+                    @if ($cart->product->has_form_order->direct_transfer_bank != null)
+                        <div class="bg-blue-50 border border-blue-300 text-blue-700 rounded px-3 py-2 text-sm ml-4 opacity-100">
+                            Transfer langsung ke {{ $cart->product->has_form_order->direct_transfer_bank }}
+                            dengan norek {{ $cart->product->has_form_order->direct_transfer_to }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+
     <div class="flex flex-col">
         <p class="italic text-right text-xs mb-1">
             Tersisa {{ $cart->product->stock }} produk

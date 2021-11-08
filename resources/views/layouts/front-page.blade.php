@@ -209,7 +209,7 @@
     {{ $slot }}
     {{-- /Body --}}
 
-    <footer class="bg-white border-t border-gray-300 bottom-0">
+    <footer class="border-t border-gray-300 bottom-0">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col items-center">
                 <div class="text-center py-4">
