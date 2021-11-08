@@ -71,6 +71,11 @@ class StoreInformationForm extends Component
                 $this->form_order->store_logo_path = $this->store_logo_path->store('store_logos');
             }
 
+            if (!$this->direct_transfer) {
+                $this->form_order->direct_transfer_bank = null;
+                $this->form_order->direct_transfer_to = null;
+            }
+
             $this->form_order->update();
         } catch (\Exception $e) {
             return session()->flash('error', 'Informasi toko gagal disimpan: ' . $e->getMessage());

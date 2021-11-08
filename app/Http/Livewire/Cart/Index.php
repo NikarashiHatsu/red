@@ -73,7 +73,7 @@ class Index extends Component
         );
 
         $itemDetails = $this->carts->filter(function($cart) {
-            if ($cart->product->stock != 0) {
+            if ($cart->product->stock != 0 && $cart->product->has_form_order->direct_transfer_bank == null) {
                 return $cart;
             };
         })->map(function($cart) {
@@ -128,7 +128,7 @@ class Index extends Component
             $result = json_decode($request, true);
 
             $this->carts->filter(function($cart) {
-                if ($cart->product->stock != 0) {
+                if ($cart->product->stock != 0 && $cart->product->has_form_order->direct_transfer_bank == null) {
                     return $cart;
                 }
             })->each(function($cart) use($result) {
@@ -149,7 +149,8 @@ class Index extends Component
 
             $this->redirect_payment = $result['paymentUrl'];
         } else {
-            return redirect()->back()->with('error', 'Transaksi gagal: ' . $request['Message']);
+            $result = json_decode($request, true);
+            return redirect()->back()->with('error', 'Transaksi gagal: ' . $result['Message']);
         }
     }
 
