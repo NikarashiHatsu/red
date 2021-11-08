@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name') }}</title>
+    <link rel="shortcut icon" href="{{ asset('images/logo.webp') }}" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Andada+Pro:wght@400;700&family=Dancing+Script&family=Exo+2&family=Lato:wght@300;400;700&family=Roboto+Condensed:wght@400;700&display=swap"
@@ -129,9 +130,27 @@
             <div class="flex flex-col">
                 @guest
                     <a href="{{ route('register') }}" class="transition ease-in-out duration-300 py-2 px-3 hover:bg-gray-100 border-b">
-                        <i class="fab fa-wp-forms mr-2 w-6"></i>
+                        <i class="fab fa-wpforms mr-2 w-6"></i>
                         <span>
                             Daftar
+                        </span>
+                    </a>
+                    <a href="{{ route('about') }}" class="transition ease-in-out duration-300 py-2 px-3 hover:bg-gray-100 border-b">
+                        <i class="fas fa-info mr-2 w-6"></i>
+                        <span>
+                            Tentang
+                        </span>
+                    </a>
+                    <a href="{{ route('policy') }}" class="transition ease-in-out duration-300 py-2 px-3 hover:bg-gray-100 border-b">
+                        <i class="fas fa-file-contract mr-2 w-6"></i>
+                        <span>
+                            Kebijakan
+                        </span>
+                    </a>
+                    <a href="{{ route('contact') }}" class="transition ease-in-out duration-300 py-2 px-3 hover:bg-gray-100 border-b">
+                        <i class="fas fa-address-book mr-2 w-6"></i>
+                        <span>
+                            Kontak
                         </span>
                     </a>
                     <a href="{{ route('login') }}" class="transition ease-in-out duration-300 py-2 px-3 hover:bg-gray-100">
@@ -189,6 +208,20 @@
     {{-- Body --}}
     {{ $slot }}
     {{-- /Body --}}
+
+    <footer class="bg-white border-t border-gray-300 bottom-0">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col items-center">
+                <div class="text-center py-4">
+                    <a href="{{ route('about') }}">Tentang Kami</a>
+                    <span class="border-r border-gray-300 mx-4"></span>
+                    <a href="{{ route('policy') }}">Kebijakan</a>
+                    <span class="border-r border-gray-300 mx-4"></span>
+                    <a href="{{ route('contact') }}">Kontak Kami</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     @livewireScripts()
 </body>
