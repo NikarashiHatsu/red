@@ -92,6 +92,9 @@ Route::group(['prefix' => 'duitku', 'as' => 'duitku.'], function() {
                 \App\Models\Cart::where('product_id', $sale->product_id)
                     ->where('user_id', $sale->user_id)
                     ->delete();
+
+                \App\Models\Product::where('id', $sale->product_id)
+                    ->decrement('stock', $sale->quantity);
             });
 
             return redirect()->route('cart.index')->with('success', 'Berhasil membeli barang');
