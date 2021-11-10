@@ -18,7 +18,8 @@
         <textarea name="store_address" wire:model.defer="form_order.store_address" id="store_address" rows="5" class="mt-2 rounded border-gray-300"></textarea>
     </div>
 
-    @if (!$has_direct_transfer)
+    {{-- DEPRECATED IN 2021-11-09 --}}
+    {{-- @if (!$has_direct_transfer)
         <div class="flex flex-col mt-4"">
             <label for="has_api_integration">Memiliki Kode Integrasi Duitku?</label>
             <div class="flex items-center mt-2">
@@ -41,7 +42,7 @@
                 </div>
             @endif
         </div>
-    @endif
+    @endif --}}
 
     <div class="flex flex-col mt-4">
         <label for="store_url">URL Perusahaan/Toko</label>
