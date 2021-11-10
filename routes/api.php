@@ -103,6 +103,8 @@ Route::group(['prefix' => 'duitku', 'as' => 'duitku.'], function() {
     })->name('return');
 
     Route::get('callback', function(Request $request) {
+        \Illuminate\Support\Facades\Log::info('Duitku Callback', $request->all());
+
         $apiKey = config('duitku.api_key');
         $merchantCode = $request->merchantCode ?? null;
         $merchantOrderId = $request->merchantOrderId ?? null;
