@@ -44,7 +44,9 @@
                             <span class="ml-1">5.0</span>
                         </div>
                         <span class="hidden sm:flex border-r border-gray-300 h-3 mx-1"></span> --}}
-                        <span class="text-xxs sm:text-sm">Terjual {{ \App\Models\Cart::where('product_id', $product->id)->count() }}</span>
+                        @if (\App\Models\Sale::where('product_id', $product->id)->count() > 0)
+                            <span class="text-xxs sm:text-sm">Terjual {{ \App\Models\Sale::where('product_id', $product->id)->count() }}</span>
+                        @endif
                     </div>
                 </div>
             </a>
@@ -107,7 +109,9 @@
                                             <span class="ml-1">5.0</span>
                                         </div>
                                         <span class="hidden sm:flex border-r border-gray-300 h-3 mx-1"></span> --}}
-                                        <span class="text-xxs sm:text-sm">Terjual {{ \App\Models\Cart::where('product_id', $product->id)->count() }}</span>
+                                        @if (\App\Models\Sale::where('product_id', $product->id)->count() > 0)
+                                            <span class="text-xxs sm:text-sm">Terjual {{ \App\Models\Sale::where('product_id', $product->id)->count() }}</span>
+                                        @endif
                                     </div>
                                 </div>
                             </a>
