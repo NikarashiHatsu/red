@@ -112,7 +112,7 @@
                     </p>
                 </div>
             </div>
-            <p class="mt-4">
+            {{-- <p class="mt-4">
                 <i class="far fa-star mr-1"></i>
                 <span>4.8</span>
                 <span class="text-xs">rata-rata ulasan</span>
@@ -121,7 +121,7 @@
                 <i class="far fa-clock mr-1"></i>
                 <span>&#177; 13 jam</span>
                 <span class="text-xs">pesanan diproses</span>
-            </p>
+            </p> --}}
         </div>
     </div>
 

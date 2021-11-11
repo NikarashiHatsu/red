@@ -18,7 +18,7 @@
 
         <div class="grid grid-cols-3 grid-flow-row gap-4 mt-2">
             <div class="col-span-1">
-                <a href="{{ route('merchant.show', $progress->user->form_order) }}">
+                <a href="{{ route('merchant.show', $progress->user->form_order) }}"> 
                     <x-button>
                         Buka Web
                     </x-button>

@@ -44,7 +44,7 @@
                             <span class="ml-1">5.0</span>
                         </div>
                         <span class="hidden sm:flex border-r border-gray-300 h-3 mx-1"></span> --}}
-                        <span class="text-xxs sm:text-sm">Terjual {{ rand(1, 50) }}</span>
+                        <span class="text-xxs sm:text-sm">Terjual {{ \App\Models\Cart::where('product_id', $product->id)->count() }}</span>
                     </div>
                 </div>
             </a>
@@ -107,7 +107,7 @@
                                             <span class="ml-1">5.0</span>
                                         </div>
                                         <span class="hidden sm:flex border-r border-gray-300 h-3 mx-1"></span> --}}
-                                        <span class="text-xxs sm:text-sm">Terjual {{ rand(1, 50) }}</span>
+                                        <span class="text-xxs sm:text-sm">Terjual {{ \App\Models\Cart::where('product_id', $product->id)->count() }}</span>
                                     </div>
                                 </div>
                             </a>

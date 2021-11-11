@@ -19,7 +19,7 @@
                 <div class="flex flex-row items-center">
                     <div class="flex flex-col ml-2">
                         <p class="text-sm">
-                            <a href="{{ route('merchant.show', $cart->store->id) }}">
+                            <a href="{{ route('merchant.show', $cart->store_id) }}">
                                 {{ $cart->store->store_name }}
                             </a>
                         </p>
