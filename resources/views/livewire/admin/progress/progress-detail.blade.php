@@ -1,4 +1,4 @@
-<div class="flex flex-col items-end">
+<div class="flex flex-col items-start sm:items-end mt-4 sm:mt-0">
     <p>
         Progress
     </p>

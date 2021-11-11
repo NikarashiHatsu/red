@@ -19,10 +19,10 @@
                             </div>
                         </x-card.header>
                         @forelse ($incomplete_progresses as $incomplete_progress)
-                            <div class="flex justify-between p-4 border-b">
-                                <div class="flex justify-center w-full">
+                            <div class="grid grid-cols-12 grid-flow-row gap-4">
+                                <div class="flex flex-col sm:flex-row col-span-12 md:col-span-6 lg:col-span-7">
                                     <img src="{{ Storage::url($incomplete_progress->user->form_order_with_id->store_logo_path) }}" class="w-32 h-32 rounded object-cover max-w-none" />
-                                    <div class="flex-col ml-4">
+                                    <div class="flex-col ml-4 mt-4">
                                         <h5 class="text-lg">
                                             {{ $incomplete_progress->user->form_order_with_id->store_name }}
                                         </h5>
@@ -57,7 +57,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="flex flex-col w-full">
+                                <div class="flex flex-col col-span-12 md:col-span-6 lg:col-span-5">
                                     <livewire:admin.progress.progress-detail
                                         :progress="$incomplete_progress"
                                     />
@@ -86,10 +86,10 @@
                             </div>
                         </x-card.header>
                         @forelse ($completed_progresses as $completed_progress)
-                            <div class="flex justify-between p-4 border-b">
-                                <div class="flex justify-center">
+                            <div class="grid grid-cols-12 grid-flow-row gap-4 p-4 border-b">
+                                <div class="flex flex-col sm:flex-row col-span-12 md:col-span-6 lg:col-span-7">
                                     <img src="{{ Storage::url($completed_progress->user->form_order->store_logo_path) }}" class="w-32 h-32 rounded object-cover max-w-none" />
-                                    <div class="flex-col ml-4">
+                                    <div class="flex-col sm:ml-4 mt-4">
                                         <h5 class="text-lg">
                                             {{ $completed_progress->user->form_order->store_name }}
                                         </h5>
@@ -124,7 +124,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="flex flex-col">
+                                <div class="flex flex-col col-span-12 md:col-span-6 lg:col-span-5">
                                     <livewire:admin.progress.progress-detail
                                         :progress="$completed_progress"
                                     />
