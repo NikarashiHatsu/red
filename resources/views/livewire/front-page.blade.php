@@ -44,8 +44,8 @@
                             <span class="ml-1">5.0</span>
                         </div>
                         <span class="hidden sm:flex border-r border-gray-300 h-3 mx-1"></span> --}}
-                        @if (\App\Models\Sale::where('product_id', $product->id)->count() > 0)
-                            <span class="text-xxs sm:text-sm">Terjual {{ \App\Models\Sale::where('product_id', $product->id)->count() }}</span>
+                        @if (\App\Models\Sale::where('product_id', $product->id)->where('is_paid', 1)->count() > 0)
+                            <span class="text-xxs sm:text-sm">Terjual {{ \App\Models\Sale::where('product_id', $product->id)->where('is_paid', 1)->sum('quantity') }}</span>
                         @endif
                     </div>
                 </div>
@@ -109,8 +109,8 @@
                                             <span class="ml-1">5.0</span>
                                         </div>
                                         <span class="hidden sm:flex border-r border-gray-300 h-3 mx-1"></span> --}}
-                                        @if (\App\Models\Sale::where('product_id', $product->id)->count() > 0)
-                                            <span class="text-xxs sm:text-sm">Terjual {{ \App\Models\Sale::where('product_id', $product->id)->count() }}</span>
+                                        @if (\App\Models\Sale::where('product_id', $product->id)->where('is_paid', 1)->count() > 0)
+                                            <span class="text-xxs sm:text-sm">Terjual {{ \App\Models\Sale::where('product_id', $product->id)->where('is_paid', 1)->sum('quantity') }}</span>
                                         @endif
                                     </div>
                                 </div>

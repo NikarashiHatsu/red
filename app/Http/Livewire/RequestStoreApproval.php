@@ -167,7 +167,10 @@ class RequestStoreApproval extends Component
         $phoneNumber = $form_order->whatsapp_number;
         $customerVaName = $user->name;
         $callbackUrl = route('duitku.callback');
-        $returnUrl = route('duitku.return');
+        $returnUrl = route('duitku.return', [
+            'page' => 'toko',
+            'user_id' => auth()->user()->id,
+        ]);
         $expiryPeriod = 10;
         $signature = md5($merchantCode . $merchantOrderId . $paymentAmount . $merchantKey);
 
@@ -241,12 +244,6 @@ class RequestStoreApproval extends Component
 
         if($httpCode == 200) {
             $result = json_decode($request, true);
-
-            DuitkuTransaction::create([
-                'user_id' => $user->id,
-                'form_order_id' => $form_order->id,
-                'reference' => $result['reference'],
-            ]);
 
             $this->redirect_payment = $result['paymentUrl'];
         } else {

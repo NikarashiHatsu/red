@@ -128,5 +128,27 @@
         </div>
     </div>
 
-    <x-success-and-error-swal />
+    @if (request()->status && request()->message && request()->status == 'success')
+        <script>
+            swal.fire({
+                title: 'Berhasil',
+                text: '{{ request()->message }}',
+                icon: 'success',
+                showCancelButton: false,
+            }).then((result) => {
+                return window.location.href = "{{ route('store.index') }}";
+            });
+        </script>
+    @elseif (request()->status && request()->message && request()->status == 'error')
+        <script>
+            swal.fire({
+                title: 'Terjadi Kesalahan',
+                text: '{{ request()->message }}',
+                icon: 'error',
+                showCancelButton: false
+            }).then((result) => {
+                return window.location.href = "{{ route('store.index') }}";
+            })
+        </script>
+    @endif
 </x-app-layout>

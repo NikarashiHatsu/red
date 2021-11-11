@@ -43,63 +43,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'duitku', 'as' => 'duitku.'], function() {
     Route::get('return', function(Request $request) {
-        // BEGIN: UNTUK PENGAJUAN TOKO
-        if ($request->resultCode == '02') {
-            \App\Models\DuitkuTransaction::where('reference', $request->reference)->delete();
-
-            return redirect()->route('store.index');
+        if ($request->page == 'toko') {
+            return (new \App\Http\Controllers\Api\Duitku\ReturnToko)->handle($request);
         }
 
-        if (\App\Models\DuitkuTransaction::where('reference', $request->reference)->exists()) {
-            $transaction = \App\Models\DuitkuTransaction::updateOrCreate(
-                ['reference' => $request->reference],
-                [
-                    'merchant_order_id' => $request->merchantOrderId,
-                    'result_code' => $request->resultCode,
-                ]
-            );
-
-            $limit = \App\Models\FormOrder::where('id', $transaction->form_order_id)
-                ->first()
-                ->pricing_plan
-                ->number_of_products;
-
-            \App\Models\Product::where('user_id', $transaction->form_order_id)
-                ->each(function($prod, $index) use($limit) {
-                    if ($index >= $limit) {
-                        $prod->delete();
-                    }
-                });
-
-            \App\Models\FormOrder::where('id', $transaction->form_order_id)->update([
-                'is_requested' => true,
-            ]);
-
-            return redirect()->route('store.index');
+        if ($request->page == 'cart') {
+            return (new \App\Http\Controllers\Api\Duitku\ReturnCart)->handle($request);
         }
-        // END: UNTUK PENGAJUAN TOKO
-
-        // BEGIN: PEMBELIAN BARANG
-        if (\App\Models\Sale::where('reference', $request->reference)->exists()) {
-            $sales = \App\Models\Sale::where('reference', $request->reference);
-            $sales->update([
-                'merchant_order_id' => $request->merchantOrderId,
-                'result_code' => $request->resultCode,
-                'is_paid' => 1,
-            ]);
-
-            $sales->each(function($sale) {
-                \App\Models\Cart::where('product_id', $sale->product_id)
-                    ->where('user_id', $sale->user_id)
-                    ->delete();
-
-                \App\Models\Product::where('id', $sale->product_id)
-                    ->decrement('stock', $sale->quantity);
-            });
-
-            return redirect()->route('cart.index')->with('success', 'Berhasil membeli barang');
-        }
-        // END: PEMBELIAN BARANG
     })->name('return');
 
     Route::get('callback', function(Request $request) {

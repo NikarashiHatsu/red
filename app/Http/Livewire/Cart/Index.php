@@ -20,6 +20,8 @@ class Index extends Component
 
     public function count_payment()
     {
+        $this->available_products = 0;
+
         $this->payment_total = $this->carts->map(function($cart) {
             if ($cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null) {
                 return 0;
@@ -51,7 +53,12 @@ class Index extends Component
         $phoneNumber = $this->phone_number;
         $customerVaName = auth()->user()->name;
         $callbackUrl = route('duitku.callback');
-        $returnUrl = route('duitku.return');
+        $returnUrl = route('duitku.return', [
+            'page' => 'cart',
+            'user_id' => auth()->user()->id,
+            'address' => $this->address,
+            'phone_number' => $this->phone_number,
+        ]);
         $expiryPeriod = 10;
         $signature = md5($merchantCode . $merchantOrderId . $paymentAmount . $merchantKey);
 
@@ -126,26 +133,6 @@ class Index extends Component
 
         if($httpCode == 200) {
             $result = json_decode($request, true);
-
-            $this->carts->filter(function($cart) {
-                if ($cart->product->stock != 0 && $cart->product->has_form_order->direct_transfer_bank == null) {
-                    return $cart;
-                }
-            })->each(function($cart) use($result) {
-                \App\Models\Sale::create([
-                    'user_id' => auth()->user()->id,
-                    'product_id' => $cart->product->id,
-                    'quantity' => $cart->quantity,
-                    'address' => $this->address,
-                    'phone_number' => $this->phone_number,
-                    'is_paid' => false,
-                    'is_product_sent' => false,
-                    'is_product_received' => false,
-                    'reference' => $result['reference'],
-                    'merchant_order_id' => null,
-                    'result_code' => null,
-                ]);
-            });
 
             $this->redirect_payment = $result['paymentUrl'];
         } else {

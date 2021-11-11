@@ -48,10 +48,34 @@
             </div>
         </div>
     </div>
+
     @if ($redirect_payment)
         <script>
             window.location.href = '{{ $redirect_payment }}';
         </script>
     @endif
-    <x-success-and-error-swal />
+
+    @if (request()->status && request()->message && request()->status == 'success')
+        <script>
+            swal.fire({
+                title: 'Berhasil',
+                text: '{{ request()->message }}',
+                icon: 'success',
+                showCancelButton: false,
+            }).then((result) => {
+                return window.location.href = "{{ route('cart.index') }}";
+            });
+        </script>
+    @elseif (request()->status && request()->message && request()->status == 'error')
+        <script>
+            swal.fire({
+                title: 'Terjadi Kesalahan',
+                text: '{{ request()->message }}',
+                icon: 'error',
+                showCancelButton: false
+            }).then((result) => {
+                return window.location.href = "{{ route('cart.index') }}";
+            })
+        </script>
+    @endif
 </div>
