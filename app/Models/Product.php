@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function has_form_order()
+    public function form_order()
     {
         return $this->hasOneThrough(
             FormOrder::class,
@@ -25,6 +25,11 @@ class Product extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function sale()
+    {
+        return $this->hasMany(Sale::class);
     }
 
     protected $fillable = [

@@ -44,8 +44,10 @@
                             <span class="ml-1">5.0</span>
                         </div>
                         <span class="hidden sm:flex border-r border-gray-300 h-3 mx-1"></span> --}}
-                        @if (\App\Models\Sale::where('product_id', $product->id)->where('is_paid', 1)->count() > 0)
-                            <span class="text-xxs sm:text-sm">Terjual {{ \App\Models\Sale::where('product_id', $product->id)->where('is_paid', 1)->sum('quantity') }}</span>
+                        @if ($product->sale_sum_quantity > 0)
+                            <span class="text-xxs sm:text-sm">
+                                Terjual {{ $product->sale_sum_quantity }}
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -62,7 +64,8 @@
         @foreach ($featured_merchants as $form_order)
             <div
                 onclick="window.location.href = '{{ route('merchant.show', $form_order->id) }}'"
-                class="transition-shadow duration-300 ease-in-out hover:text-gray-700 cursor-pointer flex flex-col col-span-12 md:col-span-6 lg:col-span-4 bg-white rounded-lg shadow hover:shadow-xl">
+                class="transition-shadow duration-300 ease-in-out hover:text-gray-700 cursor-pointer flex flex-col col-span-12 md:col-span-6 lg:col-span-4 bg-white rounded-lg shadow hover:shadow-xl"
+            >
                 <div class="relative">
                     <div class="aspect-w-16 aspect-h-9">
                         <img src="{{ Storage::url($form_order->store_banner_path) }}" class="object-cover rounded-t-lg">
@@ -77,13 +80,20 @@
                     </h5>
                     <p class="text-gray-500 text-center px-4">
                         <i class="fas fa-cubes mr-1"></i>
-                        <span>{{ $form_order->user->products()->count() }} produk</span>
+                        <span>{{ $form_order->products->count() }} produk</span>
                     </p>
+                    @if ($form_order->sale_sum_quantity > 0)
+                        <p class="text-gray-500 text-center px-4">
+                            <i class="fas fa-sale mr-1"></i>
+                            <span>Total {{ $form_order->sale_sum_quantity }} produk terjual</span>
+                        </p>
+                    @endif
                     <div class="grid grid-cols-3 grid-flow-row gap-4 p-4">
-                        @foreach ($form_order->user->products()->take(6)->get() as $product)
+                        @foreach ($form_order->products->take(6) as $product)
                             <a
                                 href="{{ route('product.show', $product) }}"
-                                class="transition-shadow duration-300 ease-in-out col-span-1 hover:text-gray-700 hover:shadow-xl flex flex-col border rounded {{ $product->stock == 0 ? 'opacity-50' : '' }}">
+                                class="transition-shadow duration-300 ease-in-out col-span-1 hover:text-gray-700 hover:shadow-xl flex flex-col border rounded {{ $product->stock == 0 ? 'opacity-50' : '' }}"
+                            >
                                 <div class="aspect-w-1 aspect-h-1">
                                     <img src="{{ Storage::url($product->product_photo_path) }}" class="w-full h-full object-cover rounded border">
                                 </div>
@@ -93,11 +103,11 @@
                                             {{ $product->name }}
                                         </p>
                                         @auth
-                                        @if ($products_in_cart?->contains($product->id))
-                                            <div class="w-4 h-4 flex items-center justify-center text-xxs sm:text-sm bg-blue-500 rounded-full">
-                                                <i class="fa-xs fas fa-shopping-cart text-white"></i>
-                                            </div>
-                                        @endif
+                                            @if ($products_in_cart?->contains($product->id))
+                                                <div class="w-4 h-4 flex items-center justify-center text-xxs sm:text-sm bg-blue-500 rounded-full">
+                                                    <i class="fa-xs fas fa-shopping-cart text-white"></i>
+                                                </div>
+                                            @endif
                                         @endauth
                                     </div>
                                     <p class="text-xxs sm:text-sm font-bold">
@@ -109,8 +119,10 @@
                                             <span class="ml-1">5.0</span>
                                         </div>
                                         <span class="hidden sm:flex border-r border-gray-300 h-3 mx-1"></span> --}}
-                                        @if (\App\Models\Sale::where('product_id', $product->id)->where('is_paid', 1)->count() > 0)
-                                            <span class="text-xxs sm:text-sm">Terjual {{ \App\Models\Sale::where('product_id', $product->id)->where('is_paid', 1)->sum('quantity') }}</span>
+                                        @if ($product->sale_sum_quantity > 0)
+                                            <span class="text-xxs sm:text-sm">
+                                                Terjual {{ $product->sale_sum_quantity }}
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
@@ -122,6 +134,4 @@
         @endforeach
     </div>
     {{-- /Toko unggulan --}}
-
-    {{-- TODO: Toko unggulan --}}
 </div>

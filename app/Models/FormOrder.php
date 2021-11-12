@@ -20,6 +20,25 @@ class FormOrder extends Model
         return $this->belongsTo(PricingPlan::class);
     }
 
+    public function products()
+    {
+        return $this
+            ->hasMany(Product::class, 'user_id', 'user_id')
+            ->withSum('sale', 'quantity');
+    }
+
+    public function sale()
+    {
+        return $this->hasManyThrough(
+            Sale::class,
+            Product::class,
+            'user_id',
+            'product_id',
+            'user_id',
+            'id',
+        );
+    }
+
     protected $fillable = [
         'user_id',
         'pricing_plan_id',

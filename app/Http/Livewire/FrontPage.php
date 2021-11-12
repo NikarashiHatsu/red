@@ -16,8 +16,21 @@ class FrontPage extends Component
 
     public function mount()
     {
-        $this->featured_products = Product::has('has_form_order')->take(12)->get();
-        $this->featured_merchants = FormOrder::where('is_request_accepted', 1)->take(6)->get();
+        $this->featured_products = Product::has('form_order')
+            ->with('form_order', 'user', 'user.form_order')
+            ->withSum('sale', 'quantity')
+            ->orderBy('sale_sum_quantity', 'DESC')
+            ->take(12)
+            ->get();
+
+        $this->featured_merchants = FormOrder::where('is_request_accepted', 1)
+            ->with(['products' => function($query) {
+                $query->orderBy('sale_sum_quantity', 'DESC');
+            }])
+            ->withSum('sale', 'quantity')
+            ->orderBy('sale_sum_quantity', 'DESC')
+            ->take(6)
+            ->get();
 
         if (auth()->user()) {
             $this->products_in_cart = auth()->user()->carts()?->get()->map(function($cart) {
