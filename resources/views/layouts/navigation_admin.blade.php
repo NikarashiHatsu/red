@@ -36,7 +36,7 @@
             </x-slot>
 
             <x-slot name="content">
-                <x-dropdown-link href="javascript:void(0)">
+                <x-dropdown-link :href="route('admin.laporan.data_pengguna')">
                     Data Pengguna
                 </x-dropdown-link>
                 <x-dropdown-link href="javascript:void(0)">

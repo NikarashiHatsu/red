@@ -14,7 +14,7 @@
     </div>
 
     <div class="pt-1 border-t">
-        <x-responsive-nav-link href="javascript:void(0)">
+        <x-responsive-nav-link :href="route('admin.laporan.data_pengguna')">
             Data Pengguna
         </x-responsive-nav-link>
         <x-responsive-nav-link href="javascript:void(0)">
