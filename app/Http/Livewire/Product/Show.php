@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Product;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Component;
 
 class Show extends Component
@@ -18,6 +19,10 @@ class Show extends Component
         $this->product = $product;
         $this->form_order = $product->user->form_order;
         $this->component = 'product-detail-layouts.layout-' . $this->form_order->layout_id;
+
+        RateLimiter::attempt("product-counter:{$product->id}", 1, function() use($product) {
+            $product->increment('view_counter');
+        }, 3600);
     }
 
     public function render()

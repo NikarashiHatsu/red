@@ -38,16 +38,26 @@
                             {{ $product->user->form_order->store_name }}
                         </span>
                     </p>
-                    <div class="flex flex-col sm:flex-row text-gray-500 mt-0.5 sm:mt-1">
-                        {{-- <div class="flex text-xxs sm:text-sm items-center">
-                            <i class="fas fa-star fa-sm text-yellow-400"></i>
-                            <span class="ml-1">5.0</span>
+                    <div class="flex flex-col sm:items-center sm:justify-between sm:flex-row text-gray-500 mt-0.5 sm:mt-1">
+                        <div class="flex flex-row items-center">
+                            {{-- <div class="flex text-xxs sm:text-sm items-center">
+                                <i class="fas fa-star fa-sm text-yellow-400"></i>
+                                <span class="ml-1">5.0</span>
+                            </div>
+                            <span class="hidden sm:flex border-r border-gray-300 h-3 mx-1"></span> --}}
+                            @if ($product->sale_sum_quantity > 0)
+                                <span class="text-xxs sm:text-sm">
+                                    Terjual {{ $product->sale_sum_quantity }}
+                                </span>
+                            @endif
                         </div>
-                        <span class="hidden sm:flex border-r border-gray-300 h-3 mx-1"></span> --}}
-                        @if ($product->sale_sum_quantity > 0)
-                            <span class="text-xxs sm:text-sm">
-                                Terjual {{ $product->sale_sum_quantity }}
-                            </span>
+                        @if ($product->view_counter > 0)
+                            <div class="flex items-center">
+                                <i class="fas fa-eye mr-1 fa-sm"></i>
+                                <span class="text-sm">
+                                    {{ $product->view_counter }}x
+                                </span>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -119,16 +129,26 @@
                                     <p class="text-xxs sm:text-sm font-bold">
                                         Rp {{ number_format($product->price, 0, '.', '.') }}
                                     </p>
-                                    <div class="flex flex-col sm:flex-row text-gray-500 mt-0.5 sm:mt-1">
-                                        {{-- <div class="flex text-xxs sm:text-sm items-center">
-                                            <i class="fas fa-star fa-sm text-yellow-400"></i>
-                                            <span class="ml-1">5.0</span>
+                                    <div class="flex flex-col sm:items-center sm:justify-between sm:flex-row text-gray-500 mt-0.5 sm:mt-1">
+                                        <div class="flex flex-row items-center">
+                                            {{-- <div class="flex text-xxs sm:text-sm items-center">
+                                                <i class="fas fa-star fa-sm text-yellow-400"></i>
+                                                <span class="ml-1">5.0</span>
+                                            </div>
+                                            <span class="hidden sm:flex border-r border-gray-300 h-3 mx-1"></span> --}}
+                                            @if ($product->sale_sum_quantity > 0)
+                                                <span class="text-xs">
+                                                    Terjual {{ $product->sale_sum_quantity }}
+                                                </span>
+                                            @endif
                                         </div>
-                                        <span class="hidden sm:flex border-r border-gray-300 h-3 mx-1"></span> --}}
-                                        @if ($product->sale_sum_quantity > 0)
-                                            <span class="text-xxs sm:text-sm">
-                                                Terjual {{ $product->sale_sum_quantity }}
-                                            </span>
+                                        @if ($product->view_counter > 0)
+                                            <div class="flex items-center">
+                                                <i class="fas fa-eye mr-1 fa-xs"></i>
+                                                <span class="text-xs">
+                                                    {{ $product->view_counter }}x
+                                                </span>
+                                            </div>
                                         @endif
                                     </div>
                                 </div>

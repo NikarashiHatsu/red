@@ -38,6 +38,7 @@ class Product extends Model
         'name',
         'price',
         'stock',
+        'view_counter',
         'description',
     ];
 }

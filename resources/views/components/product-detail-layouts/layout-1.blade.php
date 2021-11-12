@@ -86,9 +86,16 @@
         <p class="mt-2 leading-snug line-clamp-2">
             {{ $product->name }} - {{ $product->description }}
         </p>
-        <p class="mt-2 italic text-xs">
-            Stok tersisa: {{ $product->stock }} produk
-        </p>
+        <div class="mt-2 italic text-xs flex items-center justify-between">
+            <span>
+                Stok tersisa: {{ $product->stock }} produk
+            </span>
+            @if ($product->view_counter > 0)
+                <span>
+                    {{ $product->view_counter }}x dilihat
+                </span>
+            @endif
+        </div>
     </div>
 
     <div class="bg-white p-4 mt-4">
