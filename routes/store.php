@@ -9,6 +9,10 @@ Route::group(['prefix' => 'store', 'as' => 'store.', 'middleware' => 'user:verif
         Route::view('/pricing_plan', 'store.pricing_plan.index')->name('pricing_plan.index');
     });
 
+    Route::group(['prefix' => 'laporan', 'as' => 'laporan.'], function() {
+        Route::get('/data_pelanggan', \App\Http\Livewire\Store\Laporan\DataPelanggan::class)->name('data_pelanggan');
+    });
+
     Route::group(['prefix' => 'form_order', 'as' => 'form_order.', 'middleware' => 'has_pricing_plan'], function() {
         Route::view('/', 'store.form_order.index')->name('index');
         Route::view('/application_information', 'store.form_order.application_information')->name('application_information');

@@ -24,7 +24,7 @@
             <x-responsive-nav-link href="javascript:void(0)">
                 Pendapatan Toko
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="javascript:void(0)">
+            <x-responsive-nav-link :href="route('store.laporan.data_pelanggan')">
                 Data Pelanggan
             </x-responsive-nav-link>
         </div>

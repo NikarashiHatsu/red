@@ -42,7 +42,7 @@
                     <x-dropdown-link href="javascript:void(0)">
                         Pendapatan Toko
                     </x-dropdown-link>
-                    <x-dropdown-link href="javascript:void(0)">
+                    <x-dropdown-link :href="route('store.laporan.data_pelanggan')">
                         Data Pelanggan
                     </x-dropdown-link>
                 </x-slot>
