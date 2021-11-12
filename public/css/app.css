@@ -1359,6 +1359,9 @@ select {
 .mb-8 {
 	margin-bottom: 2rem !important;
 }
+.mb-0\.5 {
+	margin-bottom: 0.125rem !important;
+}
 .block {
 	display: block !important;
 }

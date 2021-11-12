@@ -78,14 +78,20 @@
                     <h5 class="text-lg font-serif text-center mt-2 px-4">
                         {{ $form_order->store_name }}
                     </h5>
-                    <p class="text-gray-500 text-center px-4">
+                    <p class="text-gray-500 text-center px-4 text-sm mb-0.5">
                         <i class="fas fa-cubes mr-1"></i>
                         <span>{{ $form_order->products->count() }} produk</span>
                     </p>
                     @if ($form_order->sale_sum_quantity > 0)
-                        <p class="text-gray-500 text-center px-4">
-                            <i class="fas fa-sale mr-1"></i>
+                        <p class="text-gray-500 text-center px-4 text-sm mb-0.5">
+                            <i class="fas fa-hand-holding-usd mr-1"></i>
                             <span>Total {{ $form_order->sale_sum_quantity }} produk terjual</span>
+                        </p>
+                    @endif
+                    @if ($form_order->view_counter > 0)
+                        <p class="text-gray-500 text-center px-4 text-sm mb-0.5">
+                            <i class="fas fa-eye"></i>
+                            <span>{{ $form_order->view_counter }}x dikunjungi</span>
                         </p>
                     @endif
                     <div class="grid grid-cols-3 grid-flow-row gap-4 p-4">

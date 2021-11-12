@@ -65,5 +65,6 @@ class FormOrder extends Model
         'sid',
         'direct_transfer_bank',
         'direct_transfer_to',
+        'view_counter',
     ];
 }
