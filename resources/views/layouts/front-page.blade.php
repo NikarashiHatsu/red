@@ -20,6 +20,9 @@
 
 <body class="bg-gray-50 font-rbt antialiased text-gray-700" x-data="{ sidebarOpened: false }">
     {{-- Navbar --}}
+    @php
+        $cart_counter = auth()->user()->carts()->count();
+    @endphp
     <nav class="bg-white shadow-lg py-4 sm:py-2 px-4 2xl:px-0">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="{{ route('index') }}" class="items-center hidden sm:flex">
@@ -82,7 +85,7 @@
 
                             <a href="{{ route('cart.index') }}">
                                 <i class="fas fa-shopping-cart"></i>
-                                Keranjang ({{ auth()->user()->carts()->count()}})
+                                Keranjang ({{ $cart_counter }})
                             </a>
                         </div>
                     @endguest
@@ -187,7 +190,7 @@
                     <a href="{{ route('cart.index') }}" class="transition ease-in-out duration-300 py-2 px-3 border-b hover:bg-gray-100">
                         <i class="fas fa-shopping-cart mr-2 w-6"></i>
                         <span>
-                            Keranjang ({{ auth()->user()->carts()->count()}})
+                            Keranjang ({{ $cart_counter }})
                         </span>
                     </a>
 

@@ -26,7 +26,7 @@ class FrontPage extends Component
         $this->featured_merchants = FormOrder::where('is_request_accepted', 1)
             ->with(['products' => function($query) {
                 $query->orderBy('sale_sum_quantity', 'DESC');
-            }])
+            }, 'store_views'])
             ->withSum('sale', 'quantity')
             ->orderBy('sale_sum_quantity', 'DESC')
             ->take(6)

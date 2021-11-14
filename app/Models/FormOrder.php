@@ -39,6 +39,11 @@ class FormOrder extends Model
         );
     }
 
+    public function store_views()
+    {
+        return $this->hasMany(StoreView::class);
+    }
+
     protected $fillable = [
         'user_id',
         'pricing_plan_id',
@@ -65,6 +70,5 @@ class FormOrder extends Model
         'sid',
         'direct_transfer_bank',
         'direct_transfer_to',
-        'view_counter',
     ];
 }

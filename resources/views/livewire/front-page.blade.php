@@ -98,10 +98,10 @@
                             <span>Total {{ $form_order->sale_sum_quantity }} produk terjual</span>
                         </p>
                     @endif
-                    @if ($form_order->view_counter > 0)
+                    @if ($form_order->store_views->count() > 0)
                         <p class="text-gray-500 text-center px-4 text-sm mb-0.5">
                             <i class="fas fa-eye"></i>
-                            <span>{{ $form_order->view_counter }}x dikunjungi</span>
+                            <span>{{ $form_order->store_views->count() }}x dikunjungi</span>
                         </p>
                     @endif
                     <div class="grid grid-cols-3 grid-flow-row gap-4 p-4">

@@ -26,7 +26,9 @@ class Show extends Component
         $this->form_order = $merchant;
 
         RateLimiter::attempt("store-counter:{$merchant->id}", 1, function() use($merchant) {
-            $merchant->increment('view_counter');
+            $merchant->store_views()->create([
+                'user_id' => auth()->user()->id,
+            ]);
         }, 3600);
     }
 
