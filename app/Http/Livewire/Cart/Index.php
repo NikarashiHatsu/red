@@ -23,7 +23,7 @@ class Index extends Component
         $this->available_products = 0;
 
         $this->payment_total = $this->carts->map(function($cart) {
-            if ($cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null) {
+            if ($cart->product->stock == 0 || $cart->product->form_order->direct_transfer_bank != null) {
                 return 0;
             }
 
@@ -31,7 +31,7 @@ class Index extends Component
         })->sum();
 
         $this->product_total = $this->carts->map(function($cart) {
-            if ($cart->product->stock == 0 || $cart->product->has_form_order->direct_transfer_bank != null) {
+            if ($cart->product->stock == 0 || $cart->product->form_order->direct_transfer_bank != null) {
                 return 0;
             }
 
@@ -80,7 +80,7 @@ class Index extends Component
         );
 
         $itemDetails = $this->carts->filter(function($cart) {
-            if ($cart->product->stock != 0 && $cart->product->has_form_order->direct_transfer_bank == null) {
+            if ($cart->product->stock != 0 && $cart->product->form_order->direct_transfer_bank == null) {
                 return $cart;
             };
         })->map(function($cart) {

@@ -31,7 +31,7 @@ class ReturnCart extends Controller
             $carts = $user->carts->load(['store', 'product']);
 
             $carts->filter(function($cart) {
-                if ($cart->product->stock != 0 && $cart->product->has_form_order->direct_transfer_bank == null) {
+                if ($cart->product->stock != 0 && $cart->product->form_order->direct_transfer_bank == null) {
                     return $cart;
                 }
             })->each(function($cart) use($request, $isPaid, $user) {
