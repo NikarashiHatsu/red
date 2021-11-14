@@ -39,8 +39,8 @@
                 <x-dropdown-link :href="route('admin.laporan.data_pengguna')">
                     Data Pengguna
                 </x-dropdown-link>
-                <x-dropdown-link href="javascript:void(0)">
-                    Grafik Kunjungan Toko
+                <x-dropdown-link :href="route('admin.laporan.data_kunjungan_toko')">
+                    Data Kunjungan Toko
                 </x-dropdown-link>
                 <x-dropdown-link href="javascript:void(0)">
                     Grafik Detail Kunjungan Toko

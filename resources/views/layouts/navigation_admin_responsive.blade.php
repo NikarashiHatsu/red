@@ -17,8 +17,8 @@
         <x-responsive-nav-link :href="route('admin.laporan.data_pengguna')">
             Data Pengguna
         </x-responsive-nav-link>
-        <x-responsive-nav-link href="javascript:void(0)">
-            Grafik Kunjungan Toko
+        <x-responsive-nav-link :href="route('admin.laporan.data_kunjungan_toko')">
+            Data Kunjungan Toko
         </x-responsive-nav-link>
         <x-responsive-nav-link href="javascript:void(0)">
             Grafik Detail Kunjungan Toko

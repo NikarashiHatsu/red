@@ -11,6 +11,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin:veri
 
     Route::group(['prefix' => 'laporan', 'as' => 'laporan.'], function() {
         Route::get('/data_pengguna', \App\Http\Livewire\Admin\Laporan\DataPengguna::class)->name('data_pengguna');
+        Route::get('/data_kunjungan_toko', \App\Http\Livewire\Admin\Laporan\DataKunjunganToko::class)->name('data_kunjungan_toko');
     });
 
     Route::view('/user_request', 'admin.user_request.index')->name('user_request.index');
