@@ -17,7 +17,7 @@ class FrontPage extends Component
     public function mount()
     {
         $this->featured_products = Product::has('form_order')
-            ->with('form_order', 'user', 'user.form_order')
+            ->with('form_order', 'user', 'user.form_order', 'product_views')
             ->withSum('sale', 'quantity')
             ->orderBy('sale_sum_quantity', 'DESC')
             ->take(12)
@@ -26,7 +26,7 @@ class FrontPage extends Component
         $this->featured_merchants = FormOrder::where('is_request_accepted', 1)
             ->with(['products' => function($query) {
                 $query->orderBy('sale_sum_quantity', 'DESC');
-            }, 'store_views'])
+            }, 'store_views', 'products.product_views'])
             ->withSum('sale', 'quantity')
             ->orderBy('sale_sum_quantity', 'DESC')
             ->take(6)

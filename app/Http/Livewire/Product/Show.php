@@ -21,7 +21,9 @@ class Show extends Component
         $this->component = 'product-detail-layouts.layout-' . $this->form_order->layout_id;
 
         RateLimiter::attempt("product-counter:{$product->id}", 1, function() use($product) {
-            $product->increment('view_counter');
+            $product->product_views()->create([
+                'user_id' => auth()->user()->id,
+            ]);
         }, 3600);
     }
 

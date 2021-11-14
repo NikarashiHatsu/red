@@ -51,11 +51,11 @@
                                 </span>
                             @endif
                         </div>
-                        @if ($product->view_counter > 0)
+                        @if ($product->product_views->count() > 0)
                             <div class="flex items-center">
                                 <i class="fas fa-eye mr-1 fa-sm"></i>
                                 <span class="text-sm">
-                                    {{ $product->view_counter }}x
+                                    {{ $product->product_views->count() }}x
                                 </span>
                             </div>
                         @endif
@@ -142,11 +142,11 @@
                                                 </span>
                                             @endif
                                         </div>
-                                        @if ($product->view_counter > 0)
+                                        @if ($product->product_views->count() > 0)
                                             <div class="flex items-center">
                                                 <i class="fas fa-eye mr-1 fa-xs"></i>
                                                 <span class="text-xs">
-                                                    {{ $product->view_counter }}x
+                                                    {{ $product->product_views->count() }}x
                                                 </span>
                                             </div>
                                         @endif

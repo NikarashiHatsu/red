@@ -32,13 +32,17 @@ class Product extends Model
         return $this->hasMany(Sale::class);
     }
 
+    public function product_views()
+    {
+        return $this->hasMany(ProductView::class);
+    }
+
     protected $fillable = [
         'user_id',
         'product_photo_path',
         'name',
         'price',
         'stock',
-        'view_counter',
         'description',
     ];
 }
