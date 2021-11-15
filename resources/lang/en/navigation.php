@@ -7,4 +7,5 @@ return [
     'form_order' => 'Form order',
     'user_request' => 'User request',
     'master_data' => 'Master data',
+    'order' => 'Pesanan',
 ];

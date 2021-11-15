@@ -12,11 +12,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // BEGIN: ADMIN
     public function pricing_plans()
     {
         return $this->hasMany(PricingPlan::class);
     }
+    // END: ADMIN
 
+    // BEGIN: STORE
     public function products()
     {
         return $this->hasMany(Product::class);
@@ -27,18 +30,15 @@ class User extends Authenticatable
         return $this->hasOne(FormOrder::class);
     }
 
-    public function form_order_with_id()
-    {
-        return $this->hasOne(FormOrder::class, 'user_id', 'id');
-    }
-
     public function transaction()
     {
+        // iPaymu Transaction
         return $this->hasOne(Transaction::class);
     }
 
     public function duitku_transaction()
     {
+        // Duitku Transaction
         return $this->hasOne(DuitkuTransaction::class);
     }
 
@@ -47,10 +47,21 @@ class User extends Authenticatable
         return $this->hasOne(Progress::class);
     }
 
+    public function store_sales()
+    {
+        return $this->hasManyThrough(
+            Sale::class,
+            Product::class
+        );
+    }
+    // END: STORE
+
+    // BEGIN: USER
     public function carts()
     {
         return $this->hasMany(Cart::class);
     }
+    // END: USER
 
     /**
      * The attributes that are mass assignable.

@@ -29,4 +29,10 @@
             </x-responsive-nav-link>
         </div>
     @endif
+
+    @if (auth()->user()->duitku_transaction)
+        <x-responsive-nav-link :href="route('store.order.index')" :active="request()->routeIs('store.order.index')">
+            {{ __('navigation.order') }}
+        </x-responsive-nav-link>
+    @endif
 @endif

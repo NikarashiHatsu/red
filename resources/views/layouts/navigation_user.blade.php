@@ -49,4 +49,12 @@
             </x-dropdown>
         </div>
     @endif
+
+    @if (auth()->user()->duitku_transaction)
+        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            <x-nav-link :href="route('store.order.index')" :active="request()->routeIs('store.order.index')">
+                {{ __('navigation.order') }}
+            </x-nav-link>
+        </div>
+    @endif
 @endif

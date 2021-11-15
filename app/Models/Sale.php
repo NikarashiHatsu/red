@@ -10,6 +10,16 @@ class Sale extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function buyer()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     protected $fillable = [
         'user_id',
         'product_id',
@@ -17,6 +27,7 @@ class Sale extends Model
         'address',
         'phone_number',
         'is_paid',
+        'is_confirmed',
         'is_product_sent',
         'is_product_received',
         'reference',
