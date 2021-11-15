@@ -26,6 +26,10 @@ class RequestStoreApproval extends Component
     public $redirect_payment = null;
     public $transaction = null;
 
+    protected $rules = [
+        'payment_method' => ['required'],
+    ];
+
     public function mount()
     {
         if (!auth()->user()->transaction()->exists() && request()->has('trx_id')) {
