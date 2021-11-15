@@ -11,6 +11,7 @@ return [
     | will be enabled if APP_DEBUG is true.
     |
     */
+    // 'enabled' => config('app.debug'),
     'enabled' => true,
 
     /*
@@ -23,7 +24,7 @@ return [
     |
     */
 
-    'whitelists' => [],
+    'whitelists' => ['0.0.0.0'],
 
     /*
     |--------------------------------------------------------------------------
@@ -37,7 +38,7 @@ return [
     'route' => [
         'prefix' => 'terminal',
         'as' => 'terminal.',
-        'middleware' => ['admin'],
+        'middleware' => ['web', 'auth', 'admin'],
     ],
 
     /*
