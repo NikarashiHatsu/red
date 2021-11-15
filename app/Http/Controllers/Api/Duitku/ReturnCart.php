@@ -38,6 +38,7 @@ class ReturnCart extends Controller
                 \App\Models\Sale::create([
                     'user_id' => $user->id,
                     'product_id' => $cart->product_id,
+                    'store_id' => $cart->product->user_id,
                     'quantity' => $cart->quantity,
                     'address' => $request->address,
                     'phone_number' => $request->phone_number,
