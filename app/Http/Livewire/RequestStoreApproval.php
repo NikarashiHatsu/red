@@ -160,7 +160,7 @@ class RequestStoreApproval extends Component
         $merchantCode = config('duitku.merchant_code');
         $merchantKey = config('duitku.api_key');
         $paymentAmount = $form_order->pricing_plan->price;
-        $paymentMethod = 'BT';
+        $paymentMethod = 'BC';
         $merchantOrderId = time() . '';
         $productDetails = 'BWI App Store';
         $email = $user->email;

@@ -46,7 +46,7 @@ class Index extends Component
         $merchantCode = config('duitku.merchant_code');
         $merchantKey = config('duitku.api_key');
         $paymentAmount = $this->payment_total;
-        $paymentMethod = 'BT';
+        $paymentMethod = 'BC';
         $merchantOrderId = time() . '';
         $productDetails = 'BWI App Store';
         $email = auth()->user()->email;
