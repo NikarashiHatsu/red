@@ -123,9 +123,23 @@
                         {{ __('store.submit_application_creation') }}
                     </x-button>
                 @elseif ($have_all_prerequisites)
-                    <x-button wire:click="send_request">
-                        {{ __('store.submit_application_creation') }}
-                    </x-button>
+                    <form wire:submit.prevent method="post" class="flex flex-col w-full">
+                        <select name="payment_method" id="payment_method" wire:model.defer="payment_method" class="border border-gray-300 rounded mb-4" required>
+                            <option value="">Pilih metode pembayaran</option>
+                            @foreach (config('duitku_payments') as $item)
+                                @php
+                                    $key = key($item)
+                                @endphp
+                                <option value="{{ $key }}">{{ $item[$key] }}</option>
+                            @endforeach
+                        </select>
+
+                        <div class="flex justify-end">
+                            <x-button wire:click="send_request">
+                                {{ __('store.submit_application_creation') }}
+                            </x-button>
+                        </div>
+                    </form>
                 @endif
             </div>
         </x-card.body>

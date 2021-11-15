@@ -32,13 +32,24 @@
                         </span>
                     </div>
                     <div class="flex flex-col justify-end px-4 pb-4">
-                        <input type="number" wire:model.defer="phone_number" placeholder="No. HP (Awali dengan 62)" class="border border-gray-300 rounded" />
-                        <textarea wire:model.defer="address" placeholder="Masukkan alamat Anda" class="border border-gray-300 rounded mt-4" rows="3"></textarea>
-                        <div class="flex justify-end mt-4">
-                            <x-button wire:click="checkout">
-                                Beli {{ $product_total }} Produk
-                            </x-button>
-                        </div>
+                        <form wire:submit.prevent method="post" class="flex flex-col">
+                            <input type="number" wire:model.defer="phone_number" placeholder="No. HP (Awali dengan 62)" class="border border-gray-300 rounded" required />
+                            <textarea wire:model.defer="address" placeholder="Masukkan alamat Anda" class="border border-gray-300 rounded mt-4" rows="3" required></textarea>
+                            <select name="payment_method" id="payment_method" wire:model.defer="payment_method" class="border border-gray-300 rounded mt-4" required>
+                                <option value="">Pilih metode pembayaran</option>
+                                @foreach (config('duitku_payments') as $item)
+                                    @php
+                                        $key = key($item)
+                                    @endphp
+                                    <option value="{{ $key }}">{{ $item[$key] }}</option>
+                                @endforeach
+                            </select>
+                            <div class="flex justify-end mt-4">
+                                <x-button wire:click="checkout">
+                                    Beli {{ $product_total }} Produk
+                                </x-button>
+                            </div>
+                        </form>
                     </div>
                 @else
                     <div class="p-4">

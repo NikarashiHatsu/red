@@ -13,6 +13,7 @@ class Index extends Component
     public $phone_number;
     public $redirect_payment = null;
     public $available_products = 0;
+    public $payment_method;
 
     protected $listeners = [
         'quantity_updated' => 'count_payment'
@@ -46,7 +47,7 @@ class Index extends Component
         $merchantCode = config('duitku.merchant_code');
         $merchantKey = config('duitku.api_key');
         $paymentAmount = $this->payment_total;
-        $paymentMethod = 'BC';
+        $paymentMethod = $this->payment_method;
         $merchantOrderId = time() . '';
         $productDetails = 'BWI App Store';
         $email = auth()->user()->email;
@@ -134,7 +135,11 @@ class Index extends Component
         if($httpCode == 200) {
             $result = json_decode($request, true);
 
-            $this->redirect_payment = $result['paymentUrl'];
+            if (isset($result['paymentUrl'])) {
+                $this->redirect_payment = $result['paymentUrl'];
+            } else {
+                return redirect()->back()->with('error', 'Channel pembayaran ditolak.');
+            }
         } else {
             $result = json_decode($request, true);
             return redirect()->back()->with('error', 'Transaksi gagal: ' . $result['Message']);
