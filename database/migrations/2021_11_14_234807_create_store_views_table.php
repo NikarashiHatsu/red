@@ -16,7 +16,7 @@ class CreateStoreViewsTable extends Migration
         Schema::create('store_views', function (Blueprint $table) {
             $table->id();
             $table->foreignId('form_order_id')->comment('Store ID')->constrained();
-            $table->foreignId('user_id')->comment('ID of User whose viewed the store')->constrained();
+            $table->foreignId('user_id')->comment('ID of User whose viewed the store')->nullable()->constrained();
             $table->timestamps();
         });
     }

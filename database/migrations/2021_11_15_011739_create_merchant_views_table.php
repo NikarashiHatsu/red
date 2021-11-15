@@ -16,7 +16,7 @@ class CreateMerchantViewsTable extends Migration
         Schema::create('product_views', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->comment('The ID of product viewed.')->constrained();
-            $table->foreignid('user_id')->comment('The ID of user whose viewed it.')->constrained();
+            $table->foreignid('user_id')->comment('The ID of user whose viewed it.')->nullable()->constrained();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateMerchantViewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('merchant_views');
+        Schema::dropIfExists('product_views');
     }
 }

@@ -22,7 +22,7 @@ class Show extends Component
 
         RateLimiter::attempt("product-counter:{$product->id}", 1, function() use($product) {
             $product->product_views()->create([
-                'user_id' => auth()->user()->id,
+                'user_id' => auth()->user()->id ?? null,
             ]);
         }, 3600);
     }

@@ -27,7 +27,7 @@ class Show extends Component
 
         RateLimiter::attempt("store-counter:{$merchant->id}", 1, function() use($merchant) {
             $merchant->store_views()->create([
-                'user_id' => auth()->user()->id,
+                'user_id' => auth()->user()->id ?? null,
             ]);
         }, 3600);
     }

@@ -21,7 +21,7 @@
 <body class="bg-gray-50 font-rbt antialiased text-gray-700" x-data="{ sidebarOpened: false }">
     {{-- Navbar --}}
     @php
-        $cart_counter = auth()->user()->carts()->count();
+        $cart_counter = auth()->user()?->carts()?->count();
     @endphp
     <nav class="bg-white shadow-lg py-4 sm:py-2 px-4 2xl:px-0">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
