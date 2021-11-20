@@ -40,6 +40,7 @@ class ReturnCart extends Controller
                     'product_id' => $cart->product_id,
                     'store_id' => $cart->product->form_order->id,
                     'quantity' => $cart->quantity,
+                    'payment_total' => $cart->product->price * $cart->quantity,
                     'address' => $request->address,
                     'phone_number' => $request->phone_number,
                     'is_paid' => $isPaid,

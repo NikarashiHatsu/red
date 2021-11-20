@@ -23,7 +23,9 @@ class Sale extends Model
     protected $fillable = [
         'user_id',
         'product_id',
+        'store_id',
         'quantity',
+        'payment_total',
         'address',
         'phone_number',
         'is_paid',

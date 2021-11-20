@@ -15,6 +15,12 @@ class Index extends Component
     public $available_products = 0;
     public $payment_method;
 
+    protected $rules = [
+        'phone_number' => 'required',
+        'address' => 'required',
+        'payment_method' => 'required',
+    ];
+
     protected $listeners = [
         'quantity_updated' => 'count_payment'
     ];
