@@ -13,7 +13,7 @@ class DataPengguna extends LivewireDatatable
     public function builder()
     {
         return User::query()
-            ->with('sales');
+            ->with('form_order');
     }
 
     public function columns()
@@ -31,7 +31,7 @@ class DataPengguna extends LivewireDatatable
                 ->label('Email')
                 ->searchable(),
 
-            Column::name('sales.phone_number')
+            Column::name('form_order.whatsapp_number')
                 ->label('Nomor HP')
                 ->searchable(),
         ];
