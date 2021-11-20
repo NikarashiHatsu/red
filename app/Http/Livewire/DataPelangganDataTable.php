@@ -30,6 +30,10 @@ class DataPelangganDataTable extends LivewireDatatable
                 ->label('Nama Pelanggan')
                 ->searchable(),
 
+            Column::name('phone_number')
+                ->label('Nomor HP')
+                ->searchable(),
+
             NumberColumn::raw('SUM(sales.quantity) AS quantity')
                 ->label('Total Produk Dibeli'),
 
