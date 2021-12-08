@@ -64,8 +64,8 @@ class RequestStoreApproval extends Component
         $user = auth()->user();
         $form_order = $user->form_order;
 
-        // $this->request_ipaymu_transaction($form_order, $user);
-        echo $this->request_duitku_transaction($form_order, $user);
+        $this->request_ipaymu_transaction($form_order, $user);
+        // echo $this->request_duitku_transaction($form_order, $user);
     }
 
     public function resend_request()
@@ -123,7 +123,7 @@ class RequestStoreApproval extends Component
         ]);
 
         $iPaymu->setBuyer([
-            'name' => $user,
+            'name' => $user->name,
             'phone' => $form_order->whatsapp_number,
             'email' => $user->email,
         ]);
@@ -132,15 +132,7 @@ class RequestStoreApproval extends Component
             'product' => $form_order->pricing_plan->name,
             'quantity' => 1,
             'price' => $form_order->pricing_plan->price,
-            'description' => 'Testing',
-            'weight' => 1,
-        ]);
-
-        $iPaymu->setCOD([
-            'pickupArea' => "76111",
-            'pickupAddress' => "Denpasar",
-            'deliveryArea' => "76111",
-            'deliveryAddress' => "Denpasar",
+            'description' => $form_order->pricing_plan->name
         ]);
 
         try {
@@ -152,12 +144,19 @@ class RequestStoreApproval extends Component
         try {
             auth()->user()->form_order()->update([
                 'sid' => $redirect_payment['Data']['SessionID'],
+                'payment_url' => $redirect_payment['Data']['Url'],
             ]);
         } catch (\Exception $e) {
             return session()->flash('error', 'Sistem gagal menyimpan SID, pembayaran dibatalkan:' . $e->getMessage());
         }
 
         $this->redirect_payment = $redirect_payment['Data']['Url'];
+
+        // Save the pending transaction here
+        auth()->user()->transaction()->create([
+            'status' => 'pending',
+        ]);
+
     }
 
     private function request_duitku_transaction(FormOrder $form_order, User $user)

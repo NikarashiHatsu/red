@@ -3,8 +3,16 @@
         <x-card class="bg-blue-500 text-white mb-6">
             <x-card.body>
                 Anda memiliki pembayaran yang belum diselesaikan dengan nominal sebesar
-                <b>Rp{{ number_format($form_order->pricing_plan->price, 0, '.', '.') }},-</b>
-                ke VA {{ strtoupper($transaction->channel) }} <b>{{ $transaction->va }}</b>
+                <b>Rp{{ number_format($form_order->pricing_plan->price, 0, '.', '.') }},-</b> <br>
+                <a href="{{ $form_order->payment_url }}" class="btn btn-warning btn-sm" target="_blank">Link Pembayaran</a></b>
+            </x-card.body>
+        </x-card>
+    @endif
+
+    @if ($have_ipaymu_sid && $transaction != null && $transaction->status == 'berhasil')
+        <x-card class="bg-blue-500 text-white mb-6">
+            <x-card.body>
+                Terimakasih sudah membeli paket di Dagangin!
             </x-card.body>
         </x-card>
     @endif
@@ -124,16 +132,6 @@
                     </x-button>
                 @elseif ($have_all_prerequisites)
                     <form wire:submit.prevent method="post" class="flex flex-col w-full">
-                        <select name="payment_method" id="payment_method" wire:model.defer="payment_method" class="border border-gray-300 rounded mb-4" required>
-                            <option value="">Pilih metode pembayaran</option>
-                            @foreach (config('duitku_payments') as $item)
-                                @php
-                                    $key = key($item)
-                                @endphp
-                                <option value="{{ $key }}">{{ $item[$key] }}</option>
-                            @endforeach
-                        </select>
-
                         <div class="flex justify-end">
                             <x-button wire:click="send_request">
                                 {{ __('store.submit_application_creation') }}
@@ -153,3 +151,4 @@
         <x-success-and-error-swal />
     </x-card>
 </div>
+
