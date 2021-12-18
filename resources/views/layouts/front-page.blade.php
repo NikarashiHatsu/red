@@ -33,10 +33,14 @@
                 </div>
             </a>
 
-            <form method="get" autocomplete="off" class="flex">
-                @csrf
-                <input placeholder="Cari produk" type="text" name="search" id="search"
-                    class="py-1 sm:py-2 text-sm rounded-l border border-gray-300 shadow focus:border focus:ring-4 focus:ring-blue-700 focus:ring-opacity-25 focus:border-blue-500" />
+            <form method="get" action="{{ route('search') }}" autocomplete="off" class="flex">
+                <input
+                    placeholder="Cari produk, toko disini"
+                    type="text"
+                    name="keyword"
+                    id="keyword"
+                    class="py-1 sm:py-2 text-sm rounded-l border border-gray-300 shadow focus:border focus:ring-4 focus:ring-blue-700 focus:ring-opacity-25 focus:border-blue-500"
+                />
                 <x-button type="submit" class="rounded-l-none shadow">
                     <i class="fas fa-search"></i>
                 </x-button>

@@ -17,6 +17,7 @@ Route::get('/', \App\Http\Livewire\FrontPage::class)->name('index');
 Route::get('/about', \App\Http\Livewire\AboutPage::class)->name('about');
 Route::get('/policy', \App\Http\Livewire\PolicyPage::class)->name('policy');
 Route::get('/contact', \App\Http\Livewire\ContactPage::class)->name('contact');
+Route::get('/search', \App\Http\Livewire\SearchPage::class)->name('search');
 
 Route::get('auth_redirector', function() {
     $user = auth()->user();
