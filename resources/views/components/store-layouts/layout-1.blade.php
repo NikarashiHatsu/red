@@ -1,7 +1,13 @@
 <div class="relative h-full overflow-y-auto rounded-b-2xl">
     <div class="transition-colors duration-300 ease-in-out relative flex items-center justify-between {{ $colorSchemeDetail[$formOrder->layout_color]['navbar_color']  }} py-4 px-3 shadow-lg z-50">
         <span class="font-semibold"></span>
-        <i class="fas fa-shopping-cart"></i>
+
+        <span class="font-semibold line-clamp-1 ml-2">
+            <a href="{{ route('cart.index') }}" class="hover:text-white">
+                <i class="fas fa-shopping-cart"></i>
+                Keranjang Saya
+            </a>
+        </span>
     </div>
 
     <div class="aspect-w-16 aspect-h-9 border-b">

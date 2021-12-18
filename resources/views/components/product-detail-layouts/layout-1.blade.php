@@ -1,5 +1,5 @@
 <div class="relative h-full overflow-y-auto rounded-b-2xl bg-gray-100 text-sm">
-    <div class="bg-white transition duration-300 ease-in-out relative flex items-center justify-between {{ $colorSchemeDetail[$formOrder->layout_color]['navbar_color'] }} py-4 px-3 shadow-lg z-50">
+    <div class="transition duration-300 ease-in-out relative flex items-center justify-between {{ $colorSchemeDetail[$formOrder->layout_color]['navbar_color'] }} py-4 px-3 shadow-lg z-50">
         @if ($clickable ?? false)
             <a href="{{ route('index') }}" class="flex items-center underline hover:text-white">
                 <i class="fas fa-arrow-left mr-2"></i>
