@@ -5,24 +5,24 @@ namespace App\Traits;
 trait Colors {
     public $color_schemes_available = [
         [
-            'nama' => 'Blue Gray',
-            'class' => 'bg-blueGray-500 hover:bg-blueGray-700',
-        ],
-        [
-            'nama' => 'Cool Gray',
-            'class' => 'bg-coolGray-500 hover:bg-coolGray-700',
+            'nama' => 'Slate',
+            'class' => 'bg-slate-500 hover:bg-slate-700',
         ],
         [
             'nama' => 'Gray',
             'class' => 'bg-gray-500 hover:bg-gray-700',
         ],
         [
-            'nama' => 'True Gray',
-            'class' => 'bg-trueGray-500 hover:bg-trueGray-700',
+            'nama' => 'Zinc',
+            'class' => 'bg-zinc-500 hover:bg-zinc-700',
         ],
         [
-            'nama' => 'Warm Gray',
-            'class' => 'bg-warmGray-500 hover:bg-warmGray-700',
+            'nama' => 'Neutral',
+            'class' => 'bg-neutral-500 hover:bg-neutral-700',
+        ],
+        [
+            'nama' => 'Stone',
+            'class' => 'bg-stone-500 hover:bg-stone-700',
         ],
         [
             'nama' => 'Red',
@@ -103,21 +103,13 @@ trait Colors {
             'border_color' => 'border-gray-200',
             'card_list_color' => 'bg-gray-50 hover:bg-gray-100',
         ],
-        'Blue Gray' => [
-            'navbar_color' => 'bg-blueGray-500 text-white',
-            'anchor_color' => 'hover:text-blueGray-600',
-            'colorised_text' => 'text-blueGray-600',
-            'light_color' => 'bg-blueGray-50',
-            'border_color' => 'border-blueGray-200',
-            'card_list_color' => 'bg-blueGray-500 hover:bg-blueGray-600 text-white',
-        ],
-        'Cool Gray' => [
-            'navbar_color' => 'bg-coolGray-500 text-white',
-            'anchor_color' => 'hover:text-coolGray-600',
-            'colorised_text' => 'text-coolGray-600',
-            'light_color' => 'bg-coolGray-50',
-            'border_color' => 'border-coolGray-200',
-            'card_list_color' => 'bg-coolGray-500 hover:bg-coolGray-600 text-white',
+        'Slate' => [
+            'navbar_color' => 'bg-slate-500 text-white',
+            'anchor_color' => 'hover:text-slate-600',
+            'colorised_text' => 'text-slate-600',
+            'light_color' => 'bg-slate-50',
+            'border_color' => 'border-slate-200',
+            'card_list_color' => 'bg-slate-500 hover:bg-slate-600 text-white',
         ],
         'Gray' => [
             'navbar_color' => 'bg-gray-500 text-white',
@@ -127,21 +119,29 @@ trait Colors {
             'border_color' => 'border-gray-200',
             'card_list_color' => 'bg-gray-500 hover:bg-gray-600 text-white',
         ],
-        'True Gray' => [
-            'navbar_color' => 'bg-trueGray-500 text-white',
-            'anchor_color' => 'hover:text-trueGray-600',
-            'colorised_text' => 'text-trueGray-600',
-            'light_color' => 'bg-trueGray-50',
-            'border_color' => 'border-trueGray-200',
-            'card_list_color' => 'bg-trueGray-500 hover:bg-trueGray-600 text-white',
+        'Zinc' => [
+            'navbar_color' => 'bg-zinc-500 text-white',
+            'anchor_color' => 'hover:text-zinc-600',
+            'colorised_text' => 'text-zinc-600',
+            'light_color' => 'bg-zinc-50',
+            'border_color' => 'border-zinc-200',
+            'card_list_color' => 'bg-zinc-500 hover:bg-zinc-600 text-white',
         ],
-        'Warm Gray' => [
-            'navbar_color' => 'bg-warmGray-500 text-white',
-            'anchor_color' => 'hover:text-warmGray-600',
-            'colorised_text' => 'text-warmGray-600',
-            'light_color' => 'bg-warmGray-50',
-            'border_color' => 'border-warmGray-200',
-            'card_list_color' => 'bg-warmGray-500 hover:bg-warmGray-600 text-white',
+        'Neutral' => [
+            'navbar_color' => 'bg-neutral-500 text-white',
+            'anchor_color' => 'hover:text-neutral-600',
+            'colorised_text' => 'text-neutral-600',
+            'light_color' => 'bg-neutral-50',
+            'border_color' => 'border-neutral-200',
+            'card_list_color' => 'bg-neutral-500 hover:bg-neutral-600 text-white',
+        ],
+        'Stone' => [
+            'navbar_color' => 'bg-stone-500 text-white',
+            'anchor_color' => 'hover:text-stone-600',
+            'colorised_text' => 'text-stone-600',
+            'light_color' => 'bg-stone-50',
+            'border_color' => 'border-stone-200',
+            'card_list_color' => 'bg-stone-500 hover:bg-stone-600 text-white',
         ],
         'Red' => [
             'navbar_color' => 'bg-red-500 text-white',

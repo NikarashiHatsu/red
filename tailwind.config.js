@@ -6,7 +6,7 @@ module.exports = {
 
     important: true,
 
-    purge: [
+    content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
@@ -26,11 +26,11 @@ module.exports = {
                 handwriting: ['Dancing Script', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                blueGray: colors.blueGray,
-                coolGray: colors.coolGray,
+                slate: colors.slate,
                 gray: colors.gray,
-                trueGray: colors.trueGray,
-                warmGray: colors.warmGray,
+                zinc: colors.zinc,
+                neutral: colors.neutral,
+                stone: colors.stone,
                 red: colors.red,
                 orange: colors.orange,
                 amber: colors.amber,

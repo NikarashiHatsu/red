@@ -12,9 +12,10 @@
     "devDependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
         "@popperjs/core": "^2.10.2",
-        "@tailwindcss/forms": "^0.2.1",
-        "@tailwindcss/line-clamp": "^0.2.2",
-        "@tailwindcss/typography": "^0.4.1",
+        "@tailwindcss/aspect-ratio": "^0.3.0",
+        "@tailwindcss/forms": "^0.4.0",
+        "@tailwindcss/line-clamp": "^0.3.0",
+        "@tailwindcss/typography": "^0.5.0",
         "alpinejs": "^2.7.3",
         "autoprefixer": "^10.1.0",
         "axios": "^0.21",
@@ -30,9 +31,6 @@
         "sass": "^1.42.1",
         "sass-loader": "^12.2.0",
         "sweetalert2": "^11.1.8",
-        "tailwindcss": "^2.0.2"
-    },
-    "dependencies": {
-        "@tailwindcss/aspect-ratio": "^0.3.0"
+        "tailwindcss": "^3"
     }
 }
