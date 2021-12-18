@@ -38,6 +38,8 @@ class FrontPage extends Component
                 $query->orderBy('sale_sum_quantity', 'DESC');
             }, 'store_views', 'products.product_views'])
             ->withSum('sale', 'quantity')
+            ->withCount('store_views')
+            ->orderBy('store_views_count', 'DESC')
             ->orderBy('sale_sum_quantity', 'DESC')
             ->paginate(6);
 
