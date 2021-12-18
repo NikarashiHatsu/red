@@ -17,7 +17,10 @@
         @endif
 
         <span class="font-semibold line-clamp-1 ml-2">
-            {{ $product->name }}
+            <a href="{{ route('cart.index') }}" class="hover:text-white">
+                <i class="fas fa-shopping-cart"></i>
+                Keranjang Saya
+            </a>
         </span>
     </div>
 
@@ -39,6 +42,7 @@
             <h5 class="text-lg font-semibold">
                 Rp{{ number_format($product->price, 0, '.', '.') }},-
             </h5>
+
             <div class="flex items-center">
                 {{-- <button class="mr-2">
                     <i class="far fa-thumbs-up"></i>
@@ -83,8 +87,11 @@
 
             </div>
         </div>
-        <p class="mt-2 leading-snug line-clamp-2">
-            {{ $product->name }} - {{ $product->description }}
+        <h6 class="mt-3 text-md font-semibold">
+            {{ $product->name }}
+        </h6>
+        <p class="mt-1 leading-snug line-clamp-2">
+            {{ $product->description }}
         </p>
         <div class="mt-2 italic text-xs flex items-center justify-between">
             <span>
