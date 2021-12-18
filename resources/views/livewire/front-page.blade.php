@@ -159,5 +159,8 @@
             </div>
         @endforeach
     </div>
+    <div class="mt-6">
+        {{ $featured_merchants->links() }}
+    </div>
     {{-- /Toko unggulan --}}
 </div>

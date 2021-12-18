@@ -5,13 +5,14 @@ namespace App\Http\Livewire;
 use App\Models\FormOrder;
 use App\Models\Product;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class FrontPage extends Component
 {
     use \App\Traits\Colors;
+    use WithPagination;
 
     public $featured_products;
-    public $featured_merchants;
     public $products_in_cart;
 
     public function mount()
@@ -23,15 +24,6 @@ class FrontPage extends Component
             ->take(12)
             ->get();
 
-        $this->featured_merchants = FormOrder::where('is_request_accepted', 1)
-            ->with(['products' => function($query) {
-                $query->orderBy('sale_sum_quantity', 'DESC');
-            }, 'store_views', 'products.product_views'])
-            ->withSum('sale', 'quantity')
-            ->orderBy('sale_sum_quantity', 'DESC')
-            ->take(6)
-            ->get();
-
         if (auth()->user()) {
             $this->products_in_cart = auth()->user()->carts()?->get()->map(function($cart) {
                 return $cart->product_id;
@@ -41,7 +33,17 @@ class FrontPage extends Component
 
     public function render()
     {
-        return view('livewire.front-page')
+        $featured_merchants = FormOrder::where('is_request_accepted', 1)
+            ->with(['products' => function($query) {
+                $query->orderBy('sale_sum_quantity', 'DESC');
+            }, 'store_views', 'products.product_views'])
+            ->withSum('sale', 'quantity')
+            ->orderBy('sale_sum_quantity', 'DESC')
+            ->paginate(6);
+
+        return view('livewire.front-page', [
+                'featured_merchants' => $featured_merchants,
+            ])
             ->layout('layouts.front-page');
     }
 }
