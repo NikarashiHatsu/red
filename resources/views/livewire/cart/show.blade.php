@@ -57,11 +57,33 @@
             </form>
 
             <div class="flex border rounded-lg ml-4">
-                <button wire:click="decrement" class="px-2 bg-white rounded-l-lg {{ $cart->quantity == 1 || $cart->product->stock == 0 || $cart->product->form_order->direct_transfer_bank != null ? 'opacity-50' : '' }}" {{ $cart->quantity == 1 || $cart->product->stock == 0 || $cart->product->form_order->direct_transfer_bank != null ? 'disabled' : '' }}>
+                <button
+                    wire:click="decrement"
+                    class="px-2 bg-white rounded-l-lg {{ $cart->quantity == 1 || $cart->product->stock == 0 ? 'opacity-50' : '' }}"
+                    wire:loading.attr="disabled"
+                    {{ $cart->quantity == 1 || $cart->product->stock == 0 ? 'disabled' : '' }}
+                >
                     <i class="fas fa-minus fa-sm"></i>
                 </button>
-                <input wire:blur="set_amount" wire:model="quantity" type="number" value="{{ $cart->quantity }}" class="w-12 px-0 text-xs border-none border-gray-300 text-center focus:outline-none focus:ring-0" min="1" max="{{ $cart->product->stock }}" {{ $cart->product->stock == 0 || $cart->product->form_order->direct_transfer_bank != null ? 'disabled' : '' }} />
-                <button wire:click="increment" class="px-2 bg-white rounded-r-lg {{ $cart->quantity >= $cart->product->stock || $cart->product->stock == 0 || $cart->product->form_order->direct_transfer_bank != null ? 'opacity-50' : '' }}" {{ $cart->quantity >= $cart->product->stock || $cart->product->stock == 0 || $cart->product->form_order->direct_transfer_bank != null ? 'disabled' : '' }}>
+
+                <input
+                    wire:blur="set_amount"
+                    wire:model="quantity"
+                    type="number"
+                    value="{{ $cart->quantity }}"
+                    class="w-12 px-0 text-xs border-none border-gray-300 text-center focus:outline-none focus:ring-0"
+                    min="1"
+                    max="{{ $cart->product->stock }}"
+                    wire:loading.attr="disabled"
+                    {{ $cart->product->stock == 0 ? 'disabled' : '' }}
+                />
+
+                <button
+                    wire:click="increment"
+                    class="px-2 bg-white rounded-r-lg {{ $cart->quantity >= $cart->product->stock || $cart->product->stock == 0 ? 'opacity-50' : '' }}"
+                    wire:loading.attr="disabled"
+                    {{ $cart->quantity >= $cart->product->stock || $cart->product->stock == 0 ? 'disabled' : '' }}
+                >
                     <i class="fas fa-plus fa-sm"></i>
                 </button>
             </div>
