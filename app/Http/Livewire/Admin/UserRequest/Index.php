@@ -13,9 +13,9 @@ class Index extends Component
 
     public function mount()
     {
-        $this->waiting_for_approval = FormOrder::where([['is_requested', true], ['is_request_accepted', null]])->limit(10)->get();
-        $this->accepted = FormOrder::where('is_request_accepted', true)->limit(10)->get();
-        $this->rejected = FormOrder::where('is_request_accepted', false)->limit(10)->get();
+        $this->waiting_for_approval = FormOrder::where([['is_requested', true], ['is_request_accepted', null]])->orderByDesc('created_at')->get();
+        $this->accepted = FormOrder::where('is_request_accepted', true)->orderByDesc('created_at')->get();
+        $this->rejected = FormOrder::where('is_request_accepted', false)->orderByDesc('created_at')->get();
     }
 
     public function render()
