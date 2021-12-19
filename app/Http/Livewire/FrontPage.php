@@ -17,7 +17,9 @@ class FrontPage extends Component
 
     public function mount()
     {
-        $this->featured_products = Product::has('form_order')
+        $this->featured_products = Product::query()
+            ->whereHas('form_order')
+            ->whereHas('user.progress')
             ->with('form_order', 'user', 'user.form_order', 'product_views')
             ->withSum('sale', 'quantity')
             ->orderBy('sale_sum_quantity', 'DESC')
