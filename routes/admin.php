@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin:verified'], function() {
-    Route::view('/', 'admin.index')->name('index');
+    Route::get('/', \App\Http\Livewire\Admin\Index::class)->name('index');
 
     Route::group(['prefix' => 'master', 'as' => 'master.'], function() {
         Route::resource('pricing_plan', App\Http\Controllers\PricingPlanController::class)->only(['index', 'create', 'edit', 'destroy']);
