@@ -2,8 +2,6 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-    mode: 'jit',
-
     important: true,
 
     content: [
@@ -63,5 +61,6 @@ module.exports = {
         require('@tailwindcss/aspect-ratio'),
         require('@tailwindcss/line-clamp'),
         require('@tailwindcss/typography'),
+        require('daisyui'),
     ],
 };
