@@ -21,8 +21,8 @@ class FrontPage extends Component
             ->whereHas('form_order')
             ->whereHas('user.progress')
             ->with('form_order', 'user', 'user.form_order', 'product_views')
-            ->withSum('sale', 'quantity')
-            ->orderBy('sale_sum_quantity', 'DESC')
+            ->withCount('product_views')
+            ->orderBy('product_views_count', 'DESC')
             ->take(12)
             ->get();
 
