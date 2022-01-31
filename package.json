@@ -33,5 +33,9 @@
         "sass-loader": "^12.2.0",
         "sweetalert2": "^11.1.8",
         "tailwindcss": "^3"
+    },
+    "dependencies": {
+        "chart.js": "^3.7.0",
+        "chartjs-plugin-datalabels": "^2.0.0"
     }
 }

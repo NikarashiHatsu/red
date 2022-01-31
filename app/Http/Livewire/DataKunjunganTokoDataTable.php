@@ -2,42 +2,43 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Progress;
+use App\Models\StoreView;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
-use Mediconesystems\LivewireDatatables\NumberColumn;
 
 class DataKunjunganTokoDataTable extends LivewireDatatable
 {
     public $exportable = true;
     public $date_from;
+    public $date_to;
+
+    protected $listeners = [
+        'filter_date',
+    ];
+
+    public function filter_date($date_from, $date_to)
+    {
+        $this->date_from = $date_from;
+        $this->date_to = $date_to;
+        $this->emit('$refresh');
+    }
 
     public function builder()
     {
-        return Progress::query()
-            ->leftJoin('form_orders', 'form_orders.user_id', 'progress.user_id')
-            ->leftJoin('pricing_plans', 'pricing_plans.id', 'form_orders.pricing_plan_id')
-            ->leftJoin('products', 'products.user_id', 'progress.user_id')
-            ->whereNull('products.deleted_at')
-            ->groupBy('progress.id');
+        return StoreView::query()
+            ->with('form_order', 'form_order.pricing_plan')
+            ->when($this->date_from != null && $this->date_to != null, function($query) {
+                return $query->whereBetween('store_views.created_at', [$this->date_from, $this->date_to]);
+            })
+            ->groupBy('form_order_id');
     }
 
     public function columns()
     {
-        $date_from = $this->date_from;
-
         return [
-            Column::name('form_orders.store_name')
-                ->label('Nama Toko'),
-
-            Column::name('pricing_plans.name')
-                ->label('Paket Harga'),
-
-            Column::raw('COUNT(products.id) AS jumlah_produk'),
-
-            NumberColumn::name('form_orders.view_counter')
-                ->label('Jumlah Pengunjung')
-                ->defaultSort('desc'),
+            Column::name('form_order.store_name')->label('Nama Toko')->searchable(),
+            Column::name('form_order.pricing_plan.name')->label('Paket Harga')->searchable(),
+            Column::raw('COUNT(store_views.id)')->label('Jumlah Kunjungan')->defaultSort('desc'),
         ];
     }
 }
