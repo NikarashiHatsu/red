@@ -74,4 +74,41 @@
             </li>
         </ol>
     </div>
+
+    <h2 class="font-serif">
+        Kebijakan Privasi
+    </h2>
+    <p>
+        Kami memerlukan data pribadi seperti nama, alamat, nomor telepon, email
+        dan laman URL website. Data pribadi tersebut akan kami gunakan untuk:
+    </p>
+    <div class="mt-4">
+        <ol>
+            <li>
+                Email, sebagai kredensial Anda untuk login ke aplikasi
+                DagangIN serta mengirimkan informasi terbaru dan notifikasi
+                dari DagangIN.
+            </li>
+            <li>
+                Nomor HP, digunakan untuk media komunikasi antara penjual
+                dan pembeli. Nomor HP akan ditampilkan pada laman toko
+                masing-masing.
+            </li>
+            <li>
+                URL Website yang berupa link YouTube, Facebook, Instagram, serta
+                Twitter. URL Website akan ditampilkan pada laman toko masing-masing.
+            </li>
+        </ol>
+    </div>
+    <p class="my-4">
+        Adapun perizinan dari perangkat Android yang kami butuhkan antara lain:
+    </p>
+    <div class="mt-4 mb-12">
+        <ol>
+            <li>
+                Galeri / File Manager, sebagai prasarana yang digunakan untuk
+                mengunggah foto produk, foto banner toko, serta foto profil.
+            </li>
+        </ol>
+    </div>
 </div>
