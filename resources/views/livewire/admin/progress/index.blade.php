@@ -117,7 +117,7 @@
                                                 {{ $completed_progress->user->form_order->store_url ?? '-' }}
                                             </span>
                                         </p>
-                                        <a href="{{ route('admin.user_request.show', $completed_progress->user->form_order) }}" target="_blank"> 
+                                        <a href="{{ route('admin.user_request.show', $completed_progress->user->form_order) }}" target="_blank">
                                             <x-button>
                                                 Lihat detail
                                             </x-button>
@@ -136,7 +136,7 @@
                             </div>
                         @endforelse
 
-                        <div>
+                        <div class="p-4">
                             {{ $completed_progresses->links() }}
                         </div>
                     </x-card>

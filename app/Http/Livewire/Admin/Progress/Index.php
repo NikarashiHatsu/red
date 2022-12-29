@@ -16,6 +16,7 @@ class Index extends Component
             ->where('is_apk_created', null)
             ->orWhere('is_published_on_google_play', null)
             ->orWhere('google_play_url', null)
+            ->orderByDesc('created_at')
             ->paginate(10);
 
         $completed_progress = Progress::query()
@@ -24,6 +25,7 @@ class Index extends Component
             ->where('is_apk_created', true)
             ->where('is_published_on_google_play', true)
             ->where('google_play_url', '!=', null)
+            ->orderByDesc('created_at')
             ->paginate(10);
 
         return view('livewire.admin.progress.index', [
