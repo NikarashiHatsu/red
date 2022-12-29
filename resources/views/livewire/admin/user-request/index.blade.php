@@ -1,5 +1,5 @@
 <div class="grid grid-cols-12 grid-flow-row gap-4">
-    <div class="col-span-12 sm:col-span-6 lg:col-span-4">
+    <div class="col-span-12 sm:col-span-6">
         <x-card x-data="{ open: true }">
             <x-card.header class="bg-yellow-500 text-white">
                 <div class="flex items-center justify-between">
@@ -54,11 +54,14 @@
                         <p>Belum ada toko yang menunggu persetujuan.</p>
                     </x-card.body>
                 @endforelse
+                <div class="p-4 border-t">
+                    {{ $waiting_for_approval->links() }}
+                </div>
             </div>
         </x-card>
     </div>
 
-    <div class="col-span-12 sm:col-span-6 lg:col-span-4">
+    <div class="col-span-12 sm:col-span-6">
         <x-card x-data="{ open: true }">
             <x-card.header class="bg-green-500 text-white">
                 <div class="flex items-center justify-between">
@@ -113,11 +116,14 @@
                         <p>Belum ada pengajuan toko yang diterima.</p>
                     </x-card.body>
                 @endforelse
+                <div class="p-4 border-t">
+                    {{ $accepted->links() }}
+                </div>
             </div>
         </x-card>
     </div>
 
-    <div class="col-span-12 sm:col-span-6 lg:col-span-4">
+    <div class="col-span-12 sm:col-span-6">
         <x-card x-data="{ open: true }">
             <x-card.header class="bg-red-500 text-white">
                 <div class="flex items-center justify-between">
@@ -172,6 +178,9 @@
                         <p>Belum ada pengajuan toko yang diterima.</p>
                     </x-card.body>
                 @endforelse
+                <div class="p-4 border-t">
+                    {{ $rejected->links() }}
+                </div>
             </div>
         </x-card>
     </div>
