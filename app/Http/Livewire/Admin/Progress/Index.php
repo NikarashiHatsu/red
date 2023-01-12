@@ -2,13 +2,24 @@
 
 namespace App\Http\Livewire\Admin\Progress;
 
+use App\Models\FormOrder;
 use App\Models\Progress;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
     use WithPagination;
+
+    public function deleteStore(int $formOrderId)
+    {
+        try {
+            FormOrder::where('id', $formOrderId)->delete();
+        } catch (\Throwable $th) {
+            Log::error("Gagal menghapus toko: {$th->getMessage()}");
+        }
+    }
 
     public function render()
     {

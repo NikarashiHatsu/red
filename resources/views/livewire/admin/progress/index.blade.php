@@ -118,11 +118,18 @@
                                                 {{ $completed_progress->user->form_order->store_url ?? '-' }}
                                             </span>
                                         </p>
-                                        <a href="{{ route('admin.user_request.show', $completed_progress->user->form_order) }}" target="_blank">
-                                            <x-button>
-                                                Lihat detail
-                                            </x-button>
-                                        </a>
+                                        <div class="flex items-center">
+                                            <a href="{{ route('admin.user_request.show', $completed_progress->user->form_order) }}" target="_blank">
+                                                <x-button>
+                                                    Lihat detail
+                                                </x-button>
+                                            </a>
+                                            <form wire:submit.prevent='deleteStore({{ $completed_progress->user->form_order->id }})' class="ml-2">
+                                                <x-red-button onclick="return confirm('Apakah Anda yakin ingin menghapus Toko: {{ $completed_progress->user->form_order->application_name }}?')">
+                                                    Hapus
+                                                </x-red-button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="flex flex-col col-span-12 md:col-span-6 lg:col-span-5">
