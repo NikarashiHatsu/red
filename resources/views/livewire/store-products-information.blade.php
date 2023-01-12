@@ -51,12 +51,12 @@
                                     </div>
                                 </td>
                                 <td class="border p-2">
-                                    <p class="line-clamp-3">
+                                    <p class="line-clamp-3 whitespace-normal">
                                         {{ $prod->name }}
                                     </p>
                                 </td>
                                 <td class="border p-2">
-                                    <p class="line-clamp-3">
+                                    <p class="line-clamp-3 whitespace-normal">
                                         {{ $prod->description }}
                                     </p>
                                 </td>
